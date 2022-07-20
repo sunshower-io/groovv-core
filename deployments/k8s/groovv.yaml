@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: groovv-io
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: groovv-io
+  template:
+    metadata:
+      labels:
+        app: groovv-io
+    spec:
+      containers:
+        - name: groovv-io
+          image: us-docker.pkg.dev/groovv-cloud/groovv-containers/groovv.io:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: groovv-io-service
+spec:
+  selector:
+    app: groovv-io
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
