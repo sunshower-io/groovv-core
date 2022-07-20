@@ -1,0 +1,54 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
+        maven { setUrl("https://maven.vaadin.com/vaadin-addons") }
+    }
+}
+plugins {
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+    id 'java'
+    id 'com.vaadin'
+}
+
+defaultTasks("clean", "build")
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+    maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
+    maven { setUrl("https://maven.vaadin.com/vaadin-addons") }
+}
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
+
+dependencies {
+    implementation('com.vaadin:vaadin-spring-boot-starter')
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "com.vaadin:vaadin-bom:$vaadinVersion"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+vaadin {
+    pnpmEnable = false
+}

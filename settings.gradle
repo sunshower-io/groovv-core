@@ -1,0 +1,26 @@
+pluginManagement {
+    plugins {
+        id 'pmd'
+        id 'groovy'
+        id 'java-library'
+        id "com.github.spotbugs" version "4.7.0" apply false
+        id "io.freefair.lombok" version "6.5.0.3" apply false
+        id "com.diffplug.spotless" version "6.8.0" apply false
+        id 'com.vaadin' version "${vaadinVersion}" apply false
+        id 'org.springframework.boot' version '2.7.1' apply false
+        id "com.github.node-gradle.node" version "3.1.1" apply false
+        id "io.spring.dependency-management" version "1.0.11.RELEASE" apply false
+    }
+
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+        maven {
+            url "https://maven.vaadin.com/vaadin-prereleases"
+        }
+    }
+}
+
+include (
+        'groovv'
+)

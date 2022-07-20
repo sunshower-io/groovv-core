@@ -1,0 +1,27 @@
+
+
+plugins {
+    id 'pmd'
+    id 'groovy'
+//    id 'com.vaadin'
+    id 'java-library'
+//    id 'java-test-fixtures'
+    id "com.github.spotbugs"
+    id "io.freefair.lombok"
+    id "com.diffplug.spotless"
+    id "com.github.node-gradle.node"
+    id "io.spring.dependency-management"
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "https://maven.vaadin.com/vaadin-prereleases"
+        }
+    }
+}
+subprojects {
+    apply plugin: 'io.freefair.lombok'
+}

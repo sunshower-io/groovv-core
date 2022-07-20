@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.groovv.bom</groupId>
+    <artifactId>bom-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+
+    <name>Groovv Bill-Of-Materials Parent</name>
+    <url>https://www.aire-ux.com</url>
+
+
+    <modules>
+        <module>imported</module>
+        <module>exported</module>
+    </modules>
+
+    <properties>
+        <aire-ux.version>1.0.16-SNAPSHOT</aire-ux.version>
+    </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>sunshower-github</id>
+            <name>Aire-UX Components repository</name>
+            <url>https://maven.pkg.github.com/aire-ux/aire-components</url>
+        </repository>
+    </distributionManagement>
+
+
+    <repositories>
+        <repository>
+            <id>sunshower-github</id>
+            <name>Sunshower-env Github</name>
+            <url>https://maven.pkg.github.com/sunshower-io/*</url>
+        </repository>
+        <repository>
+            <id>repository.spring.milestone</id>
+            <name>Spring Milestone Repository</name>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
+        <repository>
+            <id>repository.spring.release</id>
+            <name>Spring GA Repository</name>
+            <url>https://repo.spring.io/release</url>
+        </repository>
+    </repositories>
+
+
+</project>

@@ -1,0 +1,6 @@
+FROM amazoncorretto:17-alpine-jdk
+RUN mkdir -p "/home/groovv/app"
+RUN mkdir "/home/groovv/.groovv"
+COPY "./groovv/build/libs/groovv-*.jar" "/home/groovv/app/groovv-io.jar"
+EXPOSE 8080
+ENTRYPOINT java -jar "/home/groovv/app/groovv-io.jar"
