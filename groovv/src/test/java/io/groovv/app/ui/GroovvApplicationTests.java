@@ -1,10 +1,10 @@
-package com.example.demo;
+package io.groovv.app.ui;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class GroovvApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,6 +1,5 @@
 pluginManagement {
     plugins {
-
         id 'pmd'
         id 'groovy'
         id 'java-library'
