@@ -6,11 +6,11 @@ buildscript {
     }
 }
 plugins {
-    id 'org.springframework.boot'
-    id 'io.spring.dependency-management'
     id 'java'
     id 'com.vaadin'
     id "com.github.node-gradle.node"
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
 }
 
 defaultTasks("clean", "build")
@@ -34,8 +34,15 @@ configurations {
 }
 
 dependencies {
-    implementation('com.vaadin:vaadin-spring-boot-starter')
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    [
+            'com.vaadin:vaadin-spring-boot-starter',
+            'org.springframework.boot:spring-boot-starter-security',
+            'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    ].each {
+        implementation it
+    }
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }

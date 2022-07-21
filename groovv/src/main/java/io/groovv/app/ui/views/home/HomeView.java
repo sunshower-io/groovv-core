@@ -13,9 +13,11 @@ import com.vaadin.flow.router.RouterLink;
 import io.groovv.app.ui.views.accounts.AccountView;
 import io.groovv.app.ui.views.dashboard.UserDashboard;
 import io.groovv.app.ui.views.user.UserProfile;
+import javax.annotation.security.PermitAll;
 import lombok.val;
 
-@Route("home")
+@Route("")
+@PermitAll
 public class HomeView extends AppLayout {
 
   public HomeView() {
