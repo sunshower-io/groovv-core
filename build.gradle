@@ -28,13 +28,10 @@ allprojects {
 }
 
 subprojects {
+    apply plugin: 'java'
     apply plugin: 'io.freefair.lombok'
 
     dependencies {
-        compileOnly 'com.google.code.findbugs:annotations'
-        testCompileOnly 'com.google.code.findbugs:annotations'
-
-
         [
                 'org.spockframework:spock-core',
                 'org.junit-pioneer:junit-pioneer',
@@ -47,7 +44,6 @@ subprojects {
                 'org.junit.jupiter:junit-jupiter-params'
         ].each { dependency ->
             testImplementation dependency
-            benchmarksImplementation dependency
             plugins.withType(JavaTestFixturesPlugin) {
                 testFixturesImplementation dependency
             }
@@ -66,3 +62,4 @@ subprojects {
             }
         }
     }
+}
