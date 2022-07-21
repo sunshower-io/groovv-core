@@ -14,6 +14,7 @@ plugins {
 }
 
 allprojects {
+    apply plugin: 'io.spring.dependency-management'
     repositories {
         mavenLocal()
         mavenCentral()
@@ -21,7 +22,13 @@ allprojects {
             url "https://maven.vaadin.com/vaadin-prereleases"
         }
     }
+    dependencyManagement {
+        imports {
+            mavenBom "io.groovv.bom:bom-imported:$version"
+        }
+    }
 }
+
 subprojects {
     apply plugin: 'io.freefair.lombok'
 }
