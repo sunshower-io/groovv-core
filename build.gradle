@@ -1,5 +1,3 @@
-
-
 plugins {
     id 'pmd'
     id 'groovy'
@@ -14,6 +12,7 @@ plugins {
 }
 
 allprojects {
+    apply plugin: 'io.spring.dependency-management'
     repositories {
         mavenLocal()
         mavenCentral()
@@ -21,7 +20,49 @@ allprojects {
             url "https://maven.vaadin.com/vaadin-prereleases"
         }
     }
+    dependencyManagement {
+        imports {
+            mavenBom "io.groovv.bom:bom-imported:$version"
+        }
+    }
 }
+
 subprojects {
+    apply plugin: 'java'
     apply plugin: 'io.freefair.lombok'
+
+    test {
+        useJUnitPlatform()
+    }
+    dependencies {
+        [
+                'org.spockframework:spock-core',
+                'org.junit-pioneer:junit-pioneer',
+                'org.mockito:mockito-junit-jupiter',
+                'org.junit.platform:junit-platform-suite-engine',
+
+
+                'org.mockito:mockito-inline',
+                'org.junit-pioneer:junit-pioneer',
+                'org.junit.jupiter:junit-jupiter-params'
+        ].each { dependency ->
+            testImplementation dependency
+            plugins.withType(JavaTestFixturesPlugin) {
+                testFixturesImplementation dependency
+            }
+        }
+
+        [
+                'api',
+                'engine'
+        ].each { dep ->
+
+            testImplementation "org.junit.jupiter:junit-jupiter-$dep"
+            testImplementation "org.junit.platform:junit-platform-suite-$dep"
+            plugins.withType(JavaTestFixturesPlugin) {
+                testFixturesImplementation "org.junit.jupiter:junit-jupiter-$dep"
+                testFixturesImplementation "org.junit.platform:junit-platform-suite-$dep"
+            }
+        }
+    }
 }

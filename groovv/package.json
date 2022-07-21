@@ -1,6 +1,10 @@
 {
   "name": "no-name",
-  "license": "UNLICENSED",
+  "license": "COMMERCIAL/CLOSED",
+  "scripts": {
+    "develop": "npx gulp scss:watch",
+    "build": "npx gulp scss:build"
+  },
   "vaadin": {
     "dependencies": {
       "@polymer/iron-icon": "3.0.1",
@@ -127,7 +131,7 @@
       "workbox-precaching": "6.5.0",
       "workbox-webpack-plugin": "6.5.0"
     },
-    "hash": "b4af9254127653228bb8479cd6f9845ff842e4441366e2a85dabb27fa7434f2f"
+    "hash": "f105dd5eebd430e435bebbd91cfc6d94b3633ae440f993cea39f0cfd9b12e418"
   },
   "dependencies": {
     "@polymer/iron-icon": "3.0.1",
@@ -243,9 +247,13 @@
     "file-loader": "6.2.0",
     "fork-ts-checker-webpack-plugin": "6.2.1",
     "glob": "7.1.6",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
+    "gulp-sass": "^5.1.0",
     "html-webpack-plugin": "4.5.1",
     "lit-css-loader": "0.1.0",
     "loader-utils": "2.0.0",
+    "node-sass": "^7.0.1",
     "typescript": "4.5.3",
     "webpack": "4.46.0",
     "webpack-cli": "4.10.0",
