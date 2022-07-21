@@ -119,7 +119,7 @@ CREATE TABLE acl_sid
 /**
 
   relates a type to an object-identity
-  see io.sunshower.model.api.SecuredType
+  see io.groovv.security.model.api.SecuredType
  */
 CREATE TABLE acl_class
 (
