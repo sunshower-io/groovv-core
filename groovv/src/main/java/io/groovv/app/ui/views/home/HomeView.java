@@ -5,15 +5,24 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.menubar.MenuBar;
+import com.vaadin.flow.component.menubar.MenuBarVariant;
+import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.Tabs.Orientation;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.VaadinServletRequest;
+import io.groovv.app.ui.config.PrincipalDetails;
+import io.groovv.app.ui.config.SecurityUtils;
 import io.groovv.app.ui.views.accounts.AccountView;
 import io.groovv.app.ui.views.dashboard.UserDashboard;
 import io.groovv.app.ui.views.user.UserProfile;
@@ -23,9 +32,16 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 
 @Route("")
 @PermitAll
+@CssImport(value = "./styles/groovv/views/home/home.css")
 public class HomeView extends AppLayout {
 
+  private final HorizontalLayout menuLayout;
+  private final MenuBar navigationMenuBar;
+
   public HomeView() {
+
+    menuLayout = createMenuLayout();
+    navigationMenuBar = createNavigationMenuBar();
 
     val toggle = new DrawerToggle();
     val tabs = createTabs();
@@ -37,17 +53,42 @@ public class HomeView extends AppLayout {
 
     addToDrawer(tabs);
 //    addToNavbar(toggle, header);
-    addToNavbar(true, toggle, header, createLogout());
+    addToNavbar(true, toggle, header, menuLayout);
+    menuLayout.add(navigationMenuBar);
   }
 
-  private Component createLogout() {
-    val logout = new Button("Log out", e -> {
-      UI.getCurrent().getPage().setLocation("/login");
-      SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
-      logoutHandler.logout(
-          VaadinServletRequest.getCurrent().getHttpServletRequest(), null,
-          null);
+  private MenuBar createNavigationMenuBar() {
+    val menuBar = new MenuBar();
+    menuBar.addThemeVariants(MenuBarVariant.LUMO_SMALL, MenuBarVariant.LUMO_ICON);
+
+    val details = SecurityUtils.getPrincipalDetails();
+    if (details == null) {
+      doLogOut();
+      return menuBar;
+    }
+
+    var avatar = new Avatar(details.givenName());
+    avatar.setImage(details.pictureUrl());
+    val userMenu = menuBar.addItem(avatar);
+    userMenu.addThemeNames("tertiary");
+    userMenu.getSubMenu().addItem(createLogout(details));
+    return menuBar;
+  }
+
+  private void doLogOut() {
+    UI.getCurrent().getPage().setLocation("/login");
+    SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+    logoutHandler.logout(
+        VaadinServletRequest.getCurrent().getHttpServletRequest(), null,
+        null);
+  }
+
+
+  private Component createLogout(PrincipalDetails details) {
+    val logout = new Button("Log out " + details.givenName(), e -> {
+      doLogOut();
     });
+    logout.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
     return logout;
   }
 
@@ -62,5 +103,13 @@ public class HomeView extends AppLayout {
         new Tab(VaadinIcon.DASHBOARD.create(), new RouterLink("Dashboard", UserDashboard.class)));
 
     return tabs;
+  }
+
+  private HorizontalLayout createMenuLayout() {
+    val menuLayout = new HorizontalLayout();
+    menuLayout.setWidthFull();
+    menuLayout.setJustifyContentMode(JustifyContentMode.END);
+    menuLayout.setPadding(true);
+    return menuLayout;
   }
 }
