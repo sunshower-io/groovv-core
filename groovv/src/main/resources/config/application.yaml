@@ -6,5 +6,3 @@ spring:
           google:
 #            client-id: ${GROOVV_GOOGLE_CLIENT_ID}
 #            client-secret: ${GROOVV_GOOGLE_CLIENT_SECRET}
-            client-id: 950311721021-nkaimbosua6jamlg4l6v9igc8u6vjn5v.apps.googleusercontent.com
-            client-secret: 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
