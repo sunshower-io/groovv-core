@@ -10,18 +10,20 @@ plugins {
     id 'io.spring.dependency-management'
     id 'java'
     id 'com.vaadin'
+    id "com.github.node-gradle.node"
 }
 
 defaultTasks("clean", "build")
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
-    maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
-    maven { setUrl("https://maven.vaadin.com/vaadin-addons") }
+    maven {
+        url "https://maven.vaadin.com/vaadin-prereleases"
+    }
+    maven {
+        url "https://maven.vaadin.com/vaadin-addons"
+    }
 }
 
 configurations {
@@ -51,4 +53,14 @@ test {
 
 vaadin {
     pnpmEnable = false
+}
+
+task watchScss(type: NpmTask) {
+    dependsOn npmInstall
+    args = ['run', 'develop']
+}
+
+task buildScss(type: NpmTask) {
+    dependsOn npmInstall
+    args = ['run', 'build']
 }
