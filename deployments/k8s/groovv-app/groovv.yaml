@@ -66,7 +66,7 @@ spec:
 apiVersion: networking.gke.io/v1beta1
 kind: FrontendConfig
 metadata:
-  name: groovv-ssl-redirect
+  name: groovv-application-frontend-config
 spec:
   redirectToHttps:
     enabled: true
@@ -79,9 +79,9 @@ metadata:
   name: groovv-io-ingress
   annotations:
     kubernetes.io/ingress.class: "gce"
-    kubernetes.io/ingress.global-static-ip-name: "groovv-io-ip"
     networking.gke.io/managed-certificates: app-groovv-io-cert
-    networking.gke.io/v1beta1.FrontendConfig: "groovv-ssl-redirect"
+    kubernetes.io/ingress.global-static-ip-name: "groovv-io-ip"
+    networking.gke.io/v1beta1.FrontendConfig: "groovv-application-frontend-config"
 spec:
   defaultBackend:
     service:
