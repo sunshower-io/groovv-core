@@ -55,10 +55,11 @@ metadata:
   name: app-groovv-io-cert
 spec:
   domains:
-    - app.groovv.io
-    - app.groovv.cloud
     - app.groovv.co
-    - app.groovv.net
+    - app.groovv.io
+#    - app.groovv.cloud
+#    - app.groovv.co
+#    - app.groovv.net
 
 
 ---
