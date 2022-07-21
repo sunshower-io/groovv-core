@@ -16,6 +16,12 @@ spec:
         - name: groovv-io
           image: us-docker.pkg.dev/groovv-cloud/groovv-containers/groovv.io:1.0
           imagePullPolicy: Always
+          livenessProbe:
+            periodSeconds: 10
+            initialDelaySeconds: 10
+            httpGet:
+              port: 8080
+              path: /login
           ports:
             - containerPort: 8080
 
