@@ -1,5 +1,3 @@
-
-
 plugins {
     id 'pmd'
     id 'groovy'
@@ -31,4 +29,40 @@ allprojects {
 
 subprojects {
     apply plugin: 'io.freefair.lombok'
-}
+
+    dependencies {
+        compileOnly 'com.google.code.findbugs:annotations'
+        testCompileOnly 'com.google.code.findbugs:annotations'
+
+
+        [
+                'org.spockframework:spock-core',
+                'org.junit-pioneer:junit-pioneer',
+                'org.mockito:mockito-junit-jupiter',
+                'org.junit.platform:junit-platform-suite-engine',
+
+
+                'org.mockito:mockito-inline',
+                'org.junit-pioneer:junit-pioneer',
+                'org.junit.jupiter:junit-jupiter-params'
+        ].each { dependency ->
+            testImplementation dependency
+            benchmarksImplementation dependency
+            plugins.withType(JavaTestFixturesPlugin) {
+                testFixturesImplementation dependency
+            }
+        }
+
+        [
+                'api',
+                'engine'
+        ].each { dep ->
+
+            testImplementation "org.junit.jupiter:junit-jupiter-$dep"
+            testImplementation "org.junit.platform:junit-platform-suite-$dep"
+            plugins.withType(JavaTestFixturesPlugin) {
+                testFixturesImplementation "org.junit.jupiter:junit-jupiter-$dep"
+                testFixturesImplementation "org.junit.platform:junit-platform-suite-$dep"
+            }
+        }
+    }

@@ -21,21 +21,21 @@
         <aire-ux.version>1.0.16-SNAPSHOT</aire-ux.version>
     </properties>
 
-    <distributionManagement>
-        <repository>
-            <id>sunshower-github</id>
-            <name>Aire-UX Components repository</name>
-            <url>https://maven.pkg.github.com/aire-ux/aire-components</url>
-        </repository>
-    </distributionManagement>
+<!--    <distributionManagement>-->
+<!--        <repository>-->
+<!--            <id>sunshower-github</id>-->
+<!--            <name>Aire-UX Components repository</name>-->
+<!--            <url>https://maven.pkg.github.com/aire-ux/aire-components</url>-->
+<!--        </repository>-->
+<!--    </distributionManagement>-->
 
 
     <repositories>
-        <repository>
-            <id>sunshower-github</id>
-            <name>Sunshower-env Github</name>
-            <url>https://maven.pkg.github.com/sunshower-io/*</url>
-        </repository>
+<!--        <repository>-->
+<!--            <id>sunshower-github</id>-->
+<!--            <name>Sunshower-env Github</name>-->
+<!--            <url>https://maven.pkg.github.com/sunshower-io/*</url>-->
+<!--        </repository>-->
         <repository>
             <id>repository.spring.milestone</id>
             <name>Spring Milestone Repository</name>

@@ -9,8 +9,11 @@ dependencies {
     api 'io.sunshower.arcus.persist:persist-core'
     api 'io.sunshower.arcus.persist:persist-flyway'
     api 'io.sunshower.arcus.persist:persist-hibernate'
+    api 'io.sunshower.arcus:annotations'
+    api 'com.google.code.findbugs:jsr305'
 
     implementation 'io.sunshower.arcus:condensation-json'
+
 
 //    testImplementation 'io.sunshower.arcus.persist:persist-api:test-fixtures'
 //    testImplementation 'io.sunshower.arcus.persist:persist-hibernate:test-fixtures'

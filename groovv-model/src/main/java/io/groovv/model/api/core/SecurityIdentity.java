@@ -2,7 +2,6 @@ package io.groovv.model.api.core;
 
 import io.groovv.model.api.core.SecurityTables.AclSecurityIdentity;
 import io.sunshower.persistence.id.Identifier;
-import javax.annotation.Nullable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +30,7 @@ public class SecurityIdentity extends AbstractEntity<Identifier> {
   private String username;
 
   /** @param owner the owner of this SID */
-  public void setOwner(@Nullable User owner) {
+  public void setOwner(User owner) {
     if (owner == null) {
       this.owner = null;
       this.username = null;
