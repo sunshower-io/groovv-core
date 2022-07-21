@@ -1,24 +1,19 @@
 package io.groovv.app.ui.views.auth;
 
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.login.LoginI18n;
-import com.vaadin.flow.component.login.LoginOverlay;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
-import io.groovv.app.ui.views.home.HomeView;
 import lombok.val;
 
 @Route("login")
@@ -28,31 +23,47 @@ public class LoginPage extends HorizontalLayout {
 
   private static final String OAUTH_URL = "/oauth2/authorization/google";
 
+  private final VerticalLayout layout;
+
   public LoginPage() {
     setSizeFull();
-    setAlignItems(Alignment.CENTER);
-    setJustifyContentMode(JustifyContentMode.CENTER);
+    addClassName("login");
     addClassName("groovv-login-form");
-    createForm();
+    layout = new VerticalLayout();
+    layout.setWidth("unset");
+    layout.add(new H1("Groovv"));
+    layout.add(new H2("Retirement for Everyone"));
+
+    createLoginForm();
+    createOAuthProviders();
+
+    add(layout);
+    setJustifyContentMode(JustifyContentMode.CENTER);
+    setDefaultVerticalComponentAlignment(Alignment.CENTER);
+
   }
 
-  private void createForm() {
-    val vlayout = new VerticalLayout();
-    vlayout.getStyle().set("width", "auto");
-    val formLayout = new FormLayout();
 
-    formLayout.add(new H1("Groovv"));
-    formLayout.add(new H2("Retirement for Everyone"));
-    formLayout.add(new H3("Login"));
+  private void createLoginForm() {
+    layout.add(new LoginForm());
+  }
+
+  private void createOAuthProviders() {
+    val hr = new Div();
+    hr.setClassName("hr-strike");
+    hr.setText("Or Login Via");
+    layout.add(hr);
+    val formLayout = new HorizontalLayout();
+    formLayout.setWidthFull();
+    formLayout.setJustifyContentMode(JustifyContentMode.CENTER);
     val img = new Image("assets/images/oauth/providers/icons/google.svg", "Google OAuth");
     img.setWidth("24px");
     img.setHeight("24px");
     val loginLink = new Anchor(OAUTH_URL, "Google");
     loginLink.getElement().setAttribute("router-ignore", "true");
-    img.add(loginLink);
-    formLayout.add(img);
-    vlayout.add(formLayout);
-    add(vlayout);
+    loginLink.add(img);
+    formLayout.add(loginLink);
+    layout.add(formLayout);
   }
 
 

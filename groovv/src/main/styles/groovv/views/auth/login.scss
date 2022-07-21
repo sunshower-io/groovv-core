@@ -1,6 +1,44 @@
-
 @import "src/main/styles/colors";
 
-h1 {
-  color: $gold;
+.login {
+  h1 {
+    color: $blue;
+    padding: 0;
+    margin: 0;
+  }
+
+  h2 {
+    margin: 0;
+    color: $gold;
+  }
+
+  a {
+    display: flex;
+    flex-direction: column-reverse;
+    font-size: var(--lumo-font-size-m);
+
+    img {
+      margin: auto;
+    }
+  }
+
+  .hr-strike {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    color: var(--vaadin-color-secondary);
+    font-size: var(--vaadin-font-size-m);
+    font-weight: 600;
+    margin: 8px 0;
+
+    &:before, &:after {
+      content: "";
+      flex-grow: 1;
+      background: rgba(0, 0, 0, 0.35);
+      height: 1px;
+      font-size: 0;
+      line-height: 0;
+      margin: 0 8px;
+    }
+  }
 }
