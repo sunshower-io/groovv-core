@@ -131,7 +131,7 @@
       "workbox-precaching": "6.5.0",
       "workbox-webpack-plugin": "6.5.0"
     },
-    "hash": "b4af9254127653228bb8479cd6f9845ff842e4441366e2a85dabb27fa7434f2f"
+    "hash": "f105dd5eebd430e435bebbd91cfc6d94b3633ae440f993cea39f0cfd9b12e418"
   },
   "dependencies": {
     "@polymer/iron-icon": "3.0.1",

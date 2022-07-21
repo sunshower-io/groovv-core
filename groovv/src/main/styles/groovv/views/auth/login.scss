@@ -1,0 +1,10 @@
+
+@import "src/main/styles/colors";
+
+[part="brand"] {
+  background-color: white;
+  color: $blue;
+}
+[part="description"] {
+  color: $gold;
+}
