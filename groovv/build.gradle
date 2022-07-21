@@ -47,9 +47,6 @@ dependencyManagement {
     }
 }
 
-test {
-    useJUnitPlatform()
-}
 
 vaadin {
     pnpmEnable = false

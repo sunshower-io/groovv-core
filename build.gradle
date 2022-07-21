@@ -31,6 +31,9 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'io.freefair.lombok'
 
+    test {
+        useJUnitPlatform()
+    }
     dependencies {
         [
                 'org.spockframework:spock-core',
