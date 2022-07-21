@@ -9,6 +9,6 @@ import com.vaadin.flow.theme.material.Material;
  * Use the @PWA annotation make the application installable on phones, tablets
  * and some desktop browsers.
  */
-@PWA(name = "Project Base for Vaadin", shortName = "Project Base")
+@PWA(name = "Groovv Investment Platform", shortName = "Groovv.io")
 public class AppShell implements AppShellConfigurator {
 }
