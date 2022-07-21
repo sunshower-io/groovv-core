@@ -1,6 +1,6 @@
 {
   "scanned-packages": [
-    "io.sunshower.model.api",
+    "io.groovv.model.api.core",
     "io.sunshower.arcus.persist.hibernate",
     "io.sunshower.arcus.persist.hibernate.entities"
   ],

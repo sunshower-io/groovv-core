@@ -133,7 +133,7 @@ CREATE TABLE acl_class
 /**
   acl_object_identity relates
   an id and a class to an acl
-  see io.sunshower.model.api.ObjectIdentity
+  see ObjectIdentity
  */
 CREATE TABLE acl_object_identity
 (
@@ -200,7 +200,7 @@ CREATE TABLE acl_object_identity
 );
 
 /**
-  references io.sunshower.model.api.AccessControlEntry
+  references AccessControlEntry
  */
 CREATE TABLE acl_entry
 (
@@ -258,7 +258,7 @@ CREATE TABLE acl_entry
 );
 
 /**
-  maps to io.sunshower.model.api.Permission
+  maps to Permission
  */
 CREATE TABLE PERMISSIONS
 (
