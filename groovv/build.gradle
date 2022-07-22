@@ -38,6 +38,7 @@ dependencies {
     implementation project(':groovv-persist')
 //    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     [
+            'io.sunshower.arcus:arcus-identicon',
             'com.vaadin:vaadin-spring-boot-starter',
             'org.springframework.boot:spring-boot-starter-security',
             'org.springframework.boot:spring-boot-starter-oauth2-client'
