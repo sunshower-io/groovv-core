@@ -1,6 +1,7 @@
 package io.groovv.model.api.accounts;
 
 import io.groovv.model.api.core.AbstractEntity;
+import io.groovv.model.api.core.SerializableAbstractEntity;
 import io.groovv.model.api.core.User;
 import io.sunshower.persistence.id.Identifier;
 import javax.persistence.Basic;
@@ -15,7 +16,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Account extends AbstractEntity<Identifier> {
+public class Account extends SerializableAbstractEntity<Identifier> {
 
 
   @Basic

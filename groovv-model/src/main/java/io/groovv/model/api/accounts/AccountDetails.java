@@ -1,6 +1,7 @@
 package io.groovv.model.api.accounts;
 
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -10,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Embeddable
-public class AccountDetails {
+public class AccountDetails implements Serializable {
 
 
   @Basic

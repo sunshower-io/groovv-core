@@ -106,11 +106,7 @@ public class AddAccountView extends VerticalLayout {
             (acc, value) -> acc.getDetails().setAccountNumber(value));
 
     val menuBar = new MenuBar();
-    val cancelButton = new Button("Cancel", VaadinIcon.CLOSE.create());
-    val createButton = new Button("Create", VaadinIcon.CHECK.create());
-    createButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-    menuBar.addItem(cancelButton, click -> {
-
+    val cancelButton = new Button("Cancel", VaadinIcon.CLOSE.create(), click -> {
       UI.getCurrent().navigate(AccountView.class);
       val notification = new Notification();
       notification.setDuration(1500);
@@ -118,7 +114,7 @@ public class AddAccountView extends VerticalLayout {
       notification.setText("No accounts have been added");
       notification.open();
     });
-    menuBar.addItem(createButton, click -> {
+    val createButton = new Button("Create", VaadinIcon.CHECK.create(), click -> {
       try {
         accountBinder.writeBean(account);
         repository.save(account);
@@ -134,6 +130,10 @@ public class AddAccountView extends VerticalLayout {
 
       }
     });
+    createButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+    menuBar.addItem(cancelButton);
+
+    menuBar.addItem(createButton);
     layout.add(menuBar);
 
     add(layout);
