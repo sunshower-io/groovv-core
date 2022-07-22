@@ -16,11 +16,6 @@ public class SecurityConfiguration extends VaadinWebSecurityConfigurerAdapter {
 
 
 
-  @Bean
-  public AuthenticationEventPublisher authenticationEventPublisher(
-      ApplicationEventPublisher applicationEventPublisher) {
-    return new DefaultAuthenticationEventPublisher(applicationEventPublisher);
-  }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
