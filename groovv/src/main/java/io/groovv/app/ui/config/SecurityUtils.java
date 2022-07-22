@@ -1,9 +1,5 @@
 package io.groovv.app.ui.config;
 
-import com.vaadin.flow.server.HandlerHelper.RequestType;
-import com.vaadin.flow.shared.ApplicationConstants;
-import java.util.stream.Stream;
-import javax.servlet.http.HttpServletRequest;
 import lombok.val;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,6 +20,15 @@ public class SecurityUtils {
 
   public static Authentication getAuthentication() {
     return SecurityContextHolder.getContext().getAuthentication();
+  }
+
+  public static PrincipalDetails getCurrentUser(boolean required) {
+    val result = getPrincipalDetails();
+    if(result == null && required) {
+      throw new IllegalArgumentException("Error: no current principal found");
+    }
+    return result;
+
   }
 
   public static PrincipalDetails getPrincipalDetails() {

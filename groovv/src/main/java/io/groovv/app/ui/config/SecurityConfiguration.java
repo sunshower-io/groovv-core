@@ -15,6 +15,7 @@ public class SecurityConfiguration extends VaadinWebSecurityConfigurerAdapter {
   private static final String LOGIN_URL = "/login";
 
 
+
   @Bean
   public AuthenticationEventPublisher authenticationEventPublisher(
       ApplicationEventPublisher applicationEventPublisher) {
