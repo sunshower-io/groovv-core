@@ -4,7 +4,10 @@ spring:
       client:
         registration:
           google:
+            client-id: 950311721021-2tk4rehg5l12qr7u5e6kpe7s4bsqbvco.apps.googleusercontent.com
+            client-secret: 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
 #            client-id: ${GROOVV_GOOGLE_CLIENT_ID}
 #            client-secret: ${GROOVV_GOOGLE_CLIENT_SECRET}
-            client-id: 950311721021-nkaimbosua6jamlg4l6v9igc8u6vjn5v.apps.googleusercontent.com
-            client-secret: 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
+#            client-id: 950311721021-nkaimbosua6jamlg4l6v9igc8u6vjn5v.apps.googleusercontent.com
+#            client-secret: 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
+
