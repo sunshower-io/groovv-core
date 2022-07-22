@@ -1,13 +1,14 @@
+server:
+  forward-headers-strategy: framework
 spring:
   security:
     oauth2:
       client:
         registration:
           google:
-            client-id: 950311721021-2tk4rehg5l12qr7u5e6kpe7s4bsqbvco.apps.googleusercontent.com
-            client-secret: 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
-#            client-id: ${GROOVV_GOOGLE_CLIENT_ID}
-#            client-secret: ${GROOVV_GOOGLE_CLIENT_SECRET}
-#            client-id: 950311721021-nkaimbosua6jamlg4l6v9igc8u6vjn5v.apps.googleusercontent.com
-#            client-secret: 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
+            client-id: 950311721021-tgmram31ad1e3tgr3brlq8abe1mk7pvh.apps.googleusercontent.com
+            client-secret: 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
+#            redirect-uri: https://{baseHost}{basePort}{basePath}/login/oauth2/code/google
+#            client-id: 950311721021-7fkrjsilkflo0ltjbao7vqnbp7ai310d.apps.googleusercontent.com
+#            client-secret: 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
 
