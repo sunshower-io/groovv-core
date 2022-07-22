@@ -34,6 +34,8 @@ configurations {
 }
 
 dependencies {
+
+    implementation project(':groovv-persist')
 //    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     [
             'com.vaadin:vaadin-spring-boot-starter',

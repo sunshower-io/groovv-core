@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: groovv-io
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: groovv-io
@@ -16,9 +16,16 @@ spec:
         - name: groovv-io
           image: us-docker.pkg.dev/groovv-cloud/groovv-containers/groovv.io:1.0
           imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "4Gi"
+              cpu: "8000m"
+            requests:
+              memory: "2Gi"
+              cpu: "4000m"
           livenessProbe:
             periodSeconds: 10
-            initialDelaySeconds: 10
+            initialDelaySeconds: 30
             httpGet:
               port: 8080
               path: /login
