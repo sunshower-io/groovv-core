@@ -82,7 +82,6 @@ public class HomeView extends AppLayout {
 
     val details = SecurityUtils.getPrincipalDetails();
     if (details == null) {
-      doLogOut();
       return menuBar;
     }
 

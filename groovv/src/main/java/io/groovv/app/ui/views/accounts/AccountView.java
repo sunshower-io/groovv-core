@@ -15,6 +15,7 @@ import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.data.renderer.Renderer;
 import com.vaadin.flow.function.SerializableBiConsumer;
 import com.vaadin.flow.router.Route;
+import io.groovv.app.ui.components.UIUtils;
 import io.groovv.app.ui.data.providers.RepositoryDataProvider;
 import io.groovv.app.ui.views.home.HomeView;
 import io.groovv.model.api.accounts.Account;
@@ -123,14 +124,10 @@ public class AccountView extends VerticalLayout {
   }
 
   static final class IdenticonComponentUpdater implements SerializableBiConsumer<Image, Account> {
-    static final Encoding encoding = Encodings.create(Type.Base64);
-
 
     @Override
     public void accept(Image image, Account account) {
-      val svg = Jdenticon.toSvg(account);
-      val url = String.format("data:image/svg+xml;base64,%s", encoding.encode(svg));
-      image.setSrc(url);
+      image.setSrc(UIUtils.base64Svg(account));
       image.setWidth("32px");
       image.setHeight("32px");
     }

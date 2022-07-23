@@ -52,6 +52,13 @@ dependencies {
     ].each {
         testImplementation "com.aire-ux.components:$it"
     }
+
+    [
+            'org.springframework.security:spring-security-test'
+    ].each {
+        testImplementation it
+    }
+
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }

@@ -1,9 +1,13 @@
 package io.groovv.app.ui.config;
 
+import io.groovv.app.ui.components.UIUtils;
 import lombok.val;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 
 public class SecurityUtils {
@@ -43,6 +47,14 @@ public class SecurityUtils {
           principalDetails.getAttribute("family_name"),
           principalDetails.getAttribute("email"),
           principalDetails.getAttribute("picture")
+      );
+    }
+    if(principal instanceof User principalDetails) {
+      return new PrincipalDetails(
+          principalDetails.getUsername(),
+          "<unknown>",
+          principalDetails.getUsername(),
+          UIUtils.base64Svg(principalDetails.getUsername())
       );
     }
     return null;
