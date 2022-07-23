@@ -8,7 +8,6 @@ import com.aire.ux.test.RouteLocation;
 import com.aire.ux.test.Select;
 import com.aire.ux.test.TestContext;
 import com.aire.ux.test.ViewTest;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import io.groovv.app.ui.GroovvUITest;
 import io.groovv.app.ui.views.dashboard.UserDashboard;

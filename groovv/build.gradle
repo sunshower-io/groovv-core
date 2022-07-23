@@ -73,7 +73,7 @@ dependencyManagement {
 
 
 vaadin {
-    pnpmEnable = false
+    pnpmEnable = true
 }
 
 task watchScss(type: NpmTask) {
