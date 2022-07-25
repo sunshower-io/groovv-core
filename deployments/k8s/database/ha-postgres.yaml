@@ -1,0 +1,60 @@
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production-database
+---
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: groovv-ha
+  namespace: production-database
+spec:
+  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-14.4-0
+  postgresVersion: 14
+  instances:
+    - name: groovv-ha
+      replicas: 2
+      dataVolumeClaimSpec:
+        storageClassName: fast
+        accessModes:
+        - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 1000Gi
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  postgres-operator.crunchydata.com/cluster: groovv-ha
+                  postgres-operator.crunchydata.com/instance-set: pgha1
+  backups:
+    pgbackrest:
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.38-2
+      repos:
+      - name: repo1
+        volume:
+          volumeClaimSpec:
+            accessModes:
+            - "ReadWriteOnce"
+            resources:
+              requests:
+                storage: 1000Gi
+  proxy:
+    pgBouncer:
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbouncer:ubi8-1.16-4
+      replicas: 2
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  postgres-operator.crunchydata.com/cluster: groovv-ha
+                  postgres-operator.crunchydata.com/role: pgbouncer
