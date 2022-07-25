@@ -90,9 +90,9 @@ CREATE TABLE USER_DETAILS
 (
     id         BINARY(16)   NOT NULL PRIMARY KEY,
     icon       bytea,
-    type        varchar(63),
-    first_name VARCHAR(255) NOT NULL,
-    last_name  VARCHAR(255) NOT NULL,
+    type        VARCHAR(63),
+    given_name  VARCHAR(255) NOT NULL,
+    family_name VARCHAR(255) NOT NULL,
 
     CONSTRAINT
         user_details_to_user

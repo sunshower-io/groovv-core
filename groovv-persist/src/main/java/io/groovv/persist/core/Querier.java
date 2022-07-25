@@ -1,4 +1,4 @@
-package io.groovv.persist.users;
+package io.groovv.persist.core;
 
 public interface Querier<ID, T, Q> {
 

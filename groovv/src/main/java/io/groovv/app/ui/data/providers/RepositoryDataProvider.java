@@ -3,7 +3,7 @@ package io.groovv.app.ui.data.providers;
 import com.vaadin.flow.data.provider.AbstractBackEndDataProvider;
 import com.vaadin.flow.data.provider.Query;
 import io.groovv.model.api.core.Persistable;
-import io.groovv.persist.users.Repository;
+import io.groovv.persist.core.Repository;
 import java.io.Serializable;
 import java.util.stream.Stream;
 import lombok.NonNull;

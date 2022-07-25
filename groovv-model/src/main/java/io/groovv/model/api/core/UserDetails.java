@@ -24,14 +24,14 @@ import lombok.Setter;
 public class UserDetails extends SerializableAbstractEntity<Identifier> implements IconAware {
 
   @Setter
-  @Getter(onMethod = @__({@Basic, @Column(name = "first_name")}))
-  @Attribute(alias = @Alias(read = "first-name", write = "first-name"))
-  private String firstName;
+  @Getter(onMethod = @__({@Basic, @Column(name = "given_name")}))
+  @Attribute(alias = @Alias(read = "given-name", write = "given-name"))
+  private String givenName;
 
   @Setter
-  @Getter(onMethod = @__({@Basic, @Column(name = "last_name")}))
-  @Attribute(alias = @Alias(read = "last-name", write = "last-name"))
-  private String lastName;
+  @Getter(onMethod = @__({@Basic, @Column(name = "family_name")}))
+  @Attribute(alias = @Alias(read = "family-name", write = "family-name"))
+  private String familyName;
 
   @Setter
   @Getter(onMethod = @__({@Embedded}))

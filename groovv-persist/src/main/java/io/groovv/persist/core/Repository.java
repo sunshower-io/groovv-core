@@ -1,4 +1,4 @@
-package io.groovv.persist.users;
+package io.groovv.persist.core;
 
 import io.groovv.model.api.core.Persistable;
 import java.io.Serializable;

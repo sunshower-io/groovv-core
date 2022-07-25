@@ -42,8 +42,8 @@ class UserTest {
     user.setPassword(pw2);
 
     val details = new UserDetails();
-    details.setLastName("test");
-    details.setFirstName("whatever");
+    details.setGivenName("test");
+    details.setFamilyName("whatever");
     user.setDetails(details);
     entityManager.persist(user);
     entityManager.flush();
@@ -89,8 +89,8 @@ class UserTest {
     val details = new UserDetails();
     user.setDetails(details);
 
-    details.setFirstName("Josiah");
-    details.setLastName("Haswell");
+    details.setGivenName("Josiah");
+    details.setFamilyName("Haswell");
 
     entityManager.persist(user);
     entityManager.flush();
