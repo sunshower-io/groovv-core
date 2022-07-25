@@ -1,5 +1,6 @@
 package io.groovv.persist.config;
 
+import io.groovv.persist.registrations.RegistrationRepository;
 import io.sunshower.arcus.persist.flyway.ArcusFlywayMigrationManager;
 import io.sunshower.persistence.MigrationManager;
 import io.sunshower.persistence.config.DataSourceConfiguration;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -22,6 +24,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
+@EnableJpaRepositories(basePackageClasses = RegistrationRepository.class)
 public class PersistenceConfiguration {
 
   @Bean
