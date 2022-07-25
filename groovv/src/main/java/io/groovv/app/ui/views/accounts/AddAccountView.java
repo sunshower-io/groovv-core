@@ -55,8 +55,8 @@ public class AddAccountView extends VerticalLayout {
     val user = new User();
     val details = new UserDetails();
     user.setDetails(details);
-    details.setFirstName(principal.givenName());
-    details.setLastName(principal.familyName());
+    details.setGivenName(principal.givenName());
+    details.setFamilyName(principal.familyName());
 
     account.setOwner(user);
 

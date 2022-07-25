@@ -12,6 +12,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @Rollback
 @Transactional
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {FlywayTestConfiguration.class})
+@ContextConfiguration(classes = {FlywayTestConfiguration.class, ValidationTestConfiguration.class})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ModelTest {}

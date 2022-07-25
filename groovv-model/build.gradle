@@ -46,7 +46,8 @@ dependencies {
             'org.hibernate:hibernate-core',
             'org.hibernate:hibernate-entitymanager',
             'org.springframework.data:spring-data-jpa',
-            'org.hibernate.validator:hibernate-validator'
+            'org.hibernate.validator:hibernate-validator',
+            'org.springframework.boot:spring-boot-starter-validation'
     ].each {
         api it
         testFixturesApi it
