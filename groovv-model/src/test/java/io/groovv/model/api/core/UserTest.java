@@ -13,6 +13,7 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import lombok.val;
@@ -21,7 +22,8 @@ import org.junit.jupiter.api.Test;
 @ModelTest
 class UserTest {
 
-  @PersistenceContext private EntityManager entityManager;
+  @PersistenceContext
+  private EntityManager entityManager;
 
   @Test
   void ensureUserIsWrittenCorrectly() throws IOException {
@@ -79,6 +81,32 @@ class UserTest {
 
     val encoded = encoding.encode(encryptionService2.generatePassword("testpassword").getEncoded());
     assertEquals(encoded, user.getPassword());
+  }
+
+  @Test
+  void ensureSavingRealmWorks() {
+    val user = new User();
+    user.setUsername("josiah");
+    user.setPassword("password!");
+
+    val details = new UserDetails();
+    user.setDetails(details);
+
+    details.setGivenName("Josiah");
+    details.setFamilyName("Haswell");
+
+    val realm = new Realm();
+    realm.setName("google");
+
+    realm.addUser(user);
+
+    entityManager.persist(realm);
+    entityManager.persist(user);
+    entityManager.flush();
+
+    assertEquals(List.of(user), entityManager.createQuery("select u from User u join Realm r on u.realm = r where r.name = 'google'")
+        .getResultList());
+
   }
 
   @Test

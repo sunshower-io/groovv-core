@@ -8,5 +8,6 @@ dependencies {
     api 'org.springframework.data:spring-data-jpa'
 
     testImplementation testFixtures(project(':groovv-model'))
+    testFixturesApi testFixtures(project(':groovv-model'))
 
 }

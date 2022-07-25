@@ -363,7 +363,10 @@ CREATE TABLE REALM_TO_USERS
     user_id  BINARY(16) NOT NULL,
     CONSTRAINT realm_to_users_realm_ref
         FOREIGN KEY (realm_id)
-            REFERENCES REALMS (id)
+            REFERENCES REALMS (id),
 
+    CONSTRAINT users_to_realm_ref
+        FOREIGN KEY (user_id)
+            REFERENCES USERS (id)
 );
 

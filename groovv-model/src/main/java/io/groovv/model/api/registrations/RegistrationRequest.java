@@ -22,6 +22,10 @@ import lombok.Setter;
 @Table(name = UtilityTables.REGISTRATION_REQUEST)
 public class RegistrationRequest extends AbstractEntity<Identifier> {
 
+  public RegistrationRequest() {
+    setStatus(Status.Inactive);
+  }
+
   @Setter
   @Email
   @NotNull
@@ -54,4 +58,15 @@ public class RegistrationRequest extends AbstractEntity<Identifier> {
   @NotNull
   @Getter(onMethod = @__({@Enumerated(EnumType.ORDINAL), @Column(name = "realm")}))
   private Realm realm;
+
+  @Setter
+  @NotNull
+  @Getter(onMethod = @__({@Enumerated(EnumType.ORDINAL), @Column(name = "status")}))
+  private Status status;
+
+
+  public enum Status {
+    Active,
+    Inactive
+  }
 }
