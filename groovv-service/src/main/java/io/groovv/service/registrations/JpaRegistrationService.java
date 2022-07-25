@@ -2,6 +2,7 @@ package io.groovv.service.registrations;
 
 import io.groovv.model.api.core.Realm;
 import io.groovv.model.api.core.User;
+import io.groovv.model.api.core.UserDetails;
 import io.groovv.model.api.registrations.RegistrationRequest;
 import io.groovv.model.api.registrations.RegistrationRequest.Status;
 import io.groovv.persist.registrations.RegistrationRepository;
@@ -13,13 +14,15 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import lombok.val;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @Transactional
 public class JpaRegistrationService implements RegistrationService {
 
-  @PersistenceContext private EntityManager entityManager;
+  @PersistenceContext
+  private EntityManager entityManager;
   private final RegistrationRepository repository;
 
   @Inject
@@ -55,14 +58,49 @@ public class JpaRegistrationService implements RegistrationService {
           "Error: User registration identified by '%s' was not found".formatted(id));
     }
     val req = opt.get();
+    req.setStatus(Status.Active);
 
     val realm = findOrCreateRealmEntity(req.getRealm());
-    //    val user = requestToUser(req);
-    return null;
+    val user = requestToUser(req);
+    realm.addUser(user);
+    entityManager.persist(user);
+    return user;
+  }
+
+  private User requestToUser(RegistrationRequest request) {
+    val user = new User();
+    val details = user.getDetails();
+
+    user.setUsername(request.getEmailAddress());
+    details.setFamilyName(request.getLastName());
+    details.setGivenName(request.getFirstName());
+
+    user.setLocked(false);
+    user.setExpired(false);
+    return user;
   }
 
   private Realm findOrCreateRealmEntity(io.groovv.model.api.registrations.Realm realm) {
-    //    entityManager.createQuery("select ")
-    return null;
+
+    val realms =
+        entityManager
+            .createQuery("select r from Realm r where r.name = :name", Realm.class)
+            .setParameter("name", realm.getKey())
+            .getResultList();
+
+    if (realms.isEmpty()) {
+      val r = new Realm();
+      r.setName(realm.getKey());
+      entityManager.persist(r);
+      return r;
+    }
+
+    if (realms.size() > 1) {
+      throw new DataIntegrityViolationException(
+          "Error: there should be no more than a single realm with the given key (%s)"
+              .formatted(realm));
+    }
+
+    return realms.get(0);
   }
 }

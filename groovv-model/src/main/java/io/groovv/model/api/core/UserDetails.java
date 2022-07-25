@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -24,11 +26,15 @@ import lombok.Setter;
 public class UserDetails extends SerializableAbstractEntity<Identifier> implements IconAware {
 
   @Setter
+  @NotNull
+  @NotEmpty
   @Getter(onMethod = @__({@Basic, @Column(name = "given_name")}))
   @Attribute(alias = @Alias(read = "given-name", write = "given-name"))
   private String givenName;
 
   @Setter
+  @NotNull
+  @NotEmpty
   @Getter(onMethod = @__({@Basic, @Column(name = "family_name")}))
   @Attribute(alias = @Alias(read = "family-name", write = "family-name"))
   private String familyName;
@@ -40,14 +46,15 @@ public class UserDetails extends SerializableAbstractEntity<Identifier> implemen
   @Setter
   @Getter(
       onMethod =
-          @__({
-            @MapsId,
-            @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY),
-            @JoinColumn(name = "id")
-          }))
+      @__({
+          @MapsId,
+          @JoinColumn(name = "id"),
+          @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY),
+      }))
   private User user;
 
-  public UserDetails() {}
+  public UserDetails() {
+  }
 
   public UserDetails(@NonNull User user) {
     this.user = user;

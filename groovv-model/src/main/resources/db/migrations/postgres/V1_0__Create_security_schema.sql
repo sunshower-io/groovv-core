@@ -53,9 +53,10 @@ CREATE TABLE USERS
 
 
     /**
-      the password
+      the password.  May be null because
+      the user could be coming in from a non-password realm (OAuth, OIDC, SAML, etc.)
      */
-    password              VARCHAR(255) NOT NULL,
+    password              VARCHAR(255),
 
     /**
       unique constraint on username
@@ -353,7 +354,9 @@ CREATE TABLE REALMS
 (
     id       BINARY(16) NOT NULL PRIMARY KEY,
     name     VARCHAR(255),
-    provider VARCHAR(255)
+    provider VARCHAR(255),
+    constraint realm_unique_name
+        UNIQUE (name)
 );
 
 
