@@ -1,6 +1,7 @@
 package io.groovv.app.ui.views.home;
 
 
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -24,9 +25,12 @@ import com.vaadin.flow.server.VaadinServletRequest;
 import io.groovv.app.ui.config.PrincipalDetails;
 import io.groovv.app.ui.config.SecurityUtils;
 import io.groovv.app.ui.views.accounts.AccountView;
+import io.groovv.app.ui.views.accounts.AddAccountView;
 import io.groovv.app.ui.views.dashboard.UserDashboard;
 import io.groovv.app.ui.views.user.UserProfile;
+import io.groovv.persist.users.AccountRepository;
 import javax.annotation.security.PermitAll;
+import javax.inject.Inject;
 import lombok.val;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
@@ -37,12 +41,27 @@ public class HomeView extends AppLayout {
 
   private final HorizontalLayout menuLayout;
   private final MenuBar navigationMenuBar;
+  private final AccountRepository accountRepository;
 
-  public HomeView() {
+  @Inject
+  public HomeView(final AccountRepository accountRepository) {
 
     menuLayout = createMenuLayout();
     navigationMenuBar = createNavigationMenuBar();
+    this.accountRepository = accountRepository;
 
+    initializeLayout();
+  }
+
+
+  @Override
+  protected void onAttach(AttachEvent attachEvent) {
+    if(accountRepository.count() == 0) {
+      UI.getCurrent().navigate(AccountView.class);
+    }
+  }
+
+  private void initializeLayout() {
     val toggle = new DrawerToggle();
     val tabs = createTabs();
     val header = new H1("Groovv");
@@ -63,7 +82,6 @@ public class HomeView extends AppLayout {
 
     val details = SecurityUtils.getPrincipalDetails();
     if (details == null) {
-      doLogOut();
       return menuBar;
     }
 

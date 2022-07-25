@@ -34,8 +34,11 @@ configurations {
 }
 
 dependencies {
+
+    implementation project(':groovv-persist')
 //    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     [
+            'io.sunshower.arcus:arcus-identicon',
             'com.vaadin:vaadin-spring-boot-starter',
             'org.springframework.boot:spring-boot-starter-security',
             'org.springframework.boot:spring-boot-starter-oauth2-client'
@@ -43,9 +46,23 @@ dependencies {
     ].each {
         implementation it
     }
+
+    [
+            "aire-test-spring"
+    ].each {
+        testImplementation "com.aire-ux.components:$it"
+    }
+
+    [
+            'org.springframework.security:spring-security-test'
+    ].each {
+        testImplementation it
+    }
+
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+
 }
 
 dependencyManagement {
@@ -56,7 +73,7 @@ dependencyManagement {
 
 
 vaadin {
-    pnpmEnable = false
+    pnpmEnable = true
 }
 
 task watchScss(type: NpmTask) {

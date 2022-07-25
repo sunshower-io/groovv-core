@@ -3,6 +3,7 @@ package io.groovv.model.api.core;
 import io.sunshower.arcus.condensation.Attribute;
 import io.sunshower.arcus.condensation.Convert;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -32,7 +33,7 @@ public class AbstractEntity<ID extends Serializable> implements Persistable<ID> 
 
   @Override
   public int hashCode() {
-    return isNew() ? 0 : getId().hashCode();
+    return isNew() ? 0 : Objects.hashCode(getId());
   }
 
   @Override
