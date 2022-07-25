@@ -9,6 +9,4 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @Import(PersistenceConfiguration.class)
 @ComponentScan(basePackageClasses = RegistrationService.class)
-public class ServiceConfiguration {
-
-}
+public class ServiceConfiguration {}

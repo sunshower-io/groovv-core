@@ -2,24 +2,19 @@ package io.groovv.model.api.core;
 
 import io.sunshower.persistence.id.Identifier;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
-/**
- * a realm a source of user information such as OAuth, databases, or filesystems
- */
+/** a realm a source of user information such as OAuth, databases, or filesystems */
 @Entity
 @Table(name = "REALMS")
 public class Realm extends AbstractEntity<Identifier> {
@@ -36,16 +31,15 @@ public class Realm extends AbstractEntity<Identifier> {
   @Setter
   @Getter(
       onMethod =
-      @__({
-          @OneToMany(mappedBy = "realm", cascade = CascadeType.ALL, orphanRemoval = true),
-      }))
+          @__({
+            @OneToMany(mappedBy = "realm", cascade = CascadeType.ALL, orphanRemoval = true),
+          }))
   private Set<User> users;
 
   public Realm() {
     // don't retrieve users from this association--they won't appear in a deterministic order
     users = new HashSet<>();
   }
-
 
   public void addUser(@NonNull User user) {
     user.setRealm(this);

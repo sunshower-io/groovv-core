@@ -1,6 +1,5 @@
 package io.groovv.service.registrations;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.groovv.model.api.registrations.RegistrationRequest.Status;
@@ -14,9 +13,7 @@ import org.junit.jupiter.api.Test;
 @ServiceTest
 public class JpaRegistrationServiceTest {
 
-
-  @Inject
-  private RegistrationService registrationService;
+  @Inject private RegistrationService registrationService;
 
   @Inject private RegistrationRepository repository;
 
@@ -32,7 +29,5 @@ public class JpaRegistrationServiceTest {
   void ensureActivatingRegistrationWorks() {
     val request = repository.save(RegistrationTests.createValidRequest());
     val user = registrationService.activate(request.getId());
-
   }
-
 }

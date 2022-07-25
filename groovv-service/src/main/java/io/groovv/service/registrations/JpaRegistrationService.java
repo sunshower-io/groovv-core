@@ -19,11 +19,8 @@ import org.springframework.stereotype.Repository;
 @Transactional
 public class JpaRegistrationService implements RegistrationService {
 
-
-  @PersistenceContext
-  private EntityManager entityManager;
+  @PersistenceContext private EntityManager entityManager;
   private final RegistrationRepository repository;
-
 
   @Inject
   public JpaRegistrationService(final RegistrationRepository repository) {
@@ -42,8 +39,12 @@ public class JpaRegistrationService implements RegistrationService {
 
   @Override
   public List<RegistrationRequest> getRequestsByStatus(Status status) {
-    return entityManager.createQuery("select r from RegistrationRequest r where r.status = :status",
-        RegistrationRequest.class).setParameter("status", status).getResultList();
+    return entityManager
+        .createQuery(
+            "select r from RegistrationRequest r where r.status = :status",
+            RegistrationRequest.class)
+        .setParameter("status", status)
+        .getResultList();
   }
 
   @Override
@@ -56,14 +57,12 @@ public class JpaRegistrationService implements RegistrationService {
     val req = opt.get();
 
     val realm = findOrCreateRealmEntity(req.getRealm());
-//    val user = requestToUser(req);
+    //    val user = requestToUser(req);
     return null;
   }
 
-
   private Realm findOrCreateRealmEntity(io.groovv.model.api.registrations.Realm realm) {
-//    entityManager.createQuery("select ")
+    //    entityManager.createQuery("select ")
     return null;
-
   }
 }

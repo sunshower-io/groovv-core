@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Test;
 @ModelTest
 class RealmTest {
 
-  @PersistenceContext
-  EntityManager entityManager;
+  @PersistenceContext EntityManager entityManager;
 
   @Test
   void ensureRealmIDIsGenerated() {
@@ -22,5 +21,4 @@ class RealmTest {
     entityManager.flush();
     assertNotNull(realm.getId());
   }
-
 }

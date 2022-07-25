@@ -64,7 +64,6 @@ public class RegistrationRequest extends AbstractEntity<Identifier> {
   @Getter(onMethod = @__({@Enumerated(EnumType.ORDINAL), @Column(name = "status")}))
   private Status status;
 
-
   public enum Status {
     Active,
     Inactive

@@ -22,8 +22,7 @@ import org.junit.jupiter.api.Test;
 @ModelTest
 class UserTest {
 
-  @PersistenceContext
-  private EntityManager entityManager;
+  @PersistenceContext private EntityManager entityManager;
 
   @Test
   void ensureUserIsWrittenCorrectly() throws IOException {
@@ -104,9 +103,11 @@ class UserTest {
     entityManager.persist(user);
     entityManager.flush();
 
-    assertEquals(List.of(user), entityManager.createQuery("select u from User u join Realm r on u.realm = r where r.name = 'google'")
-        .getResultList());
-
+    assertEquals(
+        List.of(user),
+        entityManager
+            .createQuery("select u from User u join Realm r on u.realm = r where r.name = 'google'")
+            .getResultList());
   }
 
   @Test

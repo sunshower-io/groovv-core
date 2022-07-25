@@ -1,6 +1,5 @@
 package io.groovv.service.test;
 
-import io.groovv.persist.config.PersistenceConfiguration;
 import io.groovv.service.config.ServiceConfiguration;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -15,6 +14,4 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {ServiceConfiguration.class})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ServiceTest {
-
-}
+public @interface ServiceTest {}
