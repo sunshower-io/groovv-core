@@ -1,11 +1,14 @@
 package io.groovv.model.api.registrations;
 
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import io.groovv.model.api.location.State;
 import io.sunshower.model.test.ModelTest;
 import java.util.Calendar;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.ConstraintViolationException;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,8 +36,10 @@ class RegistrationRequestTest {
   @Test
   void ensureSavingRequestWithNullEmailFails() {
     request.setEmailAddress(null);
-    entityManager.persist(request);
-    entityManager.flush();
+    assertThrows(ConstraintViolationException.class, () -> {
+      entityManager.persist(request);
+      entityManager.flush();
+    });
   }
 
 
