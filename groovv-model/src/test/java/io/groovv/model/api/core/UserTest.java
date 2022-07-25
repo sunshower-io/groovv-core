@@ -7,6 +7,7 @@ import io.sunshower.arcus.condensation.Condensation;
 import io.sunshower.crypt.JCAEncryptionService;
 import io.sunshower.lang.common.encodings.Encodings;
 import io.sunshower.lang.common.encodings.Encodings.Type;
+import io.sunshower.model.test.ModelTest;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;

@@ -2,6 +2,7 @@ package io.groovv.model.api.core;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import io.sunshower.model.test.ModelTest;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import lombok.val;
