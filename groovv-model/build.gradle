@@ -12,7 +12,7 @@ dependencies {
     api 'io.sunshower.arcus:annotations'
     api 'com.google.code.findbugs:jsr305'
 
-    implementation 'io.sunshower.arcus:condensation-json'
+    api 'io.sunshower.arcus:condensation-json'
 
 
 //    testImplementation 'io.sunshower.arcus.persist:persist-api:test-fixtures'
@@ -23,6 +23,12 @@ dependencies {
             'persist-flyway',
             'persist-hibernate'
     ].each {
+
+        testFixturesApi(
+                name: it,
+                group: 'io.sunshower.arcus.persist',
+                classifier: 'test-fixtures'
+        )
         testImplementation(
                 name: it,
                 group: 'io.sunshower.arcus.persist',
@@ -42,13 +48,13 @@ dependencies {
             'org.springframework.data:spring-data-jpa',
             'org.hibernate.validator:hibernate-validator'
     ].each {
-        implementation it
+        api it
         testFixturesApi it
     }
 
     api 'org.springframework.security:spring-security-core'
 
-    testImplementation 'io.sunshower.arcus.cryptkeeper:cryptkeeper-core'
+    api 'io.sunshower.arcus.cryptkeeper:cryptkeeper-core'
 
 
     /**
