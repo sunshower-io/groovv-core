@@ -21,12 +21,19 @@ public class SecurityIdentity extends AbstractEntity<Identifier> {
   @Getter(onMethod = @__({@Basic, @Column(name = AclSecurityIdentity.PRINCIPAL)}))
   private boolean principal;
   /** reference user by username */
-  @Getter(onMethod = @__({@OneToOne(fetch = FetchType.LAZY), @JoinColumn(name = AclSecurityIdentity.SID)}))
+  @Getter(
+      onMethod =
+          @__({@OneToOne(fetch = FetchType.LAZY), @JoinColumn(name = AclSecurityIdentity.SID)}))
   private User owner;
 
   /** username: used to map owner */
   @Setter // you should not use this
-  @Getter(onMethod = @__({@Basic, @Column(name = AclSecurityIdentity.SID, insertable = false, updatable = false)}))
+  @Getter(
+      onMethod =
+          @__({
+            @Basic,
+            @Column(name = AclSecurityIdentity.SID, insertable = false, updatable = false)
+          }))
   private String username;
 
   /** @param owner the owner of this SID */

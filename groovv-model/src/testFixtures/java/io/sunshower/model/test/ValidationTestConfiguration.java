@@ -12,5 +12,4 @@ public class ValidationTestConfiguration {
   public Validator validator() {
     return new LocalValidatorFactoryBean();
   }
-
 }

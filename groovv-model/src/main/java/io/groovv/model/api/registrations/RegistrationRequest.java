@@ -28,13 +28,11 @@ public class RegistrationRequest extends AbstractEntity<Identifier> {
   @Getter(onMethod = @__({@Basic, @Column(name = "email_address")}))
   private String emailAddress;
 
-
   @Setter
   @NotNull
   @NotEmpty
   @Getter(onMethod = @__({@Basic, @Column(name = "first_name")}))
   private String firstName;
-
 
   @Setter
   @NotNull
@@ -42,12 +40,10 @@ public class RegistrationRequest extends AbstractEntity<Identifier> {
   @Getter(onMethod = @__({@Basic, @Column(name = "last_name")}))
   private String lastName;
 
-
   @Setter
   @NotNull
   @Getter(onMethod = @__({@Temporal(TemporalType.DATE), @Column(name = "date_of_birth")}))
   private Calendar dateOfBirth;
-
 
   @Setter
   @NotNull

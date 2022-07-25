@@ -2,9 +2,7 @@ package io.groovv.model.api.location;
 
 public enum State {
 
-  /**
-   * do not modify the order of these enumerated values--JPA maps them by ordinal
-   */
+  /** do not modify the order of these enumerated values--JPA maps them by ordinal */
   Alabama("AL"),
   Alaska("AK"),
   Arizona("AZ"),

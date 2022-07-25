@@ -10,10 +10,6 @@ class AccountTest {
 
   @PersistenceContext private EntityManager entityManager;
 
-
-
   @Test
-  void ensureAccountIsMappedCorrectly() {
-
-  }
+  void ensureAccountIsMappedCorrectly() {}
 }

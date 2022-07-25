@@ -30,9 +30,16 @@ allprojects {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'io.freefair.lombok'
+    apply plugin: "com.diffplug.spotless"
 
     test {
         useJUnitPlatform()
+    }
+
+    spotless {
+        java {
+            googleJavaFormat('1.12.0')
+        }
     }
     dependencies {
         [

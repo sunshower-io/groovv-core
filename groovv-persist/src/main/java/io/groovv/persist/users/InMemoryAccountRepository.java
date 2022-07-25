@@ -6,16 +6,12 @@ import io.groovv.persist.core.Queriers;
 import io.sunshower.persistence.id.Identifier;
 import io.sunshower.persistence.id.Identifiers;
 
-/**
- * back by collections for now.  Will integrate JPA for MVP
- */
-public class InMemoryAccountRepository<Q> extends
-    AbstractInMemoryRepository<Identifier, Account, Q> implements AccountRepository<Q> {
-
+/** back by collections for now. Will integrate JPA for MVP */
+public class InMemoryAccountRepository<Q> extends AbstractInMemoryRepository<Identifier, Account, Q>
+    implements AccountRepository<Q> {
 
   public InMemoryAccountRepository() {
-    super(Account.class, Identifier.class, Queriers.noOp(),
-        Identifiers.newSequence());
+    super(Account.class, Identifier.class, Queriers.noOp(), Identifiers.newSequence());
   }
 
   @Override

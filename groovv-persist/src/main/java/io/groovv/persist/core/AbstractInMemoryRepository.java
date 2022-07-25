@@ -13,14 +13,18 @@ import java.util.stream.StreamSupport;
 import lombok.NonNull;
 import lombok.val;
 
-public abstract class AbstractInMemoryRepository<ID extends Serializable, T extends Persistable<ID>, Q> extends
-    AbstractRepository<ID, T, Q> {
+public abstract class AbstractInMemoryRepository<
+        ID extends Serializable, T extends Persistable<ID>, Q>
+    extends AbstractRepository<ID, T, Q> {
 
   private final Map<ID, T> store;
   private final Sequence<ID> sequence;
 
-  protected AbstractInMemoryRepository(@NonNull Class<T> type, @NonNull Class<ID> idType,
-      @NonNull Querier<ID, T, Q> querier, @NonNull Sequence<ID> sequence) {
+  protected AbstractInMemoryRepository(
+      @NonNull Class<T> type,
+      @NonNull Class<ID> idType,
+      @NonNull Querier<ID, T, Q> querier,
+      @NonNull Sequence<ID> sequence) {
     super(type, idType, querier);
     this.sequence = sequence;
     this.store = new LinkedHashMap<>();
@@ -62,15 +66,12 @@ public abstract class AbstractInMemoryRepository<ID extends Serializable, T exte
     return entity;
   }
 
-
   @Override
   public <S extends T> Iterable<S> saveAll(@NonNull Iterable<S> entities) {
     return StreamSupport.stream(
-        Spliterators.spliteratorUnknownSize(
-            entities.iterator(),
-            Spliterator.ORDERED
-        ), false
-    ).map(this::save).toList();
+            Spliterators.spliteratorUnknownSize(entities.iterator(), Spliterator.ORDERED), false)
+        .map(this::save)
+        .toList();
   }
 
   @Override
@@ -91,11 +92,9 @@ public abstract class AbstractInMemoryRepository<ID extends Serializable, T exte
   @Override
   public Iterable<T> findAllById(@NonNull Iterable<ID> ids) {
     return StreamSupport.stream(
-        Spliterators.spliteratorUnknownSize(
-            ids.iterator(),
-            Spliterator.ORDERED
-        ), false
-    ).flatMap(t -> findById(t).stream()).toList();
+            Spliterators.spliteratorUnknownSize(ids.iterator(), Spliterator.ORDERED), false)
+        .flatMap(t -> findById(t).stream())
+        .toList();
   }
 
   @Override
@@ -127,7 +126,6 @@ public abstract class AbstractInMemoryRepository<ID extends Serializable, T exte
   }
 
   protected abstract <S extends T> void setId(S entity, ID id);
-
 
   protected abstract <S extends T> ID getId(S entity);
 }

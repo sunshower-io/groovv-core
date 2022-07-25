@@ -1,6 +1,5 @@
 package io.groovv.model.api.registrations;
 
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import io.groovv.model.api.location.State;
@@ -16,15 +15,13 @@ import org.junit.jupiter.api.Test;
 @ModelTest
 class RegistrationRequestTest {
 
-  @PersistenceContext
-  private EntityManager entityManager;
+  @PersistenceContext private EntityManager entityManager;
 
   private RegistrationRequest request;
 
   @BeforeEach
   void setUp() {
     request = createValidRequest();
-
   }
 
   @Test
@@ -36,12 +33,13 @@ class RegistrationRequestTest {
   @Test
   void ensureSavingRequestWithNullEmailFails() {
     request.setEmailAddress(null);
-    assertThrows(ConstraintViolationException.class, () -> {
-      entityManager.persist(request);
-      entityManager.flush();
-    });
+    assertThrows(
+        ConstraintViolationException.class,
+        () -> {
+          entityManager.persist(request);
+          entityManager.flush();
+        });
   }
-
 
   protected RegistrationRequest createValidRequest() {
     val request = new RegistrationRequest();
@@ -49,11 +47,11 @@ class RegistrationRequestTest {
     request.setFirstName("User");
     request.setLastName("OfGroovv");
     val calender = Calendar.getInstance();
-    calender.set(1978, 6, 6);;
+    calender.set(1978, 6, 6);
+    ;
     request.setDateOfBirth(calender);
     request.setRealm(Realm.Google);
     request.setState(State.Colorado);
     return request;
   }
-
 }

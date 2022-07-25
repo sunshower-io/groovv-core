@@ -1,6 +1,5 @@
 package io.groovv.persist.config;
 
-
 import io.sunshower.arcus.persist.flyway.ArcusFlywayMigrationManager;
 import io.sunshower.persistence.MigrationManager;
 import io.sunshower.persistence.config.DataSourceConfiguration;
@@ -24,7 +23,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 public class PersistenceConfiguration {
-
 
   @Bean
   public MigrationManager migrationManager(
@@ -77,7 +75,6 @@ public class PersistenceConfiguration {
     return transactionManager;
   }
 
-
   private DataSource createDataSource(DataSourceConfiguration configuration) {
     val ds = new DriverManagerDataSource();
     ds.setDriverClassName(configuration.getDriverClassName());
@@ -97,8 +94,7 @@ public class PersistenceConfiguration {
     return ds;
   }
 
-  Properties fromMap(
-      Map<String, String> properties, Predicate<Entry<String, String>> predicate) {
+  Properties fromMap(Map<String, String> properties, Predicate<Entry<String, String>> predicate) {
     val result = new Properties();
     for (val entry : properties.entrySet()) {
       if (predicate.test(entry)) {
