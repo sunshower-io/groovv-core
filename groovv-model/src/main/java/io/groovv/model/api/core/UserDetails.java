@@ -46,15 +46,14 @@ public class UserDetails extends SerializableAbstractEntity<Identifier> implemen
   @Setter
   @Getter(
       onMethod =
-      @__({
-          @MapsId,
-          @JoinColumn(name = "id"),
-          @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY),
-      }))
+          @__({
+            @MapsId,
+            @JoinColumn(name = "id"),
+            @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY),
+          }))
   private User user;
 
-  public UserDetails() {
-  }
+  public UserDetails() {}
 
   public UserDetails(@NonNull User user) {
     this.user = user;

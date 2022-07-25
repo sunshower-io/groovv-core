@@ -18,14 +18,11 @@ import org.junit.jupiter.api.Test;
 @ServiceTest
 public class JpaRegistrationServiceTest {
 
-  @Inject
-  private RegistrationService registrationService;
+  @Inject private RegistrationService registrationService;
 
-  @Inject
-  private RegistrationRepository repository;
+  @Inject private RegistrationRepository repository;
 
-  @PersistenceContext
-  private EntityManager entityManager;
+  @PersistenceContext private EntityManager entityManager;
 
   @Test
   void ensureSavingRepositoryWorks() {
@@ -41,9 +38,13 @@ public class JpaRegistrationServiceTest {
     val user = registrationService.activate(request.getId());
     assertNotNull(user);
     assertEquals(1, registrationService.getRequestsByStatus(Status.Active).size());
-    val ulist = entityManager.createQuery(
-            "select u from User u where u.username = :username and u.locked = false", User.class)
-        .setParameter("username", request.getEmailAddress()).getResultList();
+    val ulist =
+        entityManager
+            .createQuery(
+                "select u from User u where u.username = :username and u.locked = false",
+                User.class)
+            .setParameter("username", request.getEmailAddress())
+            .getResultList();
     assertEquals(List.of(user), ulist);
   }
 }

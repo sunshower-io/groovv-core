@@ -32,7 +32,6 @@ public class RegistrationRequest extends AbstractEntity<Identifier> {
   @Getter(onMethod = @__({@Basic, @Column(name = "email_address")}))
   private String emailAddress;
 
-
   @Setter
   @NotNull
   @NotEmpty

@@ -2,7 +2,6 @@ package io.groovv.service.registrations;
 
 import io.groovv.model.api.core.Realm;
 import io.groovv.model.api.core.User;
-import io.groovv.model.api.core.UserDetails;
 import io.groovv.model.api.registrations.RegistrationRequest;
 import io.groovv.model.api.registrations.RegistrationRequest.Status;
 import io.groovv.persist.registrations.RegistrationRepository;
@@ -21,8 +20,7 @@ import org.springframework.stereotype.Repository;
 @Transactional
 public class JpaRegistrationService implements RegistrationService {
 
-  @PersistenceContext
-  private EntityManager entityManager;
+  @PersistenceContext private EntityManager entityManager;
   private final RegistrationRepository repository;
 
   @Inject

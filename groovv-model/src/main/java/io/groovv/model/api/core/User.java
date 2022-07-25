@@ -69,29 +69,23 @@ public class User extends TenantedEntity
   @Setter
   @Getter(
       onMethod =
-      @__({@Basic, @Column(name = "last_authenticated"), @Temporal(TemporalType.TIMESTAMP)}))
+          @__({@Basic, @Column(name = "last_authenticated"), @Temporal(TemporalType.TIMESTAMP)}))
   @Attribute(alias = @Alias(read = "last-authenticated", write = "last-authenticated"))
   @Convert(DateConverter.class)
   private Date lastAuthenticated;
-  /**
-   * username for this user
-   */
+  /** username for this user */
   @Setter
   @Getter(onMethod = @__({@Basic, @Column(name = SecurityTables.User.USERNAME)}))
   @Attribute
   private String username;
 
-  /**
-   * password--always a salted hash
-   */
+  /** password--always a salted hash */
   @Setter
   @Attribute
   @Getter(onMethod = @__({@Basic, @Column(name = SecurityTables.User.PASSWORD)}))
   private String password;
 
-  /**
-   * a role is a category of user that grants or prohibits access to system-functionality
-   */
+  /** a role is a category of user that grants or prohibits access to system-functionality */
   @Setter
   @Getter(onMethod = @__({@ManyToMany(mappedBy = "users")}))
   private Set<Role> roles;
@@ -100,21 +94,21 @@ public class User extends TenantedEntity
   @Getter(onMethod = @__({@ManyToMany(mappedBy = "users")}))
   private Set<Group> groups;
 
-  /**
-   * a permission is a granted authority that grants a specific user access to a specific object
-   */
+  /** a permission is a granted authority that grants a specific user access to a specific object */
   @Setter
   @Getter(
       onMethod =
-      @__({
-          @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true),
-      }))
+          @__({
+            @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true),
+          }))
   private Set<Permission> permissions;
 
   @Getter(
       onMethod =
-      @__({@PrimaryKeyJoinColumn,
-          @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)}))
+          @__({
+            @PrimaryKeyJoinColumn,
+            @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+          }))
   @Element
   @NotNull
   private UserDetails details;
@@ -123,15 +117,15 @@ public class User extends TenantedEntity
   @NotNull
   @Getter(
       onMethod =
-      @__({
-          @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL),
-          @JoinTable(
-              name = "REALM_TO_USERS",
-              joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-              inverseJoinColumns = @JoinColumn(name = "realm_id", referencedColumnName = "id"),
-              foreignKey = @ForeignKey(name = "users_to_realm_ref"),
-              inverseForeignKey = @ForeignKey(name = "realm_to_users_realm_ref"))
-      }))
+          @__({
+            @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL),
+            @JoinTable(
+                name = "REALM_TO_USERS",
+                joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+                inverseJoinColumns = @JoinColumn(name = "realm_id", referencedColumnName = "id"),
+                foreignKey = @ForeignKey(name = "users_to_realm_ref"),
+                inverseForeignKey = @ForeignKey(name = "realm_to_users_realm_ref"))
+          }))
   private Realm realm;
 
   public User() {
