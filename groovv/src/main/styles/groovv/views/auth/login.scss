@@ -11,6 +11,10 @@
     margin: 0;
     color: $gold;
   }
+  h3 {
+    margin-top:-16px;
+    margin-bottom:-16px;
+  }
 
   a {
     display: flex;
@@ -21,6 +25,11 @@
       margin: auto;
     }
   }
+
+  //[part="form"], section {
+  //  padding: 0 var(--lumo-space-l);
+  //  border: 1px solid red;
+  //}
 
   .hr-strike {
     display: flex;

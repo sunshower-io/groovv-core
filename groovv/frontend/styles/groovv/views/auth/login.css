@@ -7,6 +7,10 @@
   margin: 0;
   color: #c9c94f; }
 
+.login h3 {
+  margin-top: -16px;
+  margin-bottom: -16px; }
+
 .login a {
   display: flex;
   flex-direction: column-reverse;

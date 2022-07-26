@@ -1,0 +1,8 @@
+//[part="form-title"] {
+//  color: red;
+//}
+
+::part(form-title) {
+  margin-top: -32px;
+  font-size: var(--lumo-font-size-xl);
+}

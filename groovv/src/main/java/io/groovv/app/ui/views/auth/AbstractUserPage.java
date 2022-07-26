@@ -5,23 +5,29 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.RouterLayout;
+import com.vaadin.flow.router.RouterLink;
+import io.groovv.app.ui.components.RouteTabs;
+import lombok.val;
 
 @CssImport(value = "./styles/groovv/views/auth/login.css")
-public class AbstractUserPage extends HorizontalLayout {
+public class AbstractUserPage extends VerticalLayout implements RouterLayout {
 
-  protected final VerticalLayout layout;
 
   protected AbstractUserPage() {
     setSizeFull();
     addClassName("login");
     addClassName("groovv-login-form");
-    layout = new VerticalLayout();
-    layout.setWidth("unset");
-    layout.add(new H1("Groovv"));
-    layout.add(new H2("Retirement for Everyone"));
-    add(layout);
+    setWidth("unset");
+    add(new H1("Groovv"));
+    add(new H2("Retirement for Everyone"));
+
+    val tabs = new RouteTabs();
+    tabs.add(new RouterLink("Register", RegistrationPage.class));
+    tabs.add(new RouterLink("Login", LoginPage.class));
+    add(tabs);
 
     setJustifyContentMode(JustifyContentMode.CENTER);
-    setDefaultVerticalComponentAlignment(Alignment.CENTER);
+    setDefaultHorizontalComponentAlignment(Alignment.CENTER);
   }
 }
