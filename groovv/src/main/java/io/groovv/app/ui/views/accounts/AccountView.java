@@ -15,11 +15,9 @@ import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.function.SerializableBiConsumer;
 import com.vaadin.flow.router.Route;
 import io.groovv.app.ui.components.UIUtils;
-import io.groovv.app.ui.data.providers.RepositoryDataProvider;
 import io.groovv.app.ui.views.home.HomeView;
 import io.groovv.model.api.accounts.Account;
 import io.groovv.persist.users.AccountRepository;
-import io.sunshower.persistence.id.Identifier;
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
 import lombok.NonNull;
@@ -92,7 +90,7 @@ public class AccountView extends VerticalLayout {
             }));
     val grid = new Grid<Account>();
     grid.addColumn(createIdenticonComponentRenderer()).setAutoWidth(true).setFlexGrow(0);
-    grid.setItems(new RepositoryDataProvider<Identifier, Account, Void>(repository));
+    //    grid.setItems(new RepositoryDataProvider<Identifier, Account, Void>(repository));
     grid.addColumn(new ComponentRenderer<>(VerticalLayout::new, accountDetailsComponentUpdater))
         .setHeader("Details")
         .setAutoWidth(true);

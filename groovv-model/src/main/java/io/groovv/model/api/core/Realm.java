@@ -38,6 +38,11 @@ public class Realm extends AbstractEntity<Identifier> {
 
   public Realm() {
     // don't retrieve users from this association--they won't appear in a deterministic order
+    this(null);
+  }
+
+  public Realm(String name) {
+    setName(name);
     users = new HashSet<>();
   }
 

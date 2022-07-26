@@ -23,7 +23,7 @@ import lombok.Setter;
 @Entity
 @RootElement
 @Table(name = "USER_DETAILS")
-public class UserDetails extends SerializableAbstractEntity<Identifier> implements IconAware {
+public class UserDetails extends AbstractEntity<Identifier> implements IconAware {
 
   @Setter
   @NotNull

@@ -15,6 +15,8 @@ plugins {
 
 defaultTasks("clean", "build")
 
+apply plugin: 'java-test-fixtures'
+
 
 repositories {
     mavenCentral()
@@ -35,9 +37,20 @@ configurations {
 
 dependencies {
 
+//    [
+//            'spring-cloud-starter-kubernetes-client',
+//            'spring-cloud-starter-kubernetes-fabric8',
+//            'spring-cloud-starter-kubernetes-fabric8-config'
+//    ].each {
+//        implementation "org.springframework.cloud:$it"
+//    }
+
     implementation project(':groovv-persist')
+    implementation project(':groovv-service')
+
 //    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     [
+            'com.zaxxer:HikariCP',
             'io.sunshower.arcus:arcus-identicon',
             'com.vaadin:vaadin-spring-boot-starter',
             'org.springframework.boot:spring-boot-starter-security',
@@ -63,6 +76,9 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 
+
+    testFixturesApi testFixtures(project(':groovv-persist'))
+    testFixturesApi testFixtures(project(':groovv-service'))
 }
 
 dependencyManagement {

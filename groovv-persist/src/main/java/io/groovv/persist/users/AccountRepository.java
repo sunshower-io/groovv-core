@@ -1,7 +1,9 @@
 package io.groovv.persist.users;
 
 import io.groovv.model.api.accounts.Account;
-import io.groovv.persist.core.Repository;
 import io.sunshower.persistence.id.Identifier;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.transaction.annotation.Transactional;
 
-public interface AccountRepository<Q> extends Repository<Identifier, Account, Q> {}
+@Transactional
+public interface AccountRepository extends PagingAndSortingRepository<Account, Identifier> {}

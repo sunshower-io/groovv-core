@@ -1,14 +1,16 @@
+CREATE DOMAIN IDENTIFIER AS BYTEA CHECK(LENGTH(VALUE) = 16);
+
 CREATE TABLE TENANTS
 (
 
-    id          BINARY(16) NOT NULL PRIMARY KEY,
+    id          IDENTIFIER NOT NULL PRIMARY KEY,
     name        VARCHAR(255),
     description VARCHAR(255),
     created     TIMESTAMP default NOW(),
     icon        bytea,
     type        varchar(63),
 
-    parent_id   BINARY(16),
+    parent_id   IDENTIFIER,
 
     CONSTRAINT tenant_to_parent_reference
         FOREIGN KEY (parent_id)
@@ -22,9 +24,9 @@ CREATE TABLE USERS
     /**
       the id
      */
-    id                    BINARY(16)   NOT NULL PRIMARY KEY,
+    id                    IDENTIFIER   NOT NULL PRIMARY KEY,
 
-    tenant_id             BINARY(16),
+    tenant_id             IDENTIFIER,
 
     /**
       the username
@@ -47,9 +49,9 @@ CREATE TABLE USERS
 
     expired               BOOLEAN   DEFAULT FALSE,
 
-    salt                  BINARY(32),
+    salt                  BYTEA,
 
-    initialization_vector BINARY(16),
+    initialization_vector BYTEA,
 
 
     /**
@@ -74,8 +76,8 @@ CREATE TABLE USERS
 
 CREATE TABLE TENANTS_TO_USERS
 (
-    tenant_id BINARY(16),
-    user_id   BINARY(16),
+    tenant_id IDENTIFIER,
+    user_id   IDENTIFIER,
     CONSTRAINT
         tenants_to_users_user_ref
         FOREIGN KEY (user_id)
@@ -89,7 +91,7 @@ CREATE TABLE TENANTS_TO_USERS
 
 CREATE TABLE USER_DETAILS
 (
-    id         BINARY(16)   NOT NULL PRIMARY KEY,
+    id         IDENTIFIER   NOT NULL PRIMARY KEY,
     icon       bytea,
     type        VARCHAR(63),
     given_name  VARCHAR(255) NOT NULL,
@@ -109,7 +111,7 @@ CREATE UNIQUE INDEX
 
 CREATE TABLE acl_sid
 (
-    id        binary(16)   NOT NULL PRIMARY KEY,
+    id        IDENTIFIER   NOT NULL PRIMARY KEY,
     principal BOOLEAN      NOT NULL,
     sid       varchar(128) NOT NULL,
 
@@ -124,7 +126,7 @@ CREATE TABLE acl_sid
  */
 CREATE TABLE acl_class
 (
-    id    BINARY(16)   NOT NULL PRIMARY KEY,
+    id    IDENTIFIER   NOT NULL PRIMARY KEY,
     class VARCHAR(128) NOT NULL,
     CONSTRAINT
         unique_type
@@ -142,28 +144,28 @@ CREATE TABLE acl_object_identity
     /**
       the ID for this object identity
      */
-    id                 BINARY(16) NOT NULL PRIMARY KEY,
+    id                 IDENTIFIER NOT NULL PRIMARY KEY,
 
     /**
       the owner security id for this OID
 
      */
-    owner_sid          BINARY(16),
+    owner_sid          IDENTIFIER,
 
     /**
       reference to a parent type--may be null
     */
-    parent_object      BINARY(16),
+    parent_object      IDENTIFIER,
 
     /**
       reference the type of the secured object by ID
      */
-    object_id_class    BINARY(16) NOT NULL,
+    object_id_class    IDENTIFIER NOT NULL,
 
     /**
       the ID of the referenced object
      */
-    object_id_identity BINARY(16) NOT NULL,
+    object_id_identity IDENTIFIER NOT NULL,
 
     entries_inheriting BOOLEAN,
 
@@ -209,12 +211,12 @@ CREATE TABLE acl_entry
     /**
       primary key
      */
-    id                  BINARY(16) NOT NULL PRIMARY KEY,
+    id                  IDENTIFIER NOT NULL PRIMARY KEY,
 
     /**
       reference  acl_object_identity
      */
-    acl_object_identity BINARY(16) NOT NULL,
+    acl_object_identity IDENTIFIER NOT NULL,
 
 
     /**
@@ -226,7 +228,7 @@ CREATE TABLE acl_entry
     /**
       reference the acl_sid (secured object)
      */
-    sid                 BINARY(16) NOT NULL,
+    sid                 IDENTIFIER NOT NULL,
 
 
     mask                INTEGER    NOT NULL,
@@ -264,10 +266,10 @@ CREATE TABLE acl_entry
 CREATE TABLE PERMISSIONS
 (
 
-    id                      BINARY(16)   NOT NULL PRIMARY KEY,
+    id                      IDENTIFIER   NOT NULL PRIMARY KEY,
     name                    VARCHAR(255) NOT NULL,
-    grantee_id              BINARY(16),
-    access_control_entry_id BINARY(16),
+    grantee_id              IDENTIFIER,
+    access_control_entry_id IDENTIFIER,
 
     CONSTRAINT permission_unique_name
         UNIQUE (name),
@@ -286,15 +288,15 @@ CREATE TABLE PERMISSIONS
 
 CREATE TABLE ROLES
 (
-    id   BINARY(16) PRIMARY KEY,
+    id   IDENTIFIER PRIMARY KEY,
     name VARCHAR(255)
 );
 
 
 CREATE TABLE ROLES_TO_USERS
 (
-    role_id BINARY(16) NOT NULL,
-    user_id BINARY(16) NOT NULL,
+    role_id IDENTIFIER NOT NULL,
+    user_id IDENTIFIER NOT NULL,
     CONSTRAINT
         roles_to_users_ref_role
         FOREIGN KEY (role_id)
@@ -310,7 +312,7 @@ CREATE TABLE ROLES_TO_USERS
 
 CREATE TABLE GROUPS
 (
-    id          BINARY(16) PRIMARY KEY,
+    id          IDENTIFIER PRIMARY KEY,
 
 
     name        varchar(255),
@@ -322,8 +324,8 @@ CREATE TABLE GROUPS
 
 CREATE TABLE GROUPS_TO_USERS
 (
-    user_id  BINARY(16),
-    group_id BINARY(16),
+    user_id  IDENTIFIER,
+    group_id IDENTIFIER,
     CONSTRAINT
         groups_to_users_user_ref
         FOREIGN KEY (user_id)
@@ -337,8 +339,8 @@ CREATE TABLE GROUPS_TO_USERS
 
 CREATE TABLE PERMISSIONS_TO_USERS
 (
-    user_id       BINARY(16),
-    permission_id BINARY(16),
+    user_id       IDENTIFIER,
+    permission_id IDENTIFIER,
     CONSTRAINT
         permissions_to_users_user_ref
         FOREIGN KEY (user_id)
@@ -352,7 +354,7 @@ CREATE TABLE PERMISSIONS_TO_USERS
 
 CREATE TABLE REALMS
 (
-    id       BINARY(16) NOT NULL PRIMARY KEY,
+    id       IDENTIFIER NOT NULL PRIMARY KEY,
     name     VARCHAR(255),
     provider VARCHAR(255),
     constraint realm_unique_name
@@ -362,8 +364,8 @@ CREATE TABLE REALMS
 
 CREATE TABLE REALM_TO_USERS
 (
-    realm_id BINARY(16) NOT NULL,
-    user_id  BINARY(16) NOT NULL,
+    realm_id IDENTIFIER NOT NULL,
+    user_id  IDENTIFIER NOT NULL,
     CONSTRAINT realm_to_users_realm_ref
         FOREIGN KEY (realm_id)
             REFERENCES REALMS (id),

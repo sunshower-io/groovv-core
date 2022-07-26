@@ -4,7 +4,7 @@ import static io.sunshower.model.test.RegistrationTests.createValidRequest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.groovv.model.api.registrations.Realm;
-import io.groovv.persist.PersistenceTest;
+import io.groovv.persist.config.PersistenceTest;
 import javax.inject.Inject;
 import org.junit.jupiter.api.Test;
 

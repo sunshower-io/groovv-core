@@ -11,6 +11,10 @@
     margin: 0;
     color: $gold;
   }
+  h3 {
+    margin-top:-8px;
+    margin-bottom:-16px;
+  }
 
   a {
     display: flex;
@@ -21,6 +25,7 @@
       margin: auto;
     }
   }
+
 
   .hr-strike {
     display: flex;

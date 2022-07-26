@@ -28,7 +28,12 @@ class UserTest {
   void ensureUserIsWrittenCorrectly() throws IOException {
     val user = new User();
 
+    val realm = new Realm("groovv");
+
     user.setUsername("Josiah");
+    user.getDetails().setGivenName("adfadfa");
+    user.getDetails().setFamilyName("adfadfa");
+    realm.addUser(user);
 
     val encoding = Encodings.create(Type.Base58);
     val salt = generate(32);
@@ -57,7 +62,12 @@ class UserTest {
   void ensureSavingPasswordAndIVAndSaltWorks() {
     val user = new User();
 
+    val realm = new Realm("groovv");
+
     user.setUsername("Josiah");
+    user.getDetails().setGivenName("adfadfa");
+    user.getDetails().setFamilyName("adfadfa");
+    realm.addUser(user);
 
     val encoding = Encodings.create(Type.Base58);
     val salt = generate(32);
@@ -121,6 +131,9 @@ class UserTest {
 
     details.setGivenName("Josiah");
     details.setFamilyName("Haswell");
+    val realm = new Realm();
+    realm.setName("google");
+    realm.addUser(user);
 
     entityManager.persist(user);
     entityManager.flush();
