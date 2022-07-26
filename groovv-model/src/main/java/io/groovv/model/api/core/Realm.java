@@ -14,9 +14,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
-/**
- * a realm a source of user information such as OAuth, databases, or filesystems
- */
+/** a realm a source of user information such as OAuth, databases, or filesystems */
 @Entity
 @Table(name = "REALMS")
 public class Realm extends AbstractEntity<Identifier> {
@@ -33,9 +31,9 @@ public class Realm extends AbstractEntity<Identifier> {
   @Setter
   @Getter(
       onMethod =
-      @__({
-          @OneToMany(mappedBy = "realm", cascade = CascadeType.ALL, orphanRemoval = true),
-      }))
+          @__({
+            @OneToMany(mappedBy = "realm", cascade = CascadeType.ALL, orphanRemoval = true),
+          }))
   private Set<User> users;
 
   public Realm() {
