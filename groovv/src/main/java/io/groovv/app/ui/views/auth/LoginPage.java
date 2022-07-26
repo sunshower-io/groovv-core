@@ -15,28 +15,15 @@ import lombok.val;
 
 @Route("login")
 @AnonymousAllowed
-@CssImport(value = "./styles/groovv/views/auth/login.css")
-public class LoginPage extends HorizontalLayout {
+public class LoginPage extends AbstractUserPage {
 
   private static final String OAUTH_URL = "/oauth2/authorization/google";
 
-  private final VerticalLayout layout;
 
   public LoginPage() {
-    setSizeFull();
-    addClassName("login");
-    addClassName("groovv-login-form");
-    layout = new VerticalLayout();
-    layout.setWidth("unset");
-    layout.add(new H1("Groovv"));
-    layout.add(new H2("Retirement for Everyone"));
-
+    super();
     createLoginForm();
     createOAuthProviders();
-
-    add(layout);
-    setJustifyContentMode(JustifyContentMode.CENTER);
-    setDefaultVerticalComponentAlignment(Alignment.CENTER);
   }
 
   private void createLoginForm() {
