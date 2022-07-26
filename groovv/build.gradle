@@ -37,6 +37,14 @@ configurations {
 
 dependencies {
 
+//    [
+//            'spring-cloud-starter-kubernetes-client',
+//            'spring-cloud-starter-kubernetes-fabric8',
+//            'spring-cloud-starter-kubernetes-fabric8-config'
+//    ].each {
+//        implementation "org.springframework.cloud:$it"
+//    }
+
     implementation project(':groovv-persist')
     implementation project(':groovv-service')
 

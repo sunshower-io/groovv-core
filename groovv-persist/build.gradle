@@ -11,6 +11,8 @@ dependencies {
         testFixturesApi it
     }
 
+    implementation 'com.zaxxer:HikariCP'
+
     testFixturesApi testFixtures(project(':groovv-model'))
     testImplementation testFixtures(project(':groovv-model'))
 

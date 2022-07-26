@@ -67,13 +67,6 @@ public class TestPersistenceConfiguration {
     return createDataSource(configuration);
   }
 
-  @Bean
-  public PlatformTransactionManager transactionManager(
-      LocalContainerEntityManagerFactoryBean factoryBean) {
-    val transactionManager = new JpaTransactionManager();
-    transactionManager.setEntityManagerFactory(factoryBean.getObject());
-    return transactionManager;
-  }
 
   private DataSource createDataSource(DataSourceConfiguration configuration) {
     val ds = new DriverManagerDataSource();
