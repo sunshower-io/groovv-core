@@ -24,11 +24,19 @@ class SecuredTypeTest {
 
     val tenant = tenant();
 
+    val realm = new Realm();
+    realm.setName("groovv");
+    entityManager.persist(realm);
+
     entityManager.persist(tenant);
 
     val user = new User();
+    realm.addUser(user);
+
     user.setUsername("sup");
     user.setPassword("password");
+    user.getDetails().setGivenName("test");
+    user.getDetails().setFamilyName("test");
     sid.setOwner(user);
     entityManager.persist(user);
     tenant.addUser(user);
