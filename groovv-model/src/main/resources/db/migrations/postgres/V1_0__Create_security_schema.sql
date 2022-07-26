@@ -51,7 +51,7 @@ CREATE TABLE USERS
 
     salt                  BYTEA,
 
-    initialization_vector IDENTIFIER,
+    initialization_vector BYTEA,
 
 
     /**
