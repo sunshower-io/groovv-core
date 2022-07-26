@@ -1,6 +1,8 @@
 package io.groovv.model.api.core;
 
 import io.sunshower.persistence.id.Identifier;
+import io.sunshower.persistence.id.Identifiers;
+import io.sunshower.persistence.id.Sequence;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,6 +19,12 @@ import org.springframework.security.core.GrantedAuthority;
 @Entity
 @Table(name = "PERMISSION")
 public class Permission extends AbstractEntity<Identifier> implements GrantedAuthority {
+
+  static final Sequence<Identifier> SEQUENCE;
+
+  static {
+    SEQUENCE = Identifiers.newSequence(true);
+  }
 
   @Setter
   @Getter(onMethod = @__({@Basic, @Column(name = "name")}))
@@ -42,5 +50,9 @@ public class Permission extends AbstractEntity<Identifier> implements GrantedAut
 
   public void setAuthority(String authority) {
     this.name = authority;
+  }
+
+  public Permission() {
+    super(SEQUENCE.next());
   }
 }

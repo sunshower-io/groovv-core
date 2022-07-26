@@ -18,6 +18,9 @@ public class RegistrationTests {
     request.setDateOfBirth(calender);
     request.setRealm(Realm.Google);
     request.setState(State.Colorado);
+
+    request.setZipCode("80524");
+    request.setPhoneNumber("9704438664");
     return request;
   }
 }

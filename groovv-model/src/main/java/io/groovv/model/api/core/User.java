@@ -5,6 +5,9 @@ import io.sunshower.arcus.condensation.Attribute;
 import io.sunshower.arcus.condensation.Convert;
 import io.sunshower.arcus.condensation.Element;
 import io.sunshower.arcus.condensation.RootElement;
+import io.sunshower.persistence.id.Identifier;
+import io.sunshower.persistence.id.Identifiers;
+import io.sunshower.persistence.id.Sequence;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
@@ -28,7 +31,6 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.val;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
@@ -37,6 +39,12 @@ import org.springframework.security.core.GrantedAuthority;
 @SuppressWarnings("PMD")
 public class User extends TenantedEntity
     implements org.springframework.security.core.userdetails.UserDetails {
+
+  static final Sequence<Identifier> SEQUENCE;
+
+  static {
+    SEQUENCE = Identifiers.newSequence(true);
+  }
 
   @Setter
   @Getter(onMethod = @__({@Basic, @Column(name = "salt")}))
@@ -129,16 +137,15 @@ public class User extends TenantedEntity
   private Realm realm;
 
   public User() {
+    super(SEQUENCE.next());
     details = new UserDetails();
     details.setUser(this);
   }
 
   public User(org.springframework.security.core.userdetails.UserDetails user) {
+    this();
     setUsername(user.getUsername());
     setPassword(user.getPassword());
-    val details = new UserDetails();
-    details.setUser(this);
-    setDetails(details);
   }
 
   public void setDetails(UserDetails details) {

@@ -3,6 +3,8 @@ package io.groovv.model.api.registrations;
 import io.groovv.model.api.core.AbstractEntity;
 import io.groovv.model.api.location.State;
 import io.sunshower.persistence.id.Identifier;
+import io.sunshower.persistence.id.Identifiers;
+import io.sunshower.persistence.id.Sequence;
 import java.util.Calendar;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,6 +17,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +25,14 @@ import lombok.Setter;
 @Table(name = UtilityTables.REGISTRATION_REQUEST)
 public class RegistrationRequest extends AbstractEntity<Identifier> {
 
+  static final Sequence<Identifier> SEQUENCE;
+
+  static {
+    SEQUENCE = Identifiers.newSequence(true);
+  }
+
   public RegistrationRequest() {
+    super(SEQUENCE.next());
     setStatus(Status.Inactive);
   }
 
@@ -31,6 +41,20 @@ public class RegistrationRequest extends AbstractEntity<Identifier> {
   @NotNull
   @Getter(onMethod = @__({@Basic, @Column(name = "email_address")}))
   private String emailAddress;
+
+  @Setter
+  @NotNull
+  @NotEmpty
+  @Pattern(regexp = "(^$|\\d{10})")
+  @Getter(onMethod = @__({@Basic, @Column(name = "phone_number")}))
+  private String phoneNumber;
+
+  @Setter
+  @NotNull
+  @NotEmpty
+  @Pattern(regexp = "(^$|\\d{5})")
+  @Getter(onMethod = @__({@Basic, @Column(name = "zip_code")}))
+  private String zipCode;
 
   @Setter
   @NotNull

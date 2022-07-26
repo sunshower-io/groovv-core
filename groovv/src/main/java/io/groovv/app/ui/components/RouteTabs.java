@@ -15,7 +15,6 @@ public class RouteTabs extends Tabs implements BeforeEnterObserver {
 
   public RouteTabs() {
     tabMap = new LinkedHashMap<>();
-
   }
 
   public void add(RouterLink routerLink) {
@@ -25,8 +24,7 @@ public class RouteTabs extends Tabs implements BeforeEnterObserver {
           if (shouldHighlight) {
             setSelectedTab(tabMap.get(routerLink));
           }
-        }
-    );
+        });
     tabMap.put(routerLink, new Tab(routerLink));
     super.add(tabMap.get(routerLink));
   }

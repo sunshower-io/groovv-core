@@ -1,6 +1,8 @@
 package io.groovv.model.api.core;
 
 import io.sunshower.persistence.id.Identifier;
+import io.sunshower.persistence.id.Identifiers;
+import io.sunshower.persistence.id.Sequence;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +26,12 @@ import lombok.Setter;
 @Entity
 @Table(name = "TENANTS")
 public class Tenant extends AbstractEntity<Identifier> implements IconAware {
+
+  static final Sequence<Identifier> SEQUENCE;
+
+  static {
+    SEQUENCE = Identifiers.newSequence(true);
+  }
 
   @Setter
   @Getter(onMethod = @__({@Basic, @Column(name = "name")}))
@@ -62,6 +70,10 @@ public class Tenant extends AbstractEntity<Identifier> implements IconAware {
   @Setter
   @Getter(onMethod = @__({@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)}))
   private Set<Tenant> children;
+
+  public Tenant() {
+    super(SEQUENCE.next());
+  }
 
   public void addUser(User user) {
     if (users == null) {

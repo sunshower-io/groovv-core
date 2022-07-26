@@ -2,6 +2,8 @@ package io.groovv.model.api.core;
 
 import io.groovv.model.api.core.SecurityTables.AclObjectIdentityFields;
 import io.sunshower.persistence.id.Identifier;
+import io.sunshower.persistence.id.Identifiers;
+import io.sunshower.persistence.id.Sequence;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -20,6 +22,11 @@ import lombok.Setter;
 @Table(name = SecurityTables.ACL_OBJECT_IDENTITY)
 public class ObjectIdentity extends AbstractEntity<Identifier> {
 
+  static final Sequence<Identifier> SEQUENCE;
+
+  static {
+    SEQUENCE = Identifiers.newSequence(true);
+  }
   /** determine whether this entry inherits its ancestor's permissions */
   @Setter
   @Getter(onMethod = @__({@Basic, @Column(name = AclObjectIdentityFields.INHERITS_ENTRIES)}))
@@ -54,4 +61,8 @@ public class ObjectIdentity extends AbstractEntity<Identifier> {
   @Setter
   @Getter(onMethod = @__({@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)}))
   private Set<ObjectIdentity> children;
+
+  public ObjectIdentity() {
+    super(SEQUENCE.next());
+  }
 }

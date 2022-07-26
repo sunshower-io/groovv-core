@@ -4,6 +4,8 @@ import io.sunshower.arcus.condensation.Alias;
 import io.sunshower.arcus.condensation.Attribute;
 import io.sunshower.arcus.condensation.RootElement;
 import io.sunshower.persistence.id.Identifier;
+import io.sunshower.persistence.id.Identifiers;
+import io.sunshower.persistence.id.Sequence;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -53,9 +55,18 @@ public class UserDetails extends AbstractEntity<Identifier> implements IconAware
           }))
   private User user;
 
-  public UserDetails() {}
+  static final Sequence<Identifier> SEQUENCE;
+
+  static {
+    SEQUENCE = Identifiers.newSequence(true);
+  }
+
+  public UserDetails() {
+    super(SEQUENCE.next());
+  }
 
   public UserDetails(@NonNull User user) {
+    this();
     this.user = user;
     user.setDetails(this);
   }

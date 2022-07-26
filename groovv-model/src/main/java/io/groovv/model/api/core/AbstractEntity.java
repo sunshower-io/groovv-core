@@ -4,7 +4,6 @@ import io.sunshower.arcus.condensation.Attribute;
 import io.sunshower.arcus.condensation.Convert;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import lombok.Getter;
@@ -17,10 +16,8 @@ public class AbstractEntity<ID extends Serializable> implements Persistable<ID> 
   @Setter
   @Attribute
   @Convert(IdentifierConverter.class)
-  @Getter(onMethod = @__({@Id, @GeneratedValue(generator = "flake")}))
+  @Getter(onMethod = @__({@Id}))
   private ID id;
-
-  protected AbstractEntity() {}
 
   protected AbstractEntity(ID id) {
     this.id = id;
