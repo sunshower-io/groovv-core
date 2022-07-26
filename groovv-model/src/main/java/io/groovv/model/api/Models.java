@@ -12,7 +12,7 @@ public class Models {
   private static final String[] SCANNED_PACKAGES = {
       "core",
       "accounts",
-      "registration"
+      "registrations"
   };
 
   public static String[] getScannedPackages() {

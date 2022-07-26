@@ -6,7 +6,7 @@
   the database
  */
 create table REGISTRATION_REQUEST(
-    id BINARY(16)           NOT NULL PRIMARY KEY,
+    id IDENTIFIER           NOT NULL PRIMARY KEY,
     email_address           VARCHAR(63) NOT NULL,
     first_name              VARCHAR(63) NOT NULL,
     last_name               VARCHAR(63) NOT NULL,
@@ -27,7 +27,7 @@ create table REGISTRATION_REQUEST(
   TODO Josiah add IV and salt.  Create mapped superclass
  */
 create table USER_BANK_ACCOUNTS (
-    id BINARY(16)           NOT NULL PRIMARY KEY,
+    id IDENTIFIER           NOT NULL PRIMARY KEY,
     owner_name              VARCHAR(255) NOT NULL,
     routing_number          VARCHAR(255) NOT NULL,
     account_number          VARCHAR(255) NOT NULL
