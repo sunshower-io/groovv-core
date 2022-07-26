@@ -16,10 +16,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 public class TestPersistenceConfiguration {
@@ -66,7 +64,6 @@ public class TestPersistenceConfiguration {
   public DataSource dataSource(DataSourceConfiguration configuration) {
     return createDataSource(configuration);
   }
-
 
   private DataSource createDataSource(DataSourceConfiguration configuration) {
     val ds = new DriverManagerDataSource();

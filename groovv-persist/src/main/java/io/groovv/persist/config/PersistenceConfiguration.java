@@ -11,8 +11,6 @@ import lombok.val;
 import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -38,22 +36,21 @@ public class PersistenceConfiguration {
 
   @Bean
   public Flyway flyway(DataSource dataSource) {
-    val flyway = Flyway.configure()
-        .dataSource(dataSource)
-        .validateOnMigrate(true)
-        .locations("classpath:db/migrations/postgres")
-        .createSchemas(true)
-        .baselineOnMigrate(true)
-        .loggers("auto")
-        .load();
+    val flyway =
+        Flyway.configure()
+            .dataSource(dataSource)
+            .validateOnMigrate(true)
+            .locations("classpath:db/migrations/postgres")
+            .createSchemas(true)
+            .baselineOnMigrate(true)
+            .loggers("auto")
+            .load();
     flyway.migrate();
     return flyway;
   }
 
-
   @Bean
-  public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-      DataSource dataSource) {
+  public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
     val factorybean = new LocalContainerEntityManagerFactoryBean();
     factorybean.setDataSource(dataSource);
     factorybean.setPackagesToScan(getScannedPackages());
