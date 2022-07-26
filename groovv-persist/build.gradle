@@ -3,9 +3,15 @@ apply plugin: 'java-library'
 apply plugin: 'java-test-fixtures'
 dependencies {
 
-    api project(':groovv-model')
-    api 'org.springframework.data:spring-data-jpa'
+    [
+            project(':groovv-model'),
+            'org.springframework.data:spring-data-jpa'
+    ].each {
+        api it
+        testFixturesApi it
+    }
 
+    testFixturesApi testFixtures(project(':groovv-model'))
     testImplementation testFixtures(project(':groovv-model'))
 
 }

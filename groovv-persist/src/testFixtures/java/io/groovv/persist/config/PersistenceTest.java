@@ -1,6 +1,5 @@
-package io.groovv.persist;
+package io.groovv.persist.config;
 
-import io.groovv.persist.config.PersistenceConfiguration;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import javax.transaction.Transactional;
