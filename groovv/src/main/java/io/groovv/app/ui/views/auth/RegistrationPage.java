@@ -1,5 +1,7 @@
 package io.groovv.app.ui.views.auth;
 
+import com.vaadin.flow.component.HasValidation;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -23,6 +25,7 @@ import io.groovv.service.registrations.RegistrationService;
 import java.time.LocalDate;
 import java.util.Calendar;
 import javax.inject.Inject;
+import javax.validation.Validation;
 import lombok.val;
 
 @AnonymousAllowed
@@ -31,10 +34,10 @@ public class RegistrationPage extends VerticalLayout {
 
   private final RegistrationService service;
   private final BeanValidationBinder<RegistrationRequest> registrationBinder;
-  private TextField firstNameField;
-  private TextField lastNameField;
-  private EmailField emailAddressField;
-  private DatePicker dateOfBirthField;
+  private TextField firstName;
+  private TextField lastName;
+  private EmailField emailAddress;
+  private DatePicker dateOfBirth;
   private TextField phoneNumber;
   private Select<State> state;
   private TextField zipCode;
@@ -43,6 +46,8 @@ public class RegistrationPage extends VerticalLayout {
   public RegistrationPage(RegistrationService service) {
     this.service = service;
     registrationBinder = new BeanValidationBinder<>(RegistrationRequest.class);
+    registrationBinder.setRequiredConfigurator(
+        RequiredFieldConfigurator.NOT_EMPTY.chain(RequiredFieldConfigurator.NOT_NULL));
     setPadding(true);
     setSpacing(true);
     addClassName("login");
@@ -51,6 +56,7 @@ public class RegistrationPage extends VerticalLayout {
     setMinHeight("60%");
     setJustifyContentMode(JustifyContentMode.START);
     configureForm();
+    registrationBinder.setBean(new RegistrationRequest());
   }
 
   private void configureForm() {
@@ -61,51 +67,84 @@ public class RegistrationPage extends VerticalLayout {
     //    formLayout.setResponsiveSteps(new ResponsiveStep("0", 1), new ResponsiveStep("500", 2));
     formLayout.setResponsiveSteps(new ResponsiveStep("0", 2));
 
-    firstNameField = new TextField("First Name");
-    firstNameField.setClearButtonVisible(true);
-    lastNameField = new TextField("Last Name");
-    lastNameField.setClearButtonVisible(true);
-    emailAddressField = new EmailField("Email");
-    emailAddressField.setClearButtonVisible(true);
-    dateOfBirthField = new DatePicker("Date of Birth");
-    dateOfBirthField.setClearButtonVisible(true);
+    firstName = new TextField("First Name");
+    firstName.setClearButtonVisible(true);
+    firstName.setRequired(true);
+    firstName.setRequiredIndicatorVisible(true);
+
+    lastName = new TextField("Last Name");
+    lastName.setClearButtonVisible(true);
+    lastName.setRequired(true);
+    lastName.setRequiredIndicatorVisible(true);
+
+    emailAddress = new EmailField("Email");
+    emailAddress.setClearButtonVisible(true);
+    emailAddress.setRequiredIndicatorVisible(true);
+
+    dateOfBirth = new DatePicker("Date of Birth");
+    dateOfBirth.setClearButtonVisible(true);
+    dateOfBirth.setRequired(true);
+    dateOfBirth.setRequiredIndicatorVisible(true);
+
     phoneNumber = new TextField("Phone Number");
     phoneNumber.setPattern("^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$");
+    phoneNumber.setRequired(true);
+    phoneNumber.setRequiredIndicatorVisible(true);
 
     state = new Select<State>();
     state.setItems(State.values());
     state.setLabel("State");
+    state.setRequiredIndicatorVisible(true);
 
-    formLayout.add(emailAddressField, 2);
-    formLayout.add(firstNameField, 2);
-    formLayout.add(lastNameField, 2);
-    formLayout.add(dateOfBirthField, 1);
+    formLayout.add(emailAddress, 2);
+    formLayout.add(firstName, 2);
+    formLayout.add(lastName, 2);
+    formLayout.add(dateOfBirth, 1);
     formLayout.add(phoneNumber, 1);
 
     zipCode = new TextField("Zip");
+    zipCode.setRequired(true);
+    zipCode.setRequiredIndicatorVisible(true);
+
     formLayout.add(state, 1);
     formLayout.add(zipCode, 1);
     add(formLayout);
 
     configureBinding();
 
-    val confirm =
-        new Button(
-            "Register",
-            click -> {
-              val bean = new RegistrationRequest();
-              try {
-                registrationBinder.writeBean(bean);
-                service.add(bean);
-                val notification = new Notification();
-                notification.setDuration(1500);
-                notification.setPosition(Position.TOP_STRETCH);
-                notification.setText("Successfully registered!  We'll be in touch!");
-                notification.open();
-              } catch (ValidationException e) {
-                e.printStackTrace();
-              }
-            });
+//    val confirm =
+//        new Button(
+//            "Register",
+//            click -> {
+//              val bean = new RegistrationRequest();
+//              val errors = registrationBinder.();
+//              if(!errors.hasErrors()) {
+//                if (registrationBinder.writeBeanIfValid(bean)) {
+//                  service.add(bean);
+//                  UI.getCurrent().navigate(RegistrationSuccessfulPage.class);
+//                } else {
+//                  registrationBinder.setBean(bean);
+//                }
+//              }
+//            });
+
+    val confirm = new Button("Register", click -> {
+
+      val validation = registrationBinder.validate();
+
+      if (validation.isOk()) {
+        val registration = registrationBinder.getBean();
+        service.add(registration);
+        UI.getCurrent().navigate(RegistrationSuccessfulPage.class);
+      } else {
+        validation.getFieldValidationErrors().forEach(error -> {
+          val field = error.getField();
+          if (field instanceof HasValidation hv) {
+            error.getMessage().ifPresent(hv::setErrorMessage);
+          }
+        });
+      }
+    });
     confirm.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
     formLayout.add(confirm);
   }
@@ -114,33 +153,42 @@ public class RegistrationPage extends VerticalLayout {
     registrationBinder.setRequiredConfigurator(
         RequiredFieldConfigurator.NOT_EMPTY.chain(RequiredFieldConfigurator.NOT_NULL));
 
+//    registrationBinder.bindInstanceFields(this);
+
     registrationBinder
-        .forField(emailAddressField)
+        .forField(emailAddress)
+        .asRequired()
         .bind(RegistrationRequest::getEmailAddress, RegistrationRequest::setEmailAddress);
 
     registrationBinder
-        .forField(firstNameField)
+        .forField(firstName)
+        .asRequired()
         .bind(RegistrationRequest::getFirstName, RegistrationRequest::setFirstName);
 
     registrationBinder
-        .forField(lastNameField)
-        .bind(RegistrationRequest::getLastName, RegistrationRequest::setLastName);
+        .forField(lastName)
+        .asRequired()
+        .bind(RegistrationRequest::getLastName, RegistrationRequest::setLastName).validate();
 
     registrationBinder
-        .forField(dateOfBirthField)
-        .bind(this::convertToCalendar, this::convertFromCalendar);
+        .forField(dateOfBirth)
+        .asRequired()
+        .bind(this::convertToCalendar, this::convertFromCalendar).validate();
 
     registrationBinder
         .forField(phoneNumber)
-        .bind(RegistrationRequest::getPhoneNumber, RegistrationRequest::setPhoneNumber);
+        .asRequired()
+        .bind(RegistrationRequest::getPhoneNumber, RegistrationRequest::setPhoneNumber).validate();
 
     registrationBinder
         .forField(state)
-        .bind(RegistrationRequest::getState, RegistrationRequest::setState);
+        .asRequired()
+        .bind(RegistrationRequest::getState, RegistrationRequest::setState).validate();
 
     registrationBinder
         .forField(zipCode)
-        .bind(RegistrationRequest::getZipCode, RegistrationRequest::setZipCode);
+        .asRequired()
+        .bind(RegistrationRequest::getZipCode, RegistrationRequest::setZipCode).validate();
   }
 
   private LocalDate convertToCalendar(RegistrationRequest request) {

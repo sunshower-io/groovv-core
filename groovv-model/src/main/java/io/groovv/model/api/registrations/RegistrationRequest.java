@@ -31,10 +31,6 @@ public class RegistrationRequest extends AbstractEntity<Identifier> {
     SEQUENCE = Identifiers.newSequence(true);
   }
 
-  public RegistrationRequest() {
-    super(SEQUENCE.next());
-    setStatus(Status.Inactive);
-  }
 
   @Setter
   @Email
@@ -91,5 +87,11 @@ public class RegistrationRequest extends AbstractEntity<Identifier> {
   public enum Status {
     Active,
     Inactive
+  }
+
+  public RegistrationRequest() {
+    super(SEQUENCE.next());
+    setStatus(Status.Inactive);
+    setRealm(Realm.Groovv);
   }
 }
