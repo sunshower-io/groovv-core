@@ -9,9 +9,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 @CssImport(value = "./styles/groovv/views/auth/login.css")
 public class AbstractUserPage extends HorizontalLayout {
 
-
   protected final VerticalLayout layout;
-
 
   protected AbstractUserPage() {
     setSizeFull();
@@ -26,8 +24,4 @@ public class AbstractUserPage extends HorizontalLayout {
     setJustifyContentMode(JustifyContentMode.CENTER);
     setDefaultVerticalComponentAlignment(Alignment.CENTER);
   }
-
-
-
-
 }

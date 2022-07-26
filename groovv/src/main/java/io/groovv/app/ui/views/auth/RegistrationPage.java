@@ -1,6 +1,5 @@
 package io.groovv.app.ui.views.auth;
 
-
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -19,7 +18,6 @@ public class RegistrationPage extends HorizontalLayout {
   private final VerticalLayout layout;
 
   private final RegistrationService service;
-
 
   @Inject
   public RegistrationPage(RegistrationService service) {
@@ -40,9 +38,5 @@ public class RegistrationPage extends HorizontalLayout {
     val emailAddressField = new TextField("Email");
     val dateOfBirthField = new DatePicker("Date of Birth");
     formLayout.add(firstNameField, lastNameField, emailAddressField, dateOfBirthField);
-
-
   }
-
-
 }
