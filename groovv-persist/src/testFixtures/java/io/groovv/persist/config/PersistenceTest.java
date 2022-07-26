@@ -1,5 +1,6 @@
 package io.groovv.persist.config;
 
+import io.sunshower.arcus.persist.flyway.FlywayTestConfiguration;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import javax.transaction.Transactional;
@@ -12,6 +13,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @Transactional
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(
-    classes = {PersistenceConfiguration.class, TestPersistenceConfiguration.class})
+    classes = {
+      FlywayTestConfiguration.class,
+      PersistenceConfiguration.class,
+      TestPersistenceConfiguration.class
+    })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PersistenceTest {}

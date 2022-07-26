@@ -19,7 +19,6 @@ import org.springframework.test.context.TestExecutionListeners.MergeMode;
 @AireTest
 @EnableSpring
 @ServiceTest
-@PersistenceTest
 @TestExecutionListeners(
     mergeMode = MergeMode.MERGE_WITH_DEFAULTS,
     listeners = WithSecurityContextTestExecutionListener.class)
