@@ -4,7 +4,6 @@ import com.aire.ux.test.Adapter;
 import com.aire.ux.test.AireTest;
 import com.aire.ux.test.ComponentHierarchyNodeAdapter;
 import com.aire.ux.test.spring.EnableSpring;
-import io.groovv.persist.config.PersistenceTest;
 import io.groovv.service.test.ServiceTest;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
