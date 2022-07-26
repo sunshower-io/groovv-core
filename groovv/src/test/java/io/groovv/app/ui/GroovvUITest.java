@@ -18,18 +18,11 @@ import org.springframework.test.context.TestExecutionListeners.MergeMode;
 @Documented
 @AireTest
 @EnableSpring
-@SpringBootTest(
-    classes = {
-        PersistenceConfiguration.class
-    })
+@SpringBootTest(classes = {PersistenceConfiguration.class})
 @TestExecutionListeners(
     mergeMode = MergeMode.MERGE_WITH_DEFAULTS,
-    listeners = WithSecurityContextTestExecutionListener.class
-)
+    listeners = WithSecurityContextTestExecutionListener.class)
 @Adapter(ComponentHierarchyNodeAdapter.class)
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface GroovvUITest {
-
-
-}
+public @interface GroovvUITest {}

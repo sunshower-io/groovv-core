@@ -10,8 +10,7 @@ import org.springframework.context.annotation.Import;
 @Import({SecurityConfiguration.class, PersistenceConfiguration.class})
 public class GroovvApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GroovvApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(GroovvApplication.class, args);
+  }
 }

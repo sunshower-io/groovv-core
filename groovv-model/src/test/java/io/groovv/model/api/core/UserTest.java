@@ -7,11 +7,13 @@ import io.sunshower.arcus.condensation.Condensation;
 import io.sunshower.crypt.JCAEncryptionService;
 import io.sunshower.lang.common.encodings.Encodings;
 import io.sunshower.lang.common.encodings.Encodings.Type;
+import io.sunshower.model.test.ModelTest;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import lombok.val;
@@ -42,8 +44,8 @@ class UserTest {
     user.setPassword(pw2);
 
     val details = new UserDetails();
-    details.setLastName("test");
-    details.setFirstName("whatever");
+    details.setGivenName("test");
+    details.setFamilyName("whatever");
     user.setDetails(details);
     entityManager.persist(user);
     entityManager.flush();
@@ -81,6 +83,34 @@ class UserTest {
   }
 
   @Test
+  void ensureSavingRealmWorks() {
+    val user = new User();
+    user.setUsername("josiah");
+    user.setPassword("password!");
+
+    val details = new UserDetails();
+    user.setDetails(details);
+
+    details.setGivenName("Josiah");
+    details.setFamilyName("Haswell");
+
+    val realm = new Realm();
+    realm.setName("google");
+
+    realm.addUser(user);
+
+    entityManager.persist(realm);
+    entityManager.persist(user);
+    entityManager.flush();
+
+    assertEquals(
+        List.of(user),
+        entityManager
+            .createQuery("select u from User u join Realm r on u.realm = r where r.name = 'google'")
+            .getResultList());
+  }
+
+  @Test
   void ensureUserDetailsIsCascaded() {
     val user = new User();
     user.setUsername("josiah");
@@ -89,8 +119,8 @@ class UserTest {
     val details = new UserDetails();
     user.setDetails(details);
 
-    details.setFirstName("Josiah");
-    details.setLastName("Haswell");
+    details.setGivenName("Josiah");
+    details.setFamilyName("Haswell");
 
     entityManager.persist(user);
     entityManager.flush();

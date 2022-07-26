@@ -1,6 +1,5 @@
 package io.groovv.app.ui.config;
 
-
 import io.groovv.persist.users.AccountRepository;
 import io.groovv.persist.users.InMemoryAccountRepository;
 import org.springframework.context.ApplicationEventPublisher;
@@ -17,9 +16,9 @@ public class PersistenceConfiguration {
       ApplicationEventPublisher applicationEventPublisher) {
     return new DefaultAuthenticationEventPublisher(applicationEventPublisher);
   }
+
   @Bean
   public AccountRepository accountRepository() {
     return new InMemoryAccountRepository();
   }
-
 }

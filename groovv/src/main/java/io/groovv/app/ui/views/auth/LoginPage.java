@@ -37,9 +37,7 @@ public class LoginPage extends HorizontalLayout {
     add(layout);
     setJustifyContentMode(JustifyContentMode.CENTER);
     setDefaultVerticalComponentAlignment(Alignment.CENTER);
-
   }
-
 
   private void createLoginForm() {
     layout.add(new LoginForm());
@@ -62,6 +60,4 @@ public class LoginPage extends HorizontalLayout {
     formLayout.add(loginLink);
     layout.add(formLayout);
   }
-
-
 }

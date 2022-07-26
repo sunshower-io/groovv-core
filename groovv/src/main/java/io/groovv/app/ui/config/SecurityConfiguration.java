@@ -1,10 +1,6 @@
 package io.groovv.app.ui.config;
 
 import com.vaadin.flow.spring.security.VaadinWebSecurityConfigurerAdapter;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationEventPublisher;
-import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,9 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 public class SecurityConfiguration extends VaadinWebSecurityConfigurerAdapter {
 
   private static final String LOGIN_URL = "/login";
-
-
-
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {

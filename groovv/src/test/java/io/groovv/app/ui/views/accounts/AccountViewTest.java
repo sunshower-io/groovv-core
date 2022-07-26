@@ -1,6 +1,5 @@
 package io.groovv.app.ui.views.accounts;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.aire.ux.test.Context;
@@ -22,8 +21,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 @RouteLocation(scanClassPackage = UserDashboard.class)
 @RouteLocation(scanClassPackage = AccountView.class)
 class AccountViewTest {
-
-
 
   @ViewTest
   @WithMockUser

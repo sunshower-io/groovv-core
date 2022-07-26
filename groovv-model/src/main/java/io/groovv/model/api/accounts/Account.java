@@ -1,6 +1,5 @@
 package io.groovv.model.api.accounts;
 
-import io.groovv.model.api.core.AbstractEntity;
 import io.groovv.model.api.core.SerializableAbstractEntity;
 import io.groovv.model.api.core.User;
 import io.sunshower.persistence.id.Identifier;
@@ -18,28 +17,18 @@ import lombok.Setter;
 @Setter
 public class Account extends SerializableAbstractEntity<Identifier> {
 
-
-  @Basic
-  @NotEmpty
-  private String name;
+  @Basic @NotEmpty private String name;
 
   @Basic
   @NotEmpty
   @Column(name = "owner_name")
   private String ownerName;
 
-  @NotNull
-  @ManyToOne
-  @PrimaryKeyJoinColumn
-  private User owner;
+  @NotNull @ManyToOne @PrimaryKeyJoinColumn private User owner;
 
-  @NotNull
-  @Embedded
-  private AccountDetails details;
+  @NotNull @Embedded private AccountDetails details;
 
   public Account() {
     this.details = new AccountDetails();
   }
-
-
 }

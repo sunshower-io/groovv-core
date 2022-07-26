@@ -7,6 +7,4 @@ import javax.annotation.security.PermitAll;
 
 @PermitAll
 @Route(value = "dashboard", layout = HomeView.class)
-public class UserDashboard extends VerticalLayout {
-
-}
+public class UserDashboard extends VerticalLayout {}

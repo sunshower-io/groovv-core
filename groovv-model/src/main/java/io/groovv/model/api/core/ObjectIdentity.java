@@ -30,7 +30,8 @@ public class ObjectIdentity extends AbstractEntity<Identifier> {
    * <p>column name: object_id_identity
    */
   @Setter // you should not use this directly
-  @Getter(onMethod = @__({@Basic, @Column(name = AclObjectIdentityFields.OBJECT_IDENTITY_REFERENCE)}))
+  @Getter(
+      onMethod = @__({@Basic, @Column(name = AclObjectIdentityFields.OBJECT_IDENTITY_REFERENCE)}))
   private Identifier reference;
 
   /** referenced secured object type column name: object_id_class */
@@ -45,7 +46,8 @@ public class ObjectIdentity extends AbstractEntity<Identifier> {
 
   /** reference to parent column name: parent_object */
   @Setter
-  @Getter(onMethod = @__({@ManyToOne, @JoinColumn(name = AclObjectIdentityFields.PARENT_REFERENCE)}))
+  @Getter(
+      onMethod = @__({@ManyToOne, @JoinColumn(name = AclObjectIdentityFields.PARENT_REFERENCE)}))
   private ObjectIdentity parent;
 
   /** mapped children */

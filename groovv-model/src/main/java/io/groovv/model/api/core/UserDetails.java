@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -24,14 +26,18 @@ import lombok.Setter;
 public class UserDetails extends SerializableAbstractEntity<Identifier> implements IconAware {
 
   @Setter
-  @Getter(onMethod = @__({@Basic, @Column(name = "first_name")}))
-  @Attribute(alias = @Alias(read = "first-name", write = "first-name"))
-  private String firstName;
+  @NotNull
+  @NotEmpty
+  @Getter(onMethod = @__({@Basic, @Column(name = "given_name")}))
+  @Attribute(alias = @Alias(read = "given-name", write = "given-name"))
+  private String givenName;
 
   @Setter
-  @Getter(onMethod = @__({@Basic, @Column(name = "last_name")}))
-  @Attribute(alias = @Alias(read = "last-name", write = "last-name"))
-  private String lastName;
+  @NotNull
+  @NotEmpty
+  @Getter(onMethod = @__({@Basic, @Column(name = "family_name")}))
+  @Attribute(alias = @Alias(read = "family-name", write = "family-name"))
+  private String familyName;
 
   @Setter
   @Getter(onMethod = @__({@Embedded}))
@@ -42,8 +48,8 @@ public class UserDetails extends SerializableAbstractEntity<Identifier> implemen
       onMethod =
           @__({
             @MapsId,
+            @JoinColumn(name = "id"),
             @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY),
-            @JoinColumn(name = "id")
           }))
   private User user;
 

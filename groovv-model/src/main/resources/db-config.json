@@ -1,6 +1,8 @@
 {
   "scanned-packages": [
     "io.groovv.model.api.core",
+    "io.groovv.model.api.location",
+    "io.groovv.model.api.registrations",
     "io.sunshower.arcus.persist.hibernate",
     "io.sunshower.arcus.persist.hibernate.entities"
   ],
@@ -9,7 +11,7 @@
   "connection-string": "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1",
   "additional-properties": {
     "hibernate.hbm2ddl.auto": "none",
-    "hibernate.dialect": "org.hibernate.dialect.H2Dialect"
+    "hibernate.dialect": "org.hibernate.dialect.H2Dialect",
   },
   "migration-locations": [
     "classpath:db/migrations/postgres"

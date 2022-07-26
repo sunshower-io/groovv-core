@@ -2,9 +2,7 @@ package io.groovv.app.ui.config;
 
 import io.groovv.app.ui.components.UIUtils;
 import lombok.val;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -12,14 +10,13 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 
 public class SecurityUtils {
 
-  private SecurityUtils() {
-  }
+  private SecurityUtils() {}
 
   public static boolean isUserLoggedIn() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     return authentication != null
-           && !(authentication instanceof AnonymousAuthenticationToken)
-           && authentication.isAuthenticated();
+        && !(authentication instanceof AnonymousAuthenticationToken)
+        && authentication.isAuthenticated();
   }
 
   public static Authentication getAuthentication() {
@@ -28,11 +25,10 @@ public class SecurityUtils {
 
   public static PrincipalDetails getCurrentUser(boolean required) {
     val result = getPrincipalDetails();
-    if(result == null && required) {
+    if (result == null && required) {
       throw new IllegalArgumentException("Error: no current principal found");
     }
     return result;
-
   }
 
   public static PrincipalDetails getPrincipalDetails() {
@@ -46,20 +42,17 @@ public class SecurityUtils {
           principalDetails.getAttribute("given_name"),
           principalDetails.getAttribute("family_name"),
           principalDetails.getAttribute("email"),
-          principalDetails.getAttribute("picture")
-      );
+          principalDetails.getAttribute("picture"));
     }
-    if(principal instanceof User principalDetails) {
+    if (principal instanceof User principalDetails) {
       return new PrincipalDetails(
           principalDetails.getUsername(),
           "<unknown>",
           principalDetails.getUsername(),
-          UIUtils.base64Svg(principalDetails.getUsername())
-      );
+          UIUtils.base64Svg(principalDetails.getUsername()));
     }
     return null;
   }
-
 
   public static boolean isOAuthLogin() {
     val authentication = getAuthentication();
@@ -67,6 +60,5 @@ public class SecurityUtils {
       return true;
     }
     return false;
-
   }
 }

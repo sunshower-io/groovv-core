@@ -23,7 +23,7 @@ pluginManagement {
 
 include (
         'groovv',
-        'groovv-api',
+        'groovv-sdk',
         'groovv-model',
         'groovv-persist',
         'groovv-service'

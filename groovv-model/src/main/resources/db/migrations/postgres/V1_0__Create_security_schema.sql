@@ -53,9 +53,10 @@ CREATE TABLE USERS
 
 
     /**
-      the password
+      the password.  May be null because
+      the user could be coming in from a non-password realm (OAuth, OIDC, SAML, etc.)
      */
-    password              VARCHAR(255) NOT NULL,
+    password              VARCHAR(255),
 
     /**
       unique constraint on username
@@ -90,9 +91,9 @@ CREATE TABLE USER_DETAILS
 (
     id         BINARY(16)   NOT NULL PRIMARY KEY,
     icon       bytea,
-    type        varchar(63),
-    first_name VARCHAR(255) NOT NULL,
-    last_name  VARCHAR(255) NOT NULL,
+    type        VARCHAR(63),
+    given_name  VARCHAR(255) NOT NULL,
+    family_name VARCHAR(255) NOT NULL,
 
     CONSTRAINT
         user_details_to_user
@@ -353,7 +354,9 @@ CREATE TABLE REALMS
 (
     id       BINARY(16) NOT NULL PRIMARY KEY,
     name     VARCHAR(255),
-    provider VARCHAR(255)
+    provider VARCHAR(255),
+    constraint realm_unique_name
+        UNIQUE (name)
 );
 
 
@@ -363,7 +366,10 @@ CREATE TABLE REALM_TO_USERS
     user_id  BINARY(16) NOT NULL,
     CONSTRAINT realm_to_users_realm_ref
         FOREIGN KEY (realm_id)
-            REFERENCES REALMS (id)
+            REFERENCES REALMS (id),
 
+    CONSTRAINT users_to_realm_ref
+        FOREIGN KEY (user_id)
+            REFERENCES USERS (id)
 );
 

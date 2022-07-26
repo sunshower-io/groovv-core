@@ -1,6 +1,5 @@
 package io.groovv.app.ui.views.home;
 
-
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
@@ -25,7 +24,6 @@ import com.vaadin.flow.server.VaadinServletRequest;
 import io.groovv.app.ui.config.PrincipalDetails;
 import io.groovv.app.ui.config.SecurityUtils;
 import io.groovv.app.ui.views.accounts.AccountView;
-import io.groovv.app.ui.views.accounts.AddAccountView;
 import io.groovv.app.ui.views.dashboard.UserDashboard;
 import io.groovv.app.ui.views.user.UserProfile;
 import io.groovv.persist.users.AccountRepository;
@@ -53,10 +51,9 @@ public class HomeView extends AppLayout {
     initializeLayout();
   }
 
-
   @Override
   protected void onAttach(AttachEvent attachEvent) {
-    if(accountRepository.count() == 0) {
+    if (accountRepository.count() == 0) {
       UI.getCurrent().navigate(AccountView.class);
     }
   }
@@ -66,12 +63,10 @@ public class HomeView extends AppLayout {
     val tabs = createTabs();
     val header = new H1("Groovv");
 
-    header.getStyle()
-        .set("font-size", "var(--lumo-font-size-l)")
-        .set("margin", "0");
+    header.getStyle().set("font-size", "var(--lumo-font-size-l)").set("margin", "0");
 
     addToDrawer(tabs);
-//    addToNavbar(toggle, header);
+    //    addToNavbar(toggle, header);
     addToNavbar(true, toggle, header, menuLayout);
     menuLayout.add(navigationMenuBar);
   }
@@ -96,16 +91,16 @@ public class HomeView extends AppLayout {
   private void doLogOut() {
     UI.getCurrent().getPage().setLocation("/login");
     SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
-    logoutHandler.logout(
-        VaadinServletRequest.getCurrent().getHttpServletRequest(), null,
-        null);
+    logoutHandler.logout(VaadinServletRequest.getCurrent().getHttpServletRequest(), null, null);
   }
 
-
   private Component createLogout(PrincipalDetails details) {
-    val logout = new Button("Log out " + details.givenName(), e -> {
-      doLogOut();
-    });
+    val logout =
+        new Button(
+            "Log out " + details.givenName(),
+            e -> {
+              doLogOut();
+            });
     logout.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
     return logout;
   }
