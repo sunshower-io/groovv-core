@@ -1,7 +1,7 @@
 package io.groovv.app.ui;
 
-import io.groovv.app.ui.config.PersistenceConfiguration;
 import io.groovv.app.ui.config.SecurityConfiguration;
+import io.groovv.persist.config.PersistenceConfiguration;
 import io.groovv.service.config.ServiceConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

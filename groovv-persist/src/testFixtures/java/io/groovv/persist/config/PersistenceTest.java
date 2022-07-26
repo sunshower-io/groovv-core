@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @Rollback
 @Transactional
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {PersistenceConfiguration.class})
+@ContextConfiguration(
+    classes = {PersistenceConfiguration.class, TestPersistenceConfiguration.class})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PersistenceTest {}

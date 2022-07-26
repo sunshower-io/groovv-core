@@ -18,3 +18,17 @@ create table REGISTRATION_REQUEST(
     CONSTRAINT unique_email_address
         UNIQUE (email_address)
 );
+
+
+/**
+  we will need to add the initialization vector and salt
+  to this
+
+  TODO Josiah add IV and salt.  Create mapped superclass
+ */
+create table USER_BANK_ACCOUNTS (
+    id BINARY(16)           NOT NULL PRIMARY KEY,
+    owner_name              VARCHAR(255) NOT NULL,
+    routing_number          VARCHAR(255) NOT NULL,
+    account_number          VARCHAR(255) NOT NULL
+);
