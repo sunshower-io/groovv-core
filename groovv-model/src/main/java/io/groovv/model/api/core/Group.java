@@ -1,6 +1,8 @@
 package io.groovv.model.api.core;
 
 import io.sunshower.persistence.id.Identifier;
+import io.sunshower.persistence.id.Identifiers;
+import io.sunshower.persistence.id.Sequence;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -18,6 +20,12 @@ import lombok.Setter;
 @Entity
 @Table(name = "GROUPS")
 public class Group extends AbstractEntity<Identifier> implements IconAware {
+
+  static final Sequence<Identifier> SEQUENCE;
+
+  static {
+    SEQUENCE = Identifiers.newSequence(true);
+  }
 
   @Setter
   @Getter(onMethod = @__(@Embedded))
@@ -66,4 +74,8 @@ public class Group extends AbstractEntity<Identifier> implements IconAware {
                 inverseJoinColumns = @JoinColumn(name = "user_id"))
           }))
   private Set<Permission> permissions;
+
+  public Group() {
+    super(SEQUENCE.next());
+  }
 }

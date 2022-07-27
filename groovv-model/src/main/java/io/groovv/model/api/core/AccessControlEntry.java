@@ -1,6 +1,8 @@
 package io.groovv.model.api.core;
 
 import io.sunshower.persistence.id.Identifier;
+import io.sunshower.persistence.id.Identifiers;
+import io.sunshower.persistence.id.Sequence;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -15,6 +17,12 @@ import lombok.Setter;
 @Entity
 @Table(name = SecurityTables.ACCESS_CONTROL_ENTRY)
 public class AccessControlEntry extends AbstractEntity<Identifier> {
+
+  static final Sequence<Identifier> SEQUENCE;
+
+  static {
+    SEQUENCE = Identifiers.newSequence(true);
+  }
 
   @Setter
   @Getter(onMethod = @__({@Basic, @Column(name = "ace_order")}))
@@ -41,4 +49,8 @@ public class AccessControlEntry extends AbstractEntity<Identifier> {
   @Setter
   @Getter(onMethod = @__({@Embedded}))
   private AuditResult auditResult;
+
+  public AccessControlEntry() {
+    super(SEQUENCE.next());
+  }
 }

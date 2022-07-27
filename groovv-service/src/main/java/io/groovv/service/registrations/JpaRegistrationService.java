@@ -7,6 +7,8 @@ import io.groovv.model.api.registrations.RegistrationRequest.Status;
 import io.groovv.persist.registrations.RegistrationRepository;
 import io.sunshower.persistence.id.Identifier;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -30,7 +32,8 @@ public class JpaRegistrationService implements RegistrationService {
 
   @Override
   public List<RegistrationRequest> list() {
-    return null;
+    return StreamSupport.stream(repository.findAll().spliterator(), false)
+        .collect(Collectors.toList());
   }
 
   @Override

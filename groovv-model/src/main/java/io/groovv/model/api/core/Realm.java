@@ -1,6 +1,8 @@
 package io.groovv.model.api.core;
 
 import io.sunshower.persistence.id.Identifier;
+import io.sunshower.persistence.id.Identifiers;
+import io.sunshower.persistence.id.Sequence;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -18,6 +20,12 @@ import lombok.Setter;
 @Entity
 @Table(name = "REALMS")
 public class Realm extends AbstractEntity<Identifier> {
+
+  static final Sequence<Identifier> SEQUENCE;
+
+  static {
+    SEQUENCE = Identifiers.newSequence(true);
+  }
 
   @Setter
   @Getter(onMethod = @__({@Basic, @Column(name = "name")}))
@@ -42,6 +50,7 @@ public class Realm extends AbstractEntity<Identifier> {
   }
 
   public Realm(String name) {
+    super(SEQUENCE.next());
     setName(name);
     users = new HashSet<>();
   }

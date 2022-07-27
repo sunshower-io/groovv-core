@@ -8,6 +8,11 @@
 create table REGISTRATION_REQUEST(
     id IDENTIFIER           NOT NULL PRIMARY KEY,
     email_address           VARCHAR(63) NOT NULL,
+    /**
+      pad column to 63 characters--no additional row overhead here
+     */
+    phone_number            VARCHAR(63) NOT NULL,
+    zip_code                VARCHAR(63) NOT NULL,
     first_name              VARCHAR(63) NOT NULL,
     last_name               VARCHAR(63) NOT NULL,
     date_of_birth           DATE NOT NULL,

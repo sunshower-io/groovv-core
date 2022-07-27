@@ -19,4 +19,8 @@ public class AccessControlledEntity<ID extends Serializable> extends AbstractEnt
             @JoinColumn(name = "id", insertable = false, updatable = false)
           }))
   private ObjectIdentity identity;
+
+  public AccessControlledEntity(ID id) {
+    super(id);
+  }
 }

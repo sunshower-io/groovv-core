@@ -3,7 +3,6 @@ package io.groovv.app.ui.views.auth;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
@@ -12,7 +11,6 @@ import lombok.val;
 
 @CssImport(value = "./styles/groovv/views/auth/login.css")
 public class AbstractUserPage extends VerticalLayout implements RouterLayout {
-
 
   protected AbstractUserPage() {
     setSizeFull();

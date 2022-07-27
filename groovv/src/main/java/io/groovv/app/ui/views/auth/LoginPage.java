@@ -28,7 +28,7 @@ public class LoginPage extends VerticalLayout {
   }
 
   private void createLoginForm() {
-//    layout.add(new LoginForm());
+    //    layout.add(new LoginForm());
     add(new LoginForm());
   }
 

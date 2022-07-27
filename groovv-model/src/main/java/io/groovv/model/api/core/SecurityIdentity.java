@@ -2,6 +2,8 @@ package io.groovv.model.api.core;
 
 import io.groovv.model.api.core.SecurityTables.AclSecurityIdentity;
 import io.sunshower.persistence.id.Identifier;
+import io.sunshower.persistence.id.Identifiers;
+import io.sunshower.persistence.id.Sequence;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +18,12 @@ import lombok.Setter;
 @SuppressWarnings("PMD")
 @Table(name = SecurityTables.SECURITY_IDENTITY)
 public class SecurityIdentity extends AbstractEntity<Identifier> {
+
+  static final Sequence<Identifier> SEQUENCE;
+
+  static {
+    SEQUENCE = Identifiers.newSequence(true);
+  }
 
   @Setter
   @Getter(onMethod = @__({@Basic, @Column(name = AclSecurityIdentity.PRINCIPAL)}))
@@ -35,6 +43,10 @@ public class SecurityIdentity extends AbstractEntity<Identifier> {
             @Column(name = AclSecurityIdentity.SID, insertable = false, updatable = false)
           }))
   private String username;
+
+  public SecurityIdentity() {
+    super(SEQUENCE.next());
+  }
 
   /** @param owner the owner of this SID */
   public void setOwner(User owner) {
