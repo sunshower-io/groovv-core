@@ -28,6 +28,7 @@ public class SecurityConfiguration extends VaadinWebSecurityConfigurerAdapter {
             "/offline-page.html",
             "/icons/**",
             "/images/**",
+            "/img/icons/**",
             "/frontend/**",
             "/webjars/**",
             "/h2-console/**",

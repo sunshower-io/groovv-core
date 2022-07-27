@@ -36,6 +36,12 @@ spec:
                   name: groovv-ha-pguser-groovv-ha
                   key: pgbouncer-host
                   optional: false
+            - name: GROOVV_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: groovv-ha-pguser-groovv-ha
+                  key: dbname
+                  optional: false
 
           resources:
             limits:

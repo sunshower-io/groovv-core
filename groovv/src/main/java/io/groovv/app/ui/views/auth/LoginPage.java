@@ -19,6 +19,8 @@ public class LoginPage extends VerticalLayout {
   private static final String OAUTH_URL = "/oauth2/authorization/google";
 
   public LoginPage() {
+    getStyle().set("margin-top", "0");
+    getStyle().set("padding-top", "0");
     createLoginForm();
     createOAuthProviders();
     setWidth("unset");
@@ -38,9 +40,6 @@ public class LoginPage extends VerticalLayout {
     hr.setText("Or Login Via");
     add(hr);
     val formLayout = new HorizontalLayout();
-    formLayout.setHeightFull();
-    setPadding(true);
-    setMargin(true);
     setMaxWidth("720px");
     val img = new Image("assets/images/oauth/providers/icons/google.svg", "Google OAuth");
     img.setWidth("24px");

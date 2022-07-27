@@ -29,13 +29,12 @@
 
   .hr-strike {
     display: flex;
-    flex-basis: 100%;
     align-items: center;
     color: var(--vaadin-color-secondary);
     font-size: var(--vaadin-font-size-m);
     font-weight: 600;
-    margin: 8px 0;
 
+    height:32px;
     &:before, &:after {
       content: "";
       flex-grow: 1;

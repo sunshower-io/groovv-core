@@ -1,0 +1,19 @@
+
+html, :host {
+  --lumo-primary-text-color: rgb(32, 190, 207);
+  --lumo-primary-color-50pct: rgba(32, 190, 207, 0.5);
+  --lumo-primary-color-10pct: rgba(32, 190, 207, 0.1);
+  --lumo-primary-color: hsl(186, 73%, 47%);
+  --lumo-primary-contrast-color: #FFF;
+  --lumo-success-text-color: rgb(201, 201, 79);
+  --lumo-success-color-50pct: rgba(201, 201, 79, 0.5);
+  --lumo-success-color-10pct: rgba(201, 201, 79, 0.1);
+  --lumo-success-color: 	#c9c94f;
+  --lumo-error-text-color: rgb(251, 159, 29);
+  --lumo-error-color-50pct: rgba(251, 159, 29, 0.5);
+  --lumo-error-color-10pct: rgba(251, 159, 29, 0.1);
+  --lumo-error-color: #fb9f1d;
+}
+
+[theme~="dark"] {
+}
