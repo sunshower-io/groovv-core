@@ -16,6 +16,27 @@ spec:
         - name: groovv-io
           image: us-docker.pkg.dev/groovv-cloud/groovv-containers/groovv.io:1.0
           imagePullPolicy: Always
+          env:
+            - name: GROOVV_DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: groovv-ha-pguser-groovv-ha
+                  key: user
+                  optional: false
+
+            - name: GROOVV_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: groovv-ha-pguser-groovv-ha
+                  key: password
+                  optional: false
+            - name: GROOVV_DB_LEADER_FQDN
+              valueFrom:
+                secretKeyRef:
+                  name: groovv-ha-pguser-groovv-ha
+                  key: pgbouncer-host
+                  optional: false
+
           resources:
             limits:
               memory: "4Gi"
