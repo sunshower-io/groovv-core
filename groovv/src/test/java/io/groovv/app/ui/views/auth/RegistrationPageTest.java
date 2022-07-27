@@ -6,7 +6,6 @@ import com.aire.ux.test.Context;
 import com.aire.ux.test.Forms;
 import com.aire.ux.test.Navigate;
 import com.aire.ux.test.RouteLocation;
-import com.aire.ux.test.Select;
 import com.aire.ux.test.TestContext;
 import com.aire.ux.test.ViewTest;
 import com.vaadin.flow.component.button.Button;
@@ -29,9 +28,7 @@ import lombok.val;
 @RouteLocation(scanClassPackage = LoginPage.class)
 class RegistrationPageTest {
 
-
   @Inject private RegistrationService registrationService;
-
 
   @ViewTest
   @Navigate("register")
@@ -41,20 +38,25 @@ class RegistrationPageTest {
     assertEquals(1, $.selectComponents("vaadin-date-picker[colspan='1']").size());
   }
 
-
   @ViewTest
   @Navigate("register")
   void ensureSavingValidRegistrationWorks(@Context TestContext $) {
     val date = LocalDate.of(1000, 6, 6);
     Forms.populate($)
-
-        .field("vaadin-email-field").value("user@test.com")
-        .field("vaadin-form-layout vaadin-text-field:nth-child(2)").value("User")
-        .field("vaadin-form-layout vaadin-text-field:nth-child(3)").value("OfGroovv")
-        .field("vaadin-date-picker").value(date)
-        .field("vaadin-form-layout vaadin-text-field:nth-child(5)").value("5555555555")
-        .field("vaadin-select").value(State.Alaska)
-        .field("vaadin-form-layout vaadin-text-field:nth-child(7)").value("80524");
+        .field("vaadin-email-field")
+        .value("user@test.com")
+        .field("vaadin-form-layout vaadin-text-field:nth-child(2)")
+        .value("User")
+        .field("vaadin-form-layout vaadin-text-field:nth-child(3)")
+        .value("OfGroovv")
+        .field("vaadin-date-picker")
+        .value(date)
+        .field("vaadin-form-layout vaadin-text-field:nth-child(5)")
+        .value("5555555555")
+        .field("vaadin-select")
+        .value(State.Alaska)
+        .field("vaadin-form-layout vaadin-text-field:nth-child(7)")
+        .value("80524");
     $.selectFirst(Button.class).get().click();
     val regs = registrationService.list();
     assertEquals(1, regs.size());
@@ -66,5 +68,4 @@ class RegistrationPageTest {
     assertEquals("5555555555", reg.getPhoneNumber());
     assertEquals("80524", reg.getZipCode());
   }
-
 }

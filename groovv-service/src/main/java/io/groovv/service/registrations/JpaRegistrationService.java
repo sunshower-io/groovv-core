@@ -22,8 +22,7 @@ import org.springframework.stereotype.Repository;
 @Transactional
 public class JpaRegistrationService implements RegistrationService {
 
-  @PersistenceContext
-  private EntityManager entityManager;
+  @PersistenceContext private EntityManager entityManager;
   private final RegistrationRepository repository;
 
   @Inject

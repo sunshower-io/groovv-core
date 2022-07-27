@@ -13,7 +13,6 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 @CssImport(value = "./styles/groovv/views/auth/login-form.css", themeFor = "vaadin-login-form")
 public class RegistrationSuccessfulPage extends VerticalLayout {
 
-
   public RegistrationSuccessfulPage() {
     setJustifyContentMode(JustifyContentMode.CENTER);
     setDefaultHorizontalComponentAlignment(Alignment.CENTER);
@@ -26,5 +25,4 @@ public class RegistrationSuccessfulPage extends VerticalLayout {
     add(new H3("Thanks for registering!"));
     add(new Paragraph("We'll be in touch shortly!"));
   }
-
 }

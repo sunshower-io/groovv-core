@@ -3,7 +3,7 @@ package io.sunshower.model.test;
 import io.groovv.model.api.location.State;
 import io.groovv.model.api.registrations.Realm;
 import io.groovv.model.api.registrations.RegistrationRequest;
-import java.util.Calendar;
+import java.time.LocalDate;
 import lombok.val;
 
 public class RegistrationTests {
@@ -13,9 +13,8 @@ public class RegistrationTests {
     request.setEmailAddress("user@mydomain.com");
     request.setFirstName("User");
     request.setLastName("OfGroovv");
-    val calender = Calendar.getInstance();
-    calender.set(1978, 6, 6);
-    request.setDateOfBirth(calender);
+    val date = LocalDate.of(1978, 6, 6);
+    request.setDateOfBirth(date);
     request.setRealm(Realm.Google);
     request.setState(State.Colorado);
 

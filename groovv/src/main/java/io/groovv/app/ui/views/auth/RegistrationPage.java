@@ -8,24 +8,18 @@ import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.formlayout.FormLayout.ResponsiveStep;
 import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.RequiredFieldConfigurator;
-import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import io.groovv.model.api.location.State;
 import io.groovv.model.api.registrations.RegistrationRequest;
 import io.groovv.service.registrations.RegistrationService;
-import java.time.LocalDate;
-import java.util.Calendar;
 import javax.inject.Inject;
-import javax.validation.Validation;
 import lombok.val;
 
 @AnonymousAllowed
@@ -112,39 +106,44 @@ public class RegistrationPage extends VerticalLayout {
 
     configureBinding();
 
-//    val confirm =
-//        new Button(
-//            "Register",
-//            click -> {
-//              val bean = new RegistrationRequest();
-//              val errors = registrationBinder.();
-//              if(!errors.hasErrors()) {
-//                if (registrationBinder.writeBeanIfValid(bean)) {
-//                  service.add(bean);
-//                  UI.getCurrent().navigate(RegistrationSuccessfulPage.class);
-//                } else {
-//                  registrationBinder.setBean(bean);
-//                }
-//              }
-//            });
+    //    val confirm =
+    //        new Button(
+    //            "Register",
+    //            click -> {
+    //              val bean = new RegistrationRequest();
+    //              val errors = registrationBinder.();
+    //              if(!errors.hasErrors()) {
+    //                if (registrationBinder.writeBeanIfValid(bean)) {
+    //                  service.add(bean);
+    //                  UI.getCurrent().navigate(RegistrationSuccessfulPage.class);
+    //                } else {
+    //                  registrationBinder.setBean(bean);
+    //                }
+    //              }
+    //            });
 
-    val confirm = new Button("Register", click -> {
+    val confirm =
+        new Button(
+            "Register",
+            click -> {
+              val validation = registrationBinder.validate();
 
-      val validation = registrationBinder.validate();
-
-      if (validation.isOk()) {
-        val registration = registrationBinder.getBean();
-        service.add(registration);
-        UI.getCurrent().navigate(RegistrationSuccessfulPage.class);
-      } else {
-        validation.getFieldValidationErrors().forEach(error -> {
-          val field = error.getField();
-          if (field instanceof HasValidation hv) {
-            error.getMessage().ifPresent(hv::setErrorMessage);
-          }
-        });
-      }
-    });
+              if (validation.isOk()) {
+                val registration = registrationBinder.getBean();
+                service.add(registration);
+                UI.getCurrent().navigate(RegistrationSuccessfulPage.class);
+              } else {
+                validation
+                    .getFieldValidationErrors()
+                    .forEach(
+                        error -> {
+                          val field = error.getField();
+                          if (field instanceof HasValidation hv) {
+                            error.getMessage().ifPresent(hv::setErrorMessage);
+                          }
+                        });
+              }
+            });
     confirm.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
     formLayout.add(confirm);
   }
@@ -152,59 +151,33 @@ public class RegistrationPage extends VerticalLayout {
   private void configureBinding() {
     registrationBinder.setRequiredConfigurator(
         RequiredFieldConfigurator.NOT_EMPTY.chain(RequiredFieldConfigurator.NOT_NULL));
+    registrationBinder.bindInstanceFields(this);
 
-//    registrationBinder.bindInstanceFields(this);
-
-    registrationBinder
-        .forField(emailAddress)
-        .asRequired()
-        .bind(RegistrationRequest::getEmailAddress, RegistrationRequest::setEmailAddress);
-
-    registrationBinder
-        .forField(firstName)
-        .asRequired()
-        .bind(RegistrationRequest::getFirstName, RegistrationRequest::setFirstName);
-
-    registrationBinder
-        .forField(lastName)
-        .asRequired()
-        .bind(RegistrationRequest::getLastName, RegistrationRequest::setLastName).validate();
-
-    registrationBinder
-        .forField(dateOfBirth)
-        .asRequired()
-        .bind(this::convertToCalendar, this::convertFromCalendar).validate();
-
-    registrationBinder
-        .forField(phoneNumber)
-        .asRequired()
-        .bind(RegistrationRequest::getPhoneNumber, RegistrationRequest::setPhoneNumber).validate();
-
-    registrationBinder
-        .forField(state)
-        .asRequired()
-        .bind(RegistrationRequest::getState, RegistrationRequest::setState).validate();
-
-    registrationBinder
-        .forField(zipCode)
-        .asRequired()
-        .bind(RegistrationRequest::getZipCode, RegistrationRequest::setZipCode).validate();
-  }
-
-  private LocalDate convertToCalendar(RegistrationRequest request) {
-    val date = request.getDateOfBirth();
-    if (date == null) {
-      return LocalDate.now();
-    }
-    return LocalDate.of(
-        date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
-  }
-
-  private void convertFromCalendar(RegistrationRequest request, LocalDate localDate) {
-    if (localDate != null) {
-      val instance = Calendar.getInstance();
-      instance.set(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
-      request.setDateOfBirth(instance);
-    }
+    //    registrationBinder.bind(emailAddress, "emailAddress");
+    //    registrationBinder.bind(firstName, "firstName");
+    //    registrationBinder.bind(lastName, "lastName");
+    //    registrationBinder.bind(dateOfBirth, "dateOfBirth");
+    //
+    //
+    //    registrationBinder.bind("dateOfBir")
+    //        .forField(dateOfBirth)
+    //        .asRequired()
+    //        .bind(this::convertToCalendar, this::convertFromCalendar).validate();
+    //
+    //    registrationBinder
+    //        .forField(phoneNumber)
+    //        .asRequired()
+    //        .bind(RegistrationRequest::getPhoneNumber,
+    // RegistrationRequest::setPhoneNumber).validate();
+    //
+    //    registrationBinder
+    //        .forField(state)
+    //        .asRequired()
+    //        .bind(RegistrationRequest::getState, RegistrationRequest::setState).validate();
+    //
+    //    registrationBinder
+    //        .forField(zipCode)
+    //        .asRequired()
+    //        .bind(RegistrationRequest::getZipCode, RegistrationRequest::setZipCode).validate();
   }
 }
