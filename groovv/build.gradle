@@ -62,6 +62,13 @@ dependencies {
     }
 
     [
+            'aire-ux-spring',
+            'aire-api-spring'
+    ].each {
+        implementation "com.aire-ux.components:$it"
+    }
+
+    [
             "aire-test-spring"
     ].each {
         testImplementation "com.aire-ux.components:$it"

@@ -1,5 +1,7 @@
 package io.groovv.app.ui.views.home;
 
+import com.aire.ux.Host;
+import com.aire.ux.Slot;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
@@ -34,11 +36,16 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 
 @Route("")
 @PermitAll
+@Host(":home")
 @CssImport(value = "./styles/groovv/views/home/home.css")
 public class HomeView extends AppLayout {
 
+  @Slot(":primary-navigation-layout")
   private final HorizontalLayout menuLayout;
+
+  @Slot(":primary-navigation")
   private final MenuBar navigationMenuBar;
+
   private final AccountRepository accountRepository;
 
   @Inject
