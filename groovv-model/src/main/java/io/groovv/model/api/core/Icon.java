@@ -1,5 +1,6 @@
 package io.groovv.model.api.core;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
@@ -8,7 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Embeddable
-public class Icon {
+public class Icon implements Serializable {
 
   @Setter
   @Getter(onMethod = @__({@Embedded}))

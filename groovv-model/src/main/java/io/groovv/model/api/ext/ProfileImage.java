@@ -21,7 +21,7 @@ import lombok.Setter;
  */
 @Entity
 @Table(name = "PROFILE_IMAGES")
-public class ProfileImage extends AbstractEntity<Identifier> {
+public class ProfileImage extends AbstractSerializableEntity<Identifier> {
 
   static final Sequence<Identifier> SEQUENCE;
 

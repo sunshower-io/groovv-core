@@ -2,6 +2,7 @@ package io.groovv.model.api.ext;
 
 import io.groovv.model.api.converters.LocaleConverter;
 import io.groovv.model.api.core.AbstractEntity;
+import io.groovv.model.api.core.AbstractSerializableEntity;
 import io.groovv.model.api.core.User;
 import io.sunshower.persistence.id.Identifier;
 import io.sunshower.persistence.id.Identifiers;
@@ -20,7 +21,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "USER_PROFILES")
-public class UserProfile extends AbstractEntity<Identifier> {
+public class UserProfile extends AbstractSerializableEntity<Identifier> {
 
   static final Sequence<Identifier> SEQUENCE;
 

@@ -20,7 +20,7 @@ import lombok.Setter;
 /** a realm a source of user information such as OAuth, databases, or filesystems */
 @Entity
 @Table(name = "REALMS")
-public class Realm extends AbstractEntity<Identifier> {
+public class Realm extends AbstractSerializableEntity<Identifier> {
 
   static final Sequence<Identifier> SEQUENCE;
 

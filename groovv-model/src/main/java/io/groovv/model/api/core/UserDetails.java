@@ -25,7 +25,7 @@ import lombok.Setter;
 @Entity
 @RootElement
 @Table(name = "USER_DETAILS")
-public class UserDetails extends AbstractEntity<Identifier> implements IconAware {
+public class UserDetails extends AbstractSerializableEntity<Identifier> implements IconAware {
 
   @Setter
   @NotNull
@@ -48,11 +48,11 @@ public class UserDetails extends AbstractEntity<Identifier> implements IconAware
   @Setter
   @Getter(
       onMethod =
-          @__({
-            @MapsId,
-            @JoinColumn(name = "id"),
-            @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY),
-          }))
+      @__({
+          @MapsId,
+          @JoinColumn(name = "id"),
+          @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY),
+      }))
   private User user;
 
   static final Sequence<Identifier> SEQUENCE;
