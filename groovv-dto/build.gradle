@@ -1,0 +1,17 @@
+dependencies {
+
+    [
+            'core-api',
+            'core-impl',
+            'entity-view-api',
+            'entity-view-impl',
+            'integration-entity-view-spring',
+            'integration-entity-view-spring-data-2.4',
+            'integration-hibernate-5.6',
+            'integration-jaxrs'
+
+    ].each {
+        implementation "com.blazebit:blaze-persistence-$it"
+    }
+
+}

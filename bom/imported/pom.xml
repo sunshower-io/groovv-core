@@ -50,6 +50,9 @@
     <hikari-cp.version>5.0.1</hikari-cp.version>
     <spring-cloud-dependencies.version>2021.0.3</spring-cloud-dependencies.version>
     <postgresql.version>42.4.0</postgresql.version>
+
+    <blaze-persistence.version>1.6.6</blaze-persistence.version>
+
   </properties>
 
   <dependencyManagement>
@@ -315,6 +318,134 @@
         <artifactId>junit-pioneer</artifactId>
         <version>${junit-pioneer.version}</version>
         <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-core-api</artifactId>
+        <version>${blaze-persistence.version}</version>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-core-impl</artifactId>
+        <version>${blaze-persistence.version}</version>
+        <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-entity-view-api</artifactId>
+        <version>${blaze-persistence.version}</version>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-entity-view-impl</artifactId>
+        <version>${blaze-persistence.version}</version>
+        <scope>runtime</scope>
+      </dependency>
+
+      <!-- Entity View Spring integration module -->
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-integration-entity-view-spring</artifactId>
+        <version>${blaze-persistence.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-integration-spring-data-2.4</artifactId>
+        <version>${blaze-persistence.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-integration-spring-data-webmvc</artifactId>
+        <version>${blaze-persistence.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-integration-spring-data-webflux</artifactId>
+        <version>${blaze-persistence.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-integration-spring-hateoas-webmvc</artifactId>
+        <version>${blaze-persistence.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-integration-hibernate-5.6</artifactId>
+        <version>${blaze-persistence.version}</version>
+      </dependency>
+
+      <!-- JAX-RS integration module -->
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-integration-jaxrs</artifactId>
+        <version>${blaze-persistence.version}</version>
+      </dependency>
+      <!-- Use this if you want to use Jackson for JSON serialization/deserialization -->
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-integration-jaxrs-jackson</artifactId>
+        <version>${blaze-persistence.version}</version>
+      </dependency>
+
+
+      <!-- Use this if you want to use JSONB for JSON serialization/deserialization -->
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-integration-jaxrs-jsonb</artifactId>
+        <version>${blaze-persistence.version}</version>
+      </dependency>
+
+      <!-- GraphQL integration module -->
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-integration-graphql</artifactId>
+        <version>${blaze-persistence.version}</version>
+      </dependency>
+
+      <!-- Jackson integration module -->
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-integration-jackson</artifactId>
+        <version>${blaze-persistence.version}</version>
+      </dependency>
+
+
+      <!-- Querydsl integration module -->
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-integration-querydsl-expressions</artifactId>
+        <version>${blaze-persistence.version}</version>
+      </dependency>
+
+
+
+
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-jpa-criteria-api</artifactId>
+        <version>${blaze-persistence.version}</version>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-jpa-criteria-impl</artifactId>
+        <version>${blaze-persistence.version}</version>
+        <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.blazebit</groupId>
+        <artifactId>blaze-persistence-jpa-criteria-jpa-2-compatibility</artifactId>
+        <version>${blaze-persistence.version}</version>
+        <scope>runtime</scope>
       </dependency>
 
 
