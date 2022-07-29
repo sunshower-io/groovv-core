@@ -31,4 +31,8 @@ dependencies {
     ].each {
         implementation "com.blazebit:blaze-persistence-$it"
     }
+
+    implementation 'com.blazebit:blaze-persistence-integration-spring-data-2.4'
+
+    api project(':groovv-dto')
 }

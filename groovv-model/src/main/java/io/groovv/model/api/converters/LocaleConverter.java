@@ -9,7 +9,7 @@ public class LocaleConverter implements AttributeConverter<Locale, String> {
   @Override
   @Nullable
   public String convertToDatabaseColumn(@Nullable Locale attribute) {
-    if(attribute != null) {
+    if (attribute != null) {
       return attribute.toLanguageTag();
     }
     return null;
@@ -18,7 +18,7 @@ public class LocaleConverter implements AttributeConverter<Locale, String> {
   @Override
   @Nullable
   public Locale convertToEntityAttribute(@Nullable String dbData) {
-    if(!(dbData == null || dbData.isBlank())) {
+    if (!(dbData == null || dbData.isBlank())) {
       return Locale.forLanguageTag(dbData);
     }
     return null;

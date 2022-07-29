@@ -12,8 +12,7 @@ import org.junit.jupiter.api.Test;
 @ModelTest
 class UserProfileTest {
 
-  @PersistenceContext
-  private EntityManager entityManager;
+  @PersistenceContext private EntityManager entityManager;
 
   @Test
   void ensureUserWithProfileCanBeCreated() {

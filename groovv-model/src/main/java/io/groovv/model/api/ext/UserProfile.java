@@ -31,26 +31,23 @@ public class UserProfile extends AbstractEntity<Identifier> {
   @Setter
   @Getter(
       onMethod =
-      @__({
-          @OneToOne(cascade = CascadeType.ALL),
-          @JoinColumn(name = "user_id", referencedColumnName = "id")
-      }))
+          @__({
+            @OneToOne(cascade = CascadeType.ALL),
+            @JoinColumn(name = "user_id", referencedColumnName = "id")
+          }))
   private User user;
 
   @Getter(
       onMethod =
-      @__({
-          @OneToOne(cascade = CascadeType.ALL, mappedBy = "owner"),
-      }))
+          @__({
+            @OneToOne(cascade = CascadeType.ALL, mappedBy = "owner"),
+          }))
   private ProfileImage image;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = "locale"),
-      @Convert(converter = LocaleConverter.class)
-  }))
+  @Getter(
+      onMethod =
+          @__({@Basic, @Column(name = "locale"), @Convert(converter = LocaleConverter.class)}))
   private Locale locale;
 
   public UserProfile() {
@@ -58,7 +55,7 @@ public class UserProfile extends AbstractEntity<Identifier> {
   }
 
   public void setImage(ProfileImage image) {
-    if(image != null) {
+    if (image != null) {
       this.image = image;
       image.setOwner(this);
     } else {

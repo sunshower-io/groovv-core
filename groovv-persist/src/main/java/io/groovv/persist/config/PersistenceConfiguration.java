@@ -1,16 +1,26 @@
 package io.groovv.persist.config;
 
 import static io.groovv.model.api.Models.getScannedPackages;
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_SINGLETON;
 
+import com.blazebit.persistence.Criteria;
+import com.blazebit.persistence.CriteriaBuilderFactory;
+import com.blazebit.persistence.integration.view.spring.EnableEntityViews;
+import com.blazebit.persistence.spring.data.impl.repository.BlazePersistenceRepositoryFactoryBean;
+import com.blazebit.persistence.view.EntityViewManager;
+import com.blazebit.persistence.view.spi.EntityViewConfiguration;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import io.groovv.persist.registrations.RegistrationRepository;
 import io.groovv.persist.users.AccountRepository;
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import lombok.val;
 import org.flywaydb.core.Flyway;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -18,7 +28,10 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableJpaRepositories(basePackageClasses = {RegistrationRepository.class, AccountRepository.class})
+@EnableEntityViews({"io.groovv.dto.views.model.core", "io.groovv.dto.views.model.ext"})
+@EnableJpaRepositories(
+    basePackageClasses = {RegistrationRepository.class, AccountRepository.class},
+    repositoryFactoryBeanClass = BlazePersistenceRepositoryFactoryBean.class)
 public class PersistenceConfiguration {
 
   @Bean
@@ -35,6 +48,20 @@ public class PersistenceConfiguration {
     cfg.addDataSourceProperty("prepStmtCacheSize", "250");
     cfg.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
     return new HikariDataSource(cfg);
+  }
+
+  @Bean
+  public CriteriaBuilderFactory criteriaBuilderFactory(ApplicationContext context) {
+    val cfg = Criteria.getDefault();
+    return cfg.createCriteriaBuilderFactory(context.getBean(EntityManagerFactory.class));
+  }
+
+  @Bean
+  @Scope(SCOPE_SINGLETON)
+  public EntityViewManager entityViewManager(
+      CriteriaBuilderFactory criteriaBuilderFactory,
+      EntityViewConfiguration entityViewConfiguration) {
+    return entityViewConfiguration.createEntityViewManager(criteriaBuilderFactory);
   }
 
   @Bean

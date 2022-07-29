@@ -34,10 +34,13 @@ public class ProfileImage extends AbstractEntity<Identifier> {
   }
 
   @Setter
-  @Getter(onMethod = @__({
-      @MapsId,
-      @OneToOne,
-      @PrimaryKeyJoinColumn(name = "owner_id", referencedColumnName = "id")}))
+  @Getter(
+      onMethod =
+          @__({
+            @MapsId,
+            @OneToOne,
+            @PrimaryKeyJoinColumn(name = "owner_id", referencedColumnName = "id")
+          }))
   private UserProfile owner;
 
   @Setter

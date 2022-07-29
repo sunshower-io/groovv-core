@@ -13,7 +13,12 @@ import lombok.Setter;
 public class TenantedEntity extends AbstractEntity<Identifier> {
 
   @Setter
-  @Getter(onMethod = @__({@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL), @JoinColumn(name = "tenant_id")}))
+  @Getter(
+      onMethod =
+          @__({
+            @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL),
+            @JoinColumn(name = "tenant_id")
+          }))
   private Tenant tenant;
 
   protected TenantedEntity(Identifier identifier) {
