@@ -37,6 +37,16 @@ dependencies {
     }
 
 
+    [
+            'easy-random-core',
+            'easy-random-randomizers',
+            'easy-random-bean-validation'
+    ].each {
+        testFixturesApi("org.jeasy:$it") {
+            exclude group: 'org.yaml'
+        }
+    }
+
 
     /**
      * implementation dependencies

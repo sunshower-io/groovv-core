@@ -53,6 +53,8 @@
 
     <blaze-persistence.version>1.6.6</blaze-persistence.version>
 
+    <easy-random.version>5.0.0</easy-random.version>
+    <junit-extensions.version>2.5.0</junit-extensions.version>
   </properties>
 
   <dependencyManagement>
@@ -311,7 +313,34 @@
         <artifactId>byte-buddy</artifactId>
         <version>${byte-buddy.version}</version>
       </dependency>
+      <dependency>
+        <groupId>io.github.glytching</groupId>
+        <artifactId>junit-extensions</artifactId>
+        <version>${junit-extensions.version}</version>
+        <scope>test</scope>
+      </dependency>
 
+      <dependency>
+        <groupId>org.jeasy</groupId>
+        <artifactId>easy-random-core</artifactId>
+        <version>${easy-random.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.jeasy</groupId>
+        <artifactId>easy-random-randomizers</artifactId>
+        <version>${easy-random.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jeasy</groupId>
+        <artifactId>easy-random-bean-validation</artifactId>
+        <version>${easy-random.version}</version>
+        <scope>test</scope>
+      </dependency>
 
       <dependency>
         <groupId>org.junit-pioneer</groupId>
