@@ -25,7 +25,10 @@ public class PersistenceConfiguration {
   public DataSource dataSource() {
     val cfg = new HikariConfig();
     cfg.setDriverClassName("org.postgresql.Driver");
-    cfg.setJdbcUrl(PersistenceEnvironment.LeaderDomainName.getString());
+    cfg.setJdbcUrl(
+        getUri(
+            PersistenceEnvironment.LeaderDomainName.getString(),
+            PersistenceEnvironment.DatabaseName.getString("")));
     cfg.setUsername(PersistenceEnvironment.DatabaseUserName.getString());
     cfg.setPassword(PersistenceEnvironment.DatabasePassword.getString());
     cfg.addDataSourceProperty("cachePrepStmts", "true");
@@ -69,5 +72,16 @@ public class PersistenceConfiguration {
     val transactionManager = new JpaTransactionManager();
     transactionManager.setEntityManagerFactory(factoryBean.getObject());
     return transactionManager;
+  }
+
+  private String getUri(String string, String databaseName) {
+    var result = string;
+    if (!string.startsWith("jdbc:postgresql://")) {
+      result = "jdbc:postgresql://" + string;
+    }
+    if (!string.endsWith("/")) {
+      result = result + "/";
+    }
+    return result + databaseName;
   }
 }

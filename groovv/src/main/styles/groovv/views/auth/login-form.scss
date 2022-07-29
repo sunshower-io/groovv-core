@@ -3,6 +3,8 @@
 //}
 
 ::part(form-title) {
-  margin-top: -32px;
   font-size: var(--lumo-font-size-xl);
+}
+::part(form) {
+  padding-top:0;
 }

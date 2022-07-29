@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
 public enum PersistenceEnvironment {
+  DatabaseName("GROOVV_DB_NAME", "groovv.db.name"),
   DatabaseUserName("GROOVV_DB_USERNAME", "groovv.db.username"),
   DatabasePassword("GROOVV_DB_PASSWORD", "groovv.db.password"),
   LeaderDomainName("GROOVV_DB_LEADER_FQDN", "groovv.db.leader.fqdn"),
