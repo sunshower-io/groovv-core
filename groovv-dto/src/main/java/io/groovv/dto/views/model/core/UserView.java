@@ -18,10 +18,7 @@ public interface UserView {
   @IdMapping
   Identifier getId();
 
-
   @Mapping
   @UpdatableMapping(cascade = {CascadeType.DELETE})
   RealmView getRealm();
-
-
 }

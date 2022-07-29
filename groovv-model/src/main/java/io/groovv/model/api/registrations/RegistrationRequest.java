@@ -1,6 +1,5 @@
 package io.groovv.model.api.registrations;
 
-import io.groovv.model.api.core.AbstractEntity;
 import io.groovv.model.api.core.AbstractSerializableEntity;
 import io.groovv.model.api.location.State;
 import io.sunshower.persistence.id.Identifier;
@@ -37,25 +36,25 @@ public class RegistrationRequest extends AbstractSerializableEntity<Identifier> 
   @Setter
   @Getter(
       onMethod =
-      @__({
-          @NotNull,
-          @NotEmpty,
-          @Pattern(regexp = "(^$|\\d{10})"),
-          @Basic,
-          @Column(name = "phone_number")
-      }))
+          @__({
+            @NotNull,
+            @NotEmpty,
+            @Pattern(regexp = "(^$|\\d{10})"),
+            @Basic,
+            @Column(name = "phone_number")
+          }))
   private String phoneNumber;
 
   @Setter
   @Getter(
       onMethod =
-      @__({
-          @Basic,
-          @NotNull,
-          @NotEmpty,
-          @Column(name = "zip_code"),
-          @Pattern(regexp = "(^$|\\d{5})")
-      }))
+          @__({
+            @Basic,
+            @NotNull,
+            @NotEmpty,
+            @Column(name = "zip_code"),
+            @Pattern(regexp = "(^$|\\d{5})")
+          }))
   private String zipCode;
 
   @Setter
@@ -81,11 +80,11 @@ public class RegistrationRequest extends AbstractSerializableEntity<Identifier> 
   @Setter
   @Getter(
       onMethod =
-      @__({
-          @NotNull,
-          @Column(name = "status"),
-          @Enumerated(EnumType.ORDINAL),
-      }))
+          @__({
+            @NotNull,
+            @Column(name = "status"),
+            @Enumerated(EnumType.ORDINAL),
+          }))
   private Status status;
 
   public enum Status {

@@ -20,5 +20,4 @@ public interface RealmView {
   String getName();
 
   void setName(String name);
-
 }

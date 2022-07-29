@@ -1,6 +1,6 @@
 package io.groovv.model.api.ext;
 
-import io.groovv.model.api.core.AbstractEntity;
+import io.groovv.model.api.core.AbstractSerializableEntity;
 import io.sunshower.persistence.id.Identifier;
 import io.sunshower.persistence.id.Identifiers;
 import io.sunshower.persistence.id.Sequence;

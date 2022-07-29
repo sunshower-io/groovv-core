@@ -48,11 +48,11 @@ public class UserDetails extends AbstractSerializableEntity<Identifier> implemen
   @Setter
   @Getter(
       onMethod =
-      @__({
-          @MapsId,
-          @JoinColumn(name = "id"),
-          @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY),
-      }))
+          @__({
+            @MapsId,
+            @JoinColumn(name = "id"),
+            @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY),
+          }))
   private User user;
 
   static final Sequence<Identifier> SEQUENCE;
