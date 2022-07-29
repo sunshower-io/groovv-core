@@ -8,6 +8,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -19,7 +20,7 @@ import lombok.Setter;
  * Storage). Not worrying about it for now
  */
 @Entity
-@Table(name = "PROFILE_IMAGE")
+@Table(name = "PROFILE_IMAGES")
 public class ProfileImage extends AbstractEntity<Identifier> {
 
   static final Sequence<Identifier> SEQUENCE;
@@ -33,7 +34,10 @@ public class ProfileImage extends AbstractEntity<Identifier> {
   }
 
   @Setter
-  @Getter(onMethod = @__({@OneToOne, @PrimaryKeyJoinColumn}))
+  @Getter(onMethod = @__({
+      @MapsId,
+      @OneToOne,
+      @PrimaryKeyJoinColumn(name = "owner_id", referencedColumnName = "id")}))
   private UserProfile owner;
 
   @Setter

@@ -1,5 +1,6 @@
 package io.groovv.model.api.core;
 
+import io.groovv.model.api.converters.ClassConverter;
 import io.sunshower.persistence.id.Identifier;
 import io.sunshower.persistence.id.Identifiers;
 import io.sunshower.persistence.id.Sequence;

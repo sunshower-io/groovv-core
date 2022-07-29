@@ -42,6 +42,10 @@ dependencies {
             'easy-random-randomizers',
             'easy-random-bean-validation'
     ].each {
+
+        testImplementation("org.jeasy:$it") {
+            exclude group: 'org.yaml'
+        }
         testFixturesApi("org.jeasy:$it") {
             exclude group: 'org.yaml'
         }
@@ -73,5 +77,6 @@ dependencies {
      */
     testFixturesApi 'com.h2database:h2'
     testFixturesApi 'org.springframework:spring-test'
+    testFixturesApi 'io.github.glytching:junit-extensions'
     testFixturesApi 'io.sunshower.arcus.persist:persist-condensation'
 }

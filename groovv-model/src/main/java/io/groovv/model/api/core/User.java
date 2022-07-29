@@ -1,5 +1,7 @@
 package io.groovv.model.api.core;
 
+import io.groovv.model.api.converters.Base58Converter;
+import io.groovv.model.api.converters.DateConverter;
 import io.sunshower.arcus.condensation.Alias;
 import io.sunshower.arcus.condensation.Attribute;
 import io.sunshower.arcus.condensation.Convert;

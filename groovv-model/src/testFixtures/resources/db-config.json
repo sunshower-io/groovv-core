@@ -1,5 +1,6 @@
 {
   "scanned-packages": [
+    "io.groovv.model.api.ext",
     "io.groovv.model.api.core",
     "io.groovv.model.api.location",
     "io.groovv.model.api.accounts",
