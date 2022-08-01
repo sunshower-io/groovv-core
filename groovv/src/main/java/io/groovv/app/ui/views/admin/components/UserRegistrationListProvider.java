@@ -13,7 +13,7 @@ import lombok.val;
 import org.springframework.stereotype.Component;
 
 @Component
-@RolesAllowed("super-administrator")
+@RolesAllowed("ROLE_ROOT")
 @UiDecorator(":home:primary-navigation")
 public class UserRegistrationListProvider implements Consumer<HomeView> {
 

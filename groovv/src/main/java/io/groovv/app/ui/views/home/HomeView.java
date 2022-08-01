@@ -23,7 +23,7 @@ import com.vaadin.flow.component.tabs.Tabs.Orientation;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.VaadinServletRequest;
-import io.groovv.app.ui.config.PrincipalDetails;
+import io.groovv.dto.views.model.core.PrincipalView;
 import io.groovv.app.ui.config.SecurityUtils;
 import io.groovv.app.ui.views.accounts.AccountView;
 import io.groovv.app.ui.views.dashboard.UserDashboard;
@@ -112,7 +112,7 @@ public class HomeView extends AppLayout {
     logoutHandler.logout(VaadinServletRequest.getCurrent().getHttpServletRequest(), null, null);
   }
 
-  private Component createLogout(PrincipalDetails details) {
+  private Component createLogout(PrincipalView details) {
     val logout =
         new Button(
             "Log out " + details.givenName(),
