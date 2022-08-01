@@ -7,7 +7,5 @@ import java.util.function.Function;
 @FunctionalInterface
 public interface RealmAuthenticationMapper {
 
-  Optional<PrincipalView> bind(Object principal,
-      Function<Object, String> imageUrlProvider);
-
+  Optional<PrincipalView> bind(Object principal, Function<Object, String> imageUrlProvider);
 }

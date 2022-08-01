@@ -12,16 +12,14 @@ import lombok.val;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-public abstract class AbstractPrincipalAwareComponentInclusionVoter<A extends Annotation> implements
-    ComponentInclusionVoter {
-
+public abstract class AbstractPrincipalAwareComponentInclusionVoter<A extends Annotation>
+    implements ComponentInclusionVoter {
 
   private final Class<A> annotationType;
   private final LRUCache<Class<?>, Set<String>> authorityCache;
 
-  protected AbstractPrincipalAwareComponentInclusionVoter(
-      @NonNull Class<A> annotationType) {
-    //this doesn't need to be very big
+  protected AbstractPrincipalAwareComponentInclusionVoter(@NonNull Class<A> annotationType) {
+    // this doesn't need to be very big
     this.annotationType = annotationType;
     this.authorityCache = new LRUCache<>(32);
   }
@@ -37,7 +35,6 @@ public abstract class AbstractPrincipalAwareComponentInclusionVoter<A extends An
     }
     return false;
   }
-
 
   protected Class<? extends Annotation> getAnnotationType() {
     return annotationType;
@@ -61,7 +58,6 @@ public abstract class AbstractPrincipalAwareComponentInclusionVoter<A extends An
   }
 
   protected abstract Set<String> readAllowedAnnotations(@NonNull A annotation);
-
 
   private Set<String> resolve(ExtensionDefinition<?> definition) {
     val ext = definition.getExtension();

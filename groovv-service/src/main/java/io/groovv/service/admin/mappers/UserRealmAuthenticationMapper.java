@@ -10,11 +10,14 @@ import lombok.val;
 public class UserRealmAuthenticationMapper implements RealmAuthenticationMapper {
 
   @Override
-  public Optional<PrincipalView> bind(Object principal,
-      Function<Object, String> imageUrlProvider) {
+  public Optional<PrincipalView> bind(Object principal, Function<Object, String> imageUrlProvider) {
     if (principal instanceof User u) {
-      return Optional.of(new PrincipalView(u.getUsername(), getFamilyName(u), u.getUsername(),
-          imageUrlProvider.apply(principal)));
+      return Optional.of(
+          new PrincipalView(
+              u.getUsername(),
+              getFamilyName(u),
+              u.getUsername(),
+              imageUrlProvider.apply(principal)));
     }
     return Optional.empty();
   }
@@ -32,6 +35,4 @@ public class UserRealmAuthenticationMapper implements RealmAuthenticationMapper 
     }
     return fname;
   }
-
-
 }

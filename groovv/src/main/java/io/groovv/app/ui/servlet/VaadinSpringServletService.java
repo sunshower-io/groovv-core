@@ -22,7 +22,6 @@ public class VaadinSpringServletService extends SpringVaadinServletService
 
   private final WebApplicationContext context;
 
-
   public VaadinSpringServletService(
       VaadinServlet servlet,
       DeploymentConfiguration deploymentConfiguration,
@@ -33,7 +32,6 @@ public class VaadinSpringServletService extends SpringVaadinServletService
 
   @Override
   @SuppressWarnings("PMD")
-
   protected Optional<Instantiator> loadInstantiators() throws ServiceException {
     val delegate = new SpringInstantiator(this, context);
     val decorator =
@@ -45,5 +43,4 @@ public class VaadinSpringServletService extends SpringVaadinServletService
     val instantiator = new SpringDelegatingInstantiator(delegate, decorator, context);
     return Optional.of(instantiator);
   }
-
 }

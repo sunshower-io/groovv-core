@@ -1,6 +1,5 @@
 package io.groovv.model.api.core;
 
-
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -21,27 +20,28 @@ import lombok.Setter;
 @Table(name = "ADMINISTRATOR_EMAILS")
 public class Administrator {
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @Id,
-      @NotNull,
-      @Column(name = "id"),
-      @Basic(optional = false),
-      @GeneratedValue(strategy = GenerationType.IDENTITY)
-  }))
+  @Getter(
+      onMethod =
+          @__({
+            @Id,
+            @NotNull,
+            @Column(name = "id"),
+            @Basic(optional = false),
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+          }))
   private Integer id;
 
   @Setter
-  @Getter(onMethod = @__({
-      @OneToMany,
-      @JoinTable(
-          name = "ADMINISTRATORS_TO_USERS",
-          joinColumns = @JoinColumn(name = "admin_id", referencedColumnName = "id"),
-          inverseJoinColumns = @JoinColumn(name = "username", referencedColumnName = "username")
-      )
-  }))
+  @Getter(
+      onMethod =
+          @__({
+            @OneToMany,
+            @JoinTable(
+                name = "ADMINISTRATORS_TO_USERS",
+                joinColumns = @JoinColumn(name = "admin_id", referencedColumnName = "id"),
+                inverseJoinColumns =
+                    @JoinColumn(name = "username", referencedColumnName = "username"))
+          }))
   private Set<User> users = new HashSet<>();
-
-
 }

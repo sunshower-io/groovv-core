@@ -4,8 +4,8 @@ import java.util.Set;
 import javax.annotation.security.RolesAllowed;
 import lombok.NonNull;
 
-public class RoleBasedComponentInclusionVoter extends
-    AbstractPrincipalAwareComponentInclusionVoter<RolesAllowed> {
+public class RoleBasedComponentInclusionVoter
+    extends AbstractPrincipalAwareComponentInclusionVoter<RolesAllowed> {
 
   public RoleBasedComponentInclusionVoter() {
     super(RolesAllowed.class);

@@ -106,7 +106,6 @@ public class RegistrationPage extends VerticalLayout {
 
     configureBinding();
 
-
     val confirm =
         new Button(
             "Register",

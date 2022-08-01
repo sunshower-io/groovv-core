@@ -34,11 +34,9 @@ public class GroovvVaadinOverrideAutoConfiguration {
 
   static final String VAADIN_SERVLET_MAPPING = "/vaadinServlet/*";
 
-  @Autowired
-  private WebApplicationContext context;
+  @Autowired private WebApplicationContext context;
 
-  @Autowired
-  private VaadinConfigurationProperties configurationProperties;
+  @Autowired private VaadinConfigurationProperties configurationProperties;
 
   static String makeContextRelative(String url) {
     // / -> context://
@@ -49,7 +47,6 @@ public class GroovvVaadinOverrideAutoConfiguration {
     }
     return "context://" + url;
   }
-
 
   /**
    * Creates a {@link ServletRegistrationBean} instance with Spring aware Vaadin servlet.
@@ -70,8 +67,7 @@ public class GroovvVaadinOverrideAutoConfiguration {
     }
     val registration =
         new ServletRegistrationBean<SpringServlet>(
-            new GroovvVaadinServlet(context, rootMapping),
-            mapping);
+            new GroovvVaadinServlet(context, rootMapping), mapping);
     registration.setInitParameters(initParameters);
     registration.setAsyncSupported(configurationProperties.isAsyncSupported());
     registration.setName(ClassUtils.getShortNameAsProperty(SpringServlet.class));
@@ -79,8 +75,7 @@ public class GroovvVaadinOverrideAutoConfiguration {
     if (!rootMapping) {
       multipartConfig.ifAvailable(registration::setMultipartConfig);
     }
-    registration.setLoadOnStartup(
-        configurationProperties.isLoadOnStartup() ? 1 : -1);
+    registration.setLoadOnStartup(configurationProperties.isLoadOnStartup() ? 1 : -1);
     return registration;
   }
 

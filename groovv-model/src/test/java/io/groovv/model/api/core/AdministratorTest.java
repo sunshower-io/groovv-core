@@ -11,9 +11,7 @@ import org.junit.jupiter.api.Test;
 @ModelTest
 class AdministratorTest {
 
-  @PersistenceContext
-  private EntityManager entityManager;
-
+  @PersistenceContext private EntityManager entityManager;
 
   @Test
   void ensureDefaultAdministratorIsAvailable() {
@@ -34,10 +32,17 @@ class AdministratorTest {
     entityManager.persist(user);
     entityManager.flush();
 
-
-    assertEquals("admin@groovv.co",
-        entityManager.createQuery("select a from Administrator a left join fetch a.users u",
-                Administrator.class).setFirstResult(0)
-            .setMaxResults(1).getSingleResult().getUsers().iterator().next().getUsername());
+    assertEquals(
+        "admin@groovv.co",
+        entityManager
+            .createQuery(
+                "select a from Administrator a left join fetch a.users u", Administrator.class)
+            .setFirstResult(0)
+            .setMaxResults(1)
+            .getSingleResult()
+            .getUsers()
+            .iterator()
+            .next()
+            .getUsername());
   }
 }

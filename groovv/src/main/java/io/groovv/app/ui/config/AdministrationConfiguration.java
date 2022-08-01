@@ -34,7 +34,6 @@ import org.springframework.context.event.EventListener;
 @ComponentScan(basePackages = "io.groovv.app.ui.views.admin.components")
 public class AdministrationConfiguration {
 
-
   private final List<Registration> registrations;
 
   public AdministrationConfiguration() {
@@ -59,8 +58,8 @@ public class AdministrationConfiguration {
   }
 
   @Bean
-  public UserInterface userInterface(ExtensionRegistry registry, AccessQueue accessQueue,
-      ActionManager actionManager) {
+  public UserInterface userInterface(
+      ExtensionRegistry registry, AccessQueue accessQueue, ActionManager actionManager) {
     return new DefaultUserInterface(registry, accessQueue, actionManager);
   }
 
@@ -82,16 +81,18 @@ public class AdministrationConfiguration {
     }
   }
 
-  private void doRegisterExtensions(ApplicationContext ctx, UserInterface ui,
-      ListableBeanFactory factory,
-      String name) {
+  private void doRegisterExtensions(
+      ApplicationContext ctx, UserInterface ui, ListableBeanFactory factory, String name) {
     val decorator = factory.findAnnotationOnBean(name, UiDecorator.class);
     val complete = Selection.<Component>path(decorator.value());
     val hostTarget = Selection.<Component>path(complete.trunk());
-    val ext = Extensions.create(hostTarget.leaf(), (Component target) -> {
-      val componentConsumer = (Consumer<Component>) ctx.getBean(name, Consumer.class);
-      componentConsumer.accept(target);
-    });
+    val ext =
+        Extensions.create(
+            hostTarget.leaf(),
+            (Component target) -> {
+              val componentConsumer = (Consumer<Component>) ctx.getBean(name, Consumer.class);
+              componentConsumer.accept(target);
+            });
     registrations.add(ui.register(hostTarget, ext));
   }
 

@@ -1,4 +1,5 @@
 package io.groovv.app.ui.servlet;
+
 import com.vaadin.flow.function.DeploymentConfiguration;
 import com.vaadin.flow.server.ServiceException;
 import com.vaadin.flow.server.VaadinServletService;
@@ -11,9 +12,7 @@ public class GroovvVaadinServlet extends SpringServlet implements DisposableBean
 
   private final WebApplicationContext context;
 
-  public GroovvVaadinServlet(
-      WebApplicationContext context,
-      boolean rootMapping) {
+  public GroovvVaadinServlet(WebApplicationContext context, boolean rootMapping) {
     super(context, rootMapping);
     this.context = context;
   }
@@ -25,5 +24,4 @@ public class GroovvVaadinServlet extends SpringServlet implements DisposableBean
     service.init();
     return service;
   }
-
 }

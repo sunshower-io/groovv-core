@@ -8,7 +8,6 @@ import com.aire.ux.test.Navigate;
 import com.aire.ux.test.RouteLocation;
 import com.aire.ux.test.TestContext;
 import com.aire.ux.test.ViewTest;
-import com.vaadin.flow.router.Route;
 import io.groovv.app.ui.GroovvUITest;
 import io.groovv.app.ui.views.accounts.AccountView;
 import io.groovv.app.ui.views.admin.UserRegistrationList;
@@ -29,8 +28,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 @RouteLocation(scanClassPackage = UserRegistrationList.class)
 class RoleBasedComponentInclusionVoterTest {
 
-  @Inject
-  private ComponentInclusionManager inclusionManager;
+  @Inject private ComponentInclusionManager inclusionManager;
 
   @Test
   void ensureInclusionManagerIsConfigured() {
@@ -51,5 +49,4 @@ class RoleBasedComponentInclusionVoterTest {
     $.navigate(HomeView.class);
     assertTrue($.selectComponents("vaadin-button[text='Registrations']").isEmpty());
   }
-
 }

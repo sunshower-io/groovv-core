@@ -14,24 +14,23 @@ import org.springframework.security.core.AuthenticationException;
 
 public interface AuthenticationService {
 
-
   static Stream<RealmAuthenticationMapper> loadMappers() {
-    return ServiceLoader.load(RealmAuthenticationMapper.class, Thread.currentThread()
-        .getContextClassLoader()).stream().map(Provider::get);
+    return ServiceLoader.load(
+            RealmAuthenticationMapper.class, Thread.currentThread().getContextClassLoader())
+        .stream()
+        .map(Provider::get);
   }
 
-
   /**
-   * authenticate and synthesize a principal (if possible).  The procedure for this is as follows:
-   * <p>
-   * 1. If a principal's username appears in the administrators_to_users table, add the role
+   * authenticate and synthesize a principal (if possible). The procedure for this is as follows:
+   *
+   * <p>1. If a principal's username appears in the administrators_to_users table, add the role
    *
    * @param principal
    * @return
    * @throws AuthenticationException
    */
   PrincipalView authenticate(Object principal) throws AuthenticationException;
-
 
   /**
    * determine if default role values are populated
@@ -40,10 +39,7 @@ public interface AuthenticationService {
    */
   boolean isDefaultRoleTablePopulated();
 
-  /**
-   *
-   * @return true if population was successful or the role table is populated
-   */
+  /** @return true if population was successful or the role table is populated */
   boolean populateDefaultRoleTable();
 
   /**
@@ -51,7 +47,6 @@ public interface AuthenticationService {
    * @return the role if present
    */
   Optional<Role> findByName(String name);
-
 
   /**
    * @param role the role to look for
@@ -67,16 +62,13 @@ public interface AuthenticationService {
    */
   List<Role> lookup(DefaultRoles... roles);
 
-
   void addRoles(Identifier userId, String... roles);
 
   /**
    * @param userId the userId to add a role to
-   * @param roles  the roles to add
+   * @param roles the roles to add
    */
   default void addRoles(Identifier userId, DefaultRoles... roles) {
     addRoles(userId, Arrays.stream(roles).map(Enum::name).toArray(String[]::new));
   }
-
-
 }

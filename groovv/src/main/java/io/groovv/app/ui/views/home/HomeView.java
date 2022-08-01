@@ -23,11 +23,11 @@ import com.vaadin.flow.component.tabs.Tabs.Orientation;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.VaadinServletRequest;
-import io.groovv.dto.views.model.core.PrincipalView;
 import io.groovv.app.ui.config.SecurityUtils;
 import io.groovv.app.ui.views.accounts.AccountView;
 import io.groovv.app.ui.views.dashboard.UserDashboard;
 import io.groovv.app.ui.views.user.UserProfile;
+import io.groovv.dto.views.model.core.PrincipalView;
 import io.groovv.persist.users.AccountRepository;
 import java.util.EnumMap;
 import java.util.Map;
@@ -44,6 +44,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 public class HomeView extends AppLayout {
 
   private final Map<Menus, Component> submenus;
+
   @Getter
   @Slot(":primary-navigation-layout")
   private final HorizontalLayout menuLayout;

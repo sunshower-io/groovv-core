@@ -26,6 +26,5 @@ class UserRegistrationListProviderTest {
   @ViewTest
   @WithMockUser
   @Navigate("admin/registrations")
-  void ensureRegistrationButtonIsNotPresentForAnonymousUser(@Context TestContext $) {
-  }
+  void ensureRegistrationButtonIsNotPresentForAnonymousUser(@Context TestContext $) {}
 }

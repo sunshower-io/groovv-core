@@ -7,8 +7,6 @@ import io.groovv.persist.config.PersistenceConfiguration;
 import io.groovv.service.config.ServiceConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Import;
 
@@ -19,7 +17,6 @@ import org.springframework.context.annotation.Import;
   ServiceConfiguration.class,
   AdministrationConfiguration.class
 })
-
 public class GroovvApplication extends SpringBootServletInitializer {
 
   public static void main(String[] args) {

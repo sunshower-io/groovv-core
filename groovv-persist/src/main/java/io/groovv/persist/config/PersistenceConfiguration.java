@@ -103,7 +103,7 @@ public class PersistenceConfiguration {
 
   private String getUri(String string, String databaseName) {
     var dbName = databaseName.trim();
-    if("\"\"".equals(dbName)) {
+    if ("\"\"".equals(dbName)) {
       dbName = "";
     }
     var result = string;
