@@ -4,21 +4,21 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import io.groovv.app.ui.components.annotations.UiDecorator;
 import io.groovv.app.ui.views.admin.UserRegistrationList;
-import java.util.function.Supplier;
+import io.groovv.app.ui.views.home.HomeView;
+import java.util.function.Consumer;
 import javax.annotation.security.RolesAllowed;
 import org.springframework.stereotype.Component;
 
 @Component
 @RolesAllowed("super-administrator")
 @UiDecorator(":home:primary-navigation")
-public class UserRegistrationListProvider implements Supplier<Button> {
+public class UserRegistrationListProvider implements Consumer<HomeView> {
 
   @Override
-  public Button get() {
-    return new Button(
-        "Registrations",
-        click -> {
-          UI.getCurrent().navigate(UserRegistrationList.class);
-        });
+  public void accept(HomeView homeView) {
+    homeView.getNavigationMenuBar()
+        .addItem(new Button("Registrations", click -> UI.getCurrent().navigate(
+            UserRegistrationList.class)));
   }
+
 }

@@ -31,18 +31,21 @@ import io.groovv.app.ui.views.user.UserProfile;
 import io.groovv.persist.users.AccountRepository;
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
+import lombok.Getter;
 import lombok.val;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 @Route("")
 @PermitAll
-@Host(":home")
+@Host("home")
 @CssImport(value = "./styles/groovv/views/home/home.css")
 public class HomeView extends AppLayout {
 
+  @Getter
   @Slot(":primary-navigation-layout")
   private final HorizontalLayout menuLayout;
 
+  @Getter
   @Slot(":primary-navigation")
   private final MenuBar navigationMenuBar;
 
