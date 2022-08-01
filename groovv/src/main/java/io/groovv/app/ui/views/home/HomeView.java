@@ -30,8 +30,6 @@ import io.groovv.app.ui.views.dashboard.UserDashboard;
 import io.groovv.app.ui.views.user.UserProfile;
 import io.groovv.persist.users.AccountRepository;
 import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
