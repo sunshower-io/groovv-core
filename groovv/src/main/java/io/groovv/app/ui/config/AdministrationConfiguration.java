@@ -16,7 +16,6 @@ import com.aire.ux.ext.spring.SpringExtensionRegistry;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.server.VaadinService;
 import io.groovv.app.ui.components.annotations.UiDecorator;
-import io.groovv.app.ui.config.inclusionvoters.PermissionBasedComponentInclusionVoter;
 import io.groovv.app.ui.config.inclusionvoters.RoleBasedComponentInclusionVoter;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +50,6 @@ public class AdministrationConfiguration {
   public ComponentInclusionManager componentInclusionManager() {
     val inclusionManager = new SpringComponentInclusionManager();
     inclusionManager.register(new RoleBasedComponentInclusionVoter());
-    inclusionManager.register(new PermissionBasedComponentInclusionVoter());
     return inclusionManager;
   }
 

@@ -29,6 +29,10 @@ import io.groovv.app.ui.views.accounts.AccountView;
 import io.groovv.app.ui.views.dashboard.UserDashboard;
 import io.groovv.app.ui.views.user.UserProfile;
 import io.groovv.persist.users.AccountRepository;
+import java.util.EnumMap;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
 import lombok.Getter;
@@ -41,6 +45,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 @CssImport(value = "./styles/groovv/views/home/home.css")
 public class HomeView extends AppLayout {
 
+  private final Map<Menus, Component> submenus;
   @Getter
   @Slot(":primary-navigation-layout")
   private final HorizontalLayout menuLayout;
@@ -53,7 +58,7 @@ public class HomeView extends AppLayout {
 
   @Inject
   public HomeView(final AccountRepository accountRepository) {
-
+    submenus = new EnumMap<>(Menus.class);
     menuLayout = createMenuLayout();
     navigationMenuBar = createNavigationMenuBar();
     this.accountRepository = accountRepository;
@@ -95,7 +100,12 @@ public class HomeView extends AppLayout {
     val userMenu = menuBar.addItem(avatar);
     userMenu.addThemeNames("tertiary");
     userMenu.getSubMenu().addItem(createLogout(details));
+    submenus.put(Menus.USER, userMenu);
     return menuBar;
+  }
+
+  public Component getSubmenu(Menus menu) {
+    return submenus.get(menu);
   }
 
   private void doLogOut() {
@@ -134,5 +144,9 @@ public class HomeView extends AppLayout {
     menuLayout.setJustifyContentMode(JustifyContentMode.END);
     menuLayout.setPadding(true);
     return menuLayout;
+  }
+
+  public enum Menus {
+    USER
   }
 }
