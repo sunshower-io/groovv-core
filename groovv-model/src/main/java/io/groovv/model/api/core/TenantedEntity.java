@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @MappedSuperclass
-public class TenantedEntity extends AbstractEntity<Identifier> {
+public class TenantedEntity extends AbstractEntity<Identifier> implements TenantAware {
 
   @Setter
   @Getter(
