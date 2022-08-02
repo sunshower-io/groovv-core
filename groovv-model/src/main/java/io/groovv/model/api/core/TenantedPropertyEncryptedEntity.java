@@ -11,18 +11,18 @@ import lombok.Setter;
 
 @MappedSuperclass
 public class TenantedPropertyEncryptedEntity<
-    ID extends Serializable,
-    P extends TenantedPropertyEncryptedEntity<ID, P, E>,
-    E extends EncryptedProperty<ID, P, E>
-    > extends PropertyEncryptedEntity<ID, P, E> implements TenantAware {
+        ID extends Serializable,
+        P extends TenantedPropertyEncryptedEntity<ID, P, E>,
+        E extends EncryptedProperty<ID, P, E>>
+    extends PropertyEncryptedEntity<ID, P, E> implements TenantAware {
 
   @Setter
   @Getter(
       onMethod =
-      @__({
-          @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL),
-          @JoinColumn(name = "tenant_id")
-      }))
+          @__({
+            @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL),
+            @JoinColumn(name = "tenant_id")
+          }))
   private Tenant tenant;
 
   protected TenantedPropertyEncryptedEntity(ID id) {
