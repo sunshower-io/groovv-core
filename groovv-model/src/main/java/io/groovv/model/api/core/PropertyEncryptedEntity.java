@@ -10,15 +10,15 @@ import lombok.Setter;
 
 @MappedSuperclass
 public class PropertyEncryptedEntity<
-    ID extends Serializable,
-    P extends PropertyEncryptedEntity<ID, P, E>,
-    E extends EncryptedProperty<ID, P, E>>
+        ID extends Serializable,
+        P extends PropertyEncryptedEntity<ID, P, E>,
+        E extends EncryptedProperty<ID, P, E>>
     extends AbstractEntity<ID> {
 
   @Setter
-  @Getter(onMethod = @__({
-      @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-  }))
+  @Getter(
+      onMethod =
+          @__({@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)}))
   private Set<E> encryptedProperties;
 
   protected PropertyEncryptedEntity(ID id) {

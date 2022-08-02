@@ -15,18 +15,16 @@ import lombok.Setter;
 
 @MappedSuperclass
 public class EncryptedProperty<
-    ID extends Serializable,
-    P extends PropertyEncryptedEntity<ID, P, E>,
-    E extends EncryptedProperty<ID, P, E>>
+        ID extends Serializable,
+        P extends PropertyEncryptedEntity<ID, P, E>,
+        E extends EncryptedProperty<ID, P, E>>
     extends AbstractEntity<ID> {
 
-  /**
-   * you can override this, but you'll usually have to override the annotations as well
-   */
+  /** you can override this, but you'll usually have to override the annotations as well */
   @Setter
   @Getter(
       onMethod =
-      @__({@ManyToOne, @PrimaryKeyJoinColumn(name = "owner_id", referencedColumnName = "id")}))
+          @__({@ManyToOne, @PrimaryKeyJoinColumn(name = "owner_id", referencedColumnName = "id")}))
   private E owner;
 
   @Setter
@@ -41,13 +39,13 @@ public class EncryptedProperty<
   @Setter
   @Getter(
       onMethod =
-      @__({
-          @Basic,
-          @Convert(Base58Converter.class),
-          @Column(name = "initialization_vector"),
-          @Attribute(
-              alias = @Alias(read = "initialization-vector", write = "initialization-vector")),
-      }))
+          @__({
+            @Basic,
+            @Convert(Base58Converter.class),
+            @Column(name = "initialization_vector"),
+            @Attribute(
+                alias = @Alias(read = "initialization-vector", write = "initialization-vector")),
+          }))
   private byte[] initializationVector;
 
   protected EncryptedProperty(ID id) {
