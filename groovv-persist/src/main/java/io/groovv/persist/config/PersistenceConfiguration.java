@@ -41,7 +41,7 @@ public class PersistenceConfiguration {
     cfg.setJdbcUrl(
         getUri(
             PersistenceEnvironment.LeaderDomainName.getString(),
-            PersistenceEnvironment.DatabaseName.getString("")));
+            PersistenceEnvironment.DatabaseName.getString()));
     cfg.setUsername(PersistenceEnvironment.DatabaseUserName.getString());
     cfg.setPassword(PersistenceEnvironment.DatabasePassword.getString());
     cfg.addDataSourceProperty("cachePrepStmts", "true");
@@ -102,6 +102,10 @@ public class PersistenceConfiguration {
   }
 
   private String getUri(String string, String databaseName) {
+    var dbName = databaseName.trim();
+    if ("\"\"".equals(dbName)) {
+      dbName = "";
+    }
     var result = string;
     if (!string.startsWith("jdbc:postgresql://")) {
       result = "jdbc:postgresql://" + string;
@@ -109,6 +113,6 @@ public class PersistenceConfiguration {
     if (!string.endsWith("/")) {
       result = result + "/";
     }
-    return result + databaseName;
+    return result + dbName;
   }
 }

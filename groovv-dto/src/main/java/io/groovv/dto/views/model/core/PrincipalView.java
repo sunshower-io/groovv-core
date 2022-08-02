@@ -1,4 +1,4 @@
-package io.groovv.app.ui.config;
+package io.groovv.dto.views.model.core;
 
-public record PrincipalDetails(
+public record PrincipalView(
     String givenName, String familyName, String emailAddress, String pictureUrl) {}

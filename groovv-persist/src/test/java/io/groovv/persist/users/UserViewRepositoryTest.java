@@ -10,9 +10,11 @@ import io.groovv.persist.config.PersistenceTest;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 @PersistenceTest
+@Disabled
 public class UserViewRepositoryTest {
 
   @Inject private UserViewRepository repository;

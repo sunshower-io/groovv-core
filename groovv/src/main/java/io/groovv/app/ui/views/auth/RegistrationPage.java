@@ -106,22 +106,6 @@ public class RegistrationPage extends VerticalLayout {
 
     configureBinding();
 
-    //    val confirm =
-    //        new Button(
-    //            "Register",
-    //            click -> {
-    //              val bean = new RegistrationRequest();
-    //              val errors = registrationBinder.();
-    //              if(!errors.hasErrors()) {
-    //                if (registrationBinder.writeBeanIfValid(bean)) {
-    //                  service.add(bean);
-    //                  UI.getCurrent().navigate(RegistrationSuccessfulPage.class);
-    //                } else {
-    //                  registrationBinder.setBean(bean);
-    //                }
-    //              }
-    //            });
-
     val confirm =
         new Button(
             "Register",
@@ -152,32 +136,5 @@ public class RegistrationPage extends VerticalLayout {
     registrationBinder.setRequiredConfigurator(
         RequiredFieldConfigurator.NOT_EMPTY.chain(RequiredFieldConfigurator.NOT_NULL));
     registrationBinder.bindInstanceFields(this);
-
-    //    registrationBinder.bind(emailAddress, "emailAddress");
-    //    registrationBinder.bind(firstName, "firstName");
-    //    registrationBinder.bind(lastName, "lastName");
-    //    registrationBinder.bind(dateOfBirth, "dateOfBirth");
-    //
-    //
-    //    registrationBinder.bind("dateOfBir")
-    //        .forField(dateOfBirth)
-    //        .asRequired()
-    //        .bind(this::convertToCalendar, this::convertFromCalendar).validate();
-    //
-    //    registrationBinder
-    //        .forField(phoneNumber)
-    //        .asRequired()
-    //        .bind(RegistrationRequest::getPhoneNumber,
-    // RegistrationRequest::setPhoneNumber).validate();
-    //
-    //    registrationBinder
-    //        .forField(state)
-    //        .asRequired()
-    //        .bind(RegistrationRequest::getState, RegistrationRequest::setState).validate();
-    //
-    //    registrationBinder
-    //        .forField(zipCode)
-    //        .asRequired()
-    //        .bind(RegistrationRequest::getZipCode, RegistrationRequest::setZipCode).validate();
   }
 }

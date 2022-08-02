@@ -288,8 +288,13 @@ CREATE TABLE PERMISSIONS
 
 CREATE TABLE ROLES
 (
-    id   IDENTIFIER PRIMARY KEY,
-    name VARCHAR(255)
+    id              IDENTIFIER PRIMARY KEY,
+    name            VARCHAR(255),
+    parent_id       IDENTIFIER,
+
+    CONSTRAINT role_parent_to_role_self_ref
+        FOREIGN KEY (parent_id)
+            REFERENCES ROLES(id)
 );
 
 

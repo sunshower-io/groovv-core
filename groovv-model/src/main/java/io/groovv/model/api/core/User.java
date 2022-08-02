@@ -1,6 +1,5 @@
 package io.groovv.model.api.core;
 
-import io.groovv.model.api.converters.Base58Converter;
 import io.groovv.model.api.converters.DateConverter;
 import io.sunshower.arcus.condensation.Alias;
 import io.sunshower.arcus.condensation.Attribute;
@@ -39,7 +38,7 @@ import org.springframework.security.core.GrantedAuthority;
 @RootElement
 @Table(name = SecurityTables.USER)
 @SuppressWarnings("PMD")
-public class User extends SerializableTenantedEntity
+public class User extends TenantedPropertyEncryptedEntity<Identifier, User, EncryptedUserProperty>
     implements org.springframework.security.core.userdetails.UserDetails {
 
   static final Sequence<Identifier> SEQUENCE;
@@ -47,18 +46,6 @@ public class User extends SerializableTenantedEntity
   static {
     SEQUENCE = Identifiers.newSequence(true);
   }
-
-  @Setter
-  @Getter(onMethod = @__({@Basic, @Column(name = "salt")}))
-  @Attribute
-  @Convert(Base58Converter.class)
-  private byte[] salt;
-
-  @Setter
-  @Getter(onMethod = @__({@Basic, @Column(name = "initialization_vector")}))
-  @Attribute(alias = @Alias(read = "initialization-vector", write = "initialization-vector"))
-  @Convert(Base58Converter.class)
-  private byte[] initializationVector;
 
   @Setter
   @Getter(onMethod = @__({@Basic, @Column(name = "locked")}))

@@ -35,18 +35,18 @@ class UserTest {
     user.getDetails().setFamilyName("adfadfa");
     realm.addUser(user);
 
-    val encoding = Encodings.create(Type.Base58);
-    val salt = generate(32);
-    val iv = generate(16);
-    val encryptionService =
-        new JCAEncryptionService(encoding, encoding.encode(salt.array()), "testpassword");
-    encryptionService.setInitializationVector(encoding.encode(iv.array()));
-
-    user.setSalt(salt.array());
-    user.setInitializationVector(iv.array());
-    val pw = encryptionService.generatePassword("testpassword");
-    val pw2 = encoding.encode(pw.getEncoded());
-    user.setPassword(pw2);
+    //    val encoding = Encodings.create(Type.Base58);
+    //    val salt = generate(32);
+    //    val iv = generate(16);
+    //    val encryptionService =
+    //        new JCAEncryptionService(encoding, encoding.encode(salt.array()), "testpassword");
+    //    encryptionService.setInitializationVector(encoding.encode(iv.array()));
+    //
+    //    user.setSalt(salt.array());
+    //    user.setInitializationVector(iv.array());
+    //    val pw = encryptionService.generatePassword("testpassword");
+    //    val pw2 = encoding.encode(pw.getEncoded());
+    //    user.setPassword(pw2);
 
     val details = new UserDetails();
     details.setGivenName("test");
@@ -76,20 +76,22 @@ class UserTest {
         new JCAEncryptionService(encoding, encoding.encode(salt.array()), "testpassword");
     encryptionService.setInitializationVector(encoding.encode(iv.array()));
 
-    user.setSalt(salt.array());
-    user.setInitializationVector(iv.array());
-    val pw = encryptionService.generatePassword("testpassword");
-    val pw2 = encoding.encode(pw.getEncoded());
-    user.setPassword(pw2);
+    //    user.setSalt(salt.array());
+    //    user.setInitializationVector(iv.array());
+    //    val pw = encryptionService.generatePassword("testpassword");
+    //    val pw2 = encoding.encode(pw.getEncoded());
+    //    user.setPassword(pw2);
     entityManager.persist(user);
     entityManager.flush();
 
-    val encryptionService2 =
-        new JCAEncryptionService(encoding, encoding.encode(user.getSalt()), "testpassword");
-    encryptionService2.setInitializationVector(encoding.encode(user.getInitializationVector()));
-
-    val encoded = encoding.encode(encryptionService2.generatePassword("testpassword").getEncoded());
-    assertEquals(encoded, user.getPassword());
+    //    val encryptionService2 =
+    //        new JCAEncryptionService(encoding, encoding.encode(user.getSalt()), "testpassword");
+    //
+    // encryptionService2.setInitializationVector(encoding.encode(user.getInitializationVector()));
+    //
+    //    val encoded =
+    // encoding.encode(encryptionService2.generatePassword("testpassword").getEncoded());
+    //    assertEquals(encoded, user.getPassword());
   }
 
   @Test

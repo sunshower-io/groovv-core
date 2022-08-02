@@ -1,6 +1,7 @@
 package io.groovv.app.ui.config;
 
 import io.groovv.app.ui.components.UIUtils;
+import io.groovv.dto.views.model.core.PrincipalView;
 import lombok.val;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,7 +24,7 @@ public class SecurityUtils {
     return SecurityContextHolder.getContext().getAuthentication();
   }
 
-  public static PrincipalDetails getCurrentUser(boolean required) {
+  public static PrincipalView getCurrentUser(boolean required) {
     val result = getPrincipalDetails();
     if (result == null && required) {
       throw new IllegalArgumentException("Error: no current principal found");
@@ -31,21 +32,21 @@ public class SecurityUtils {
     return result;
   }
 
-  public static PrincipalDetails getPrincipalDetails() {
+  public static PrincipalView getPrincipalDetails() {
     val authentication = getAuthentication();
     if (authentication == null) {
       return null;
     }
     val principal = authentication.getPrincipal();
     if (principal instanceof OAuth2AuthenticatedPrincipal principalDetails) {
-      return new PrincipalDetails(
+      return new PrincipalView(
           principalDetails.getAttribute("given_name"),
           principalDetails.getAttribute("family_name"),
           principalDetails.getAttribute("email"),
           principalDetails.getAttribute("picture"));
     }
     if (principal instanceof User principalDetails) {
-      return new PrincipalDetails(
+      return new PrincipalView(
           principalDetails.getUsername(),
           "<unknown>",
           principalDetails.getUsername(),

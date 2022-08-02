@@ -1,6 +1,6 @@
 package io.groovv.model.api.core;
 
-import io.sunshower.persistence.id.Identifier;
+import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -10,7 +10,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 @MappedSuperclass
-public class TenantedEntity extends AbstractEntity<Identifier> implements TenantAware {
+public class TenantedPropertyEncryptedEntity<
+        ID extends Serializable,
+        P extends TenantedPropertyEncryptedEntity<ID, P, E>,
+        E extends EncryptedProperty<ID, P, E>>
+    extends PropertyEncryptedEntity<ID, P, E> implements TenantAware {
 
   @Setter
   @Getter(
@@ -21,7 +25,7 @@ public class TenantedEntity extends AbstractEntity<Identifier> implements Tenant
           }))
   private Tenant tenant;
 
-  protected TenantedEntity(Identifier identifier) {
-    super(identifier);
+  protected TenantedPropertyEncryptedEntity(ID id) {
+    super(id);
   }
 }
