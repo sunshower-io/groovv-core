@@ -45,6 +45,7 @@ dependencies {
 //        implementation "org.springframework.cloud:$it"
 //    }
 
+    implementation project(':groovv-dto')
     implementation project(':groovv-persist')
     implementation project(':groovv-service')
 

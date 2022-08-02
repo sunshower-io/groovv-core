@@ -1,5 +1,7 @@
 package io.groovv.model.api.core;
 
+import io.groovv.model.api.converters.Base58Converter;
+import io.groovv.model.api.converters.DateConverter;
 import io.sunshower.arcus.condensation.Alias;
 import io.sunshower.arcus.condensation.Attribute;
 import io.sunshower.arcus.condensation.Convert;
@@ -37,7 +39,7 @@ import org.springframework.security.core.GrantedAuthority;
 @RootElement
 @Table(name = SecurityTables.USER)
 @SuppressWarnings("PMD")
-public class User extends TenantedEntity
+public class User extends SerializableTenantedEntity
     implements org.springframework.security.core.userdetails.UserDetails {
 
   static final Sequence<Identifier> SEQUENCE;

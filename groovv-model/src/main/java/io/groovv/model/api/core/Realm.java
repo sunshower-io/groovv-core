@@ -1,5 +1,6 @@
 package io.groovv.model.api.core;
 
+import io.groovv.model.api.converters.ClassConverter;
 import io.sunshower.persistence.id.Identifier;
 import io.sunshower.persistence.id.Identifiers;
 import io.sunshower.persistence.id.Sequence;
@@ -19,7 +20,7 @@ import lombok.Setter;
 /** a realm a source of user information such as OAuth, databases, or filesystems */
 @Entity
 @Table(name = "REALMS")
-public class Realm extends AbstractEntity<Identifier> {
+public class Realm extends AbstractSerializableEntity<Identifier> {
 
   static final Sequence<Identifier> SEQUENCE;
 

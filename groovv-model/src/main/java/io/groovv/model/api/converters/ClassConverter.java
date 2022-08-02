@@ -1,4 +1,4 @@
-package io.groovv.model.api.core;
+package io.groovv.model.api.converters;
 
 import javax.persistence.AttributeConverter;
 

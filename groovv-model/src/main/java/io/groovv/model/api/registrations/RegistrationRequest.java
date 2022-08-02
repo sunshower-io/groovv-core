@@ -1,6 +1,6 @@
 package io.groovv.model.api.registrations;
 
-import io.groovv.model.api.core.AbstractEntity;
+import io.groovv.model.api.core.AbstractSerializableEntity;
 import io.groovv.model.api.location.State;
 import io.sunshower.persistence.id.Identifier;
 import io.sunshower.persistence.id.Identifiers;
@@ -21,7 +21,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = UtilityTables.REGISTRATION_REQUEST)
-public class RegistrationRequest extends AbstractEntity<Identifier> {
+public class RegistrationRequest extends AbstractSerializableEntity<Identifier> {
 
   static final Sequence<Identifier> SEQUENCE;
 

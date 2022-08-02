@@ -37,3 +37,34 @@ create table USER_BANK_ACCOUNTS (
     routing_number          VARCHAR(255) NOT NULL,
     account_number          VARCHAR(255) NOT NULL
 );
+
+
+
+/**
+  a user profile is lazily-loaded user metadata
+ */
+CREATE TABLE USER_PROFILES(
+
+    id          IDENTIFIER NOT NULL PRIMARY KEY,
+    user_id     IDENTIFIER NOT NULL,
+    locale      VARCHAR(5) NOT NULL,
+
+
+
+    CONSTRAINT user_profile_to_user_reference
+        FOREIGN KEY (user_id)
+            REFERENCES USERS(id)
+
+
+
+);
+
+CREATE TABLE PROFILE_IMAGES (
+   id          IDENTIFIER NOT NULL PRIMARY KEY,
+   owner_id    IDENTIFIER NOT NULL,
+   data        BYTEA,
+
+   CONSTRAINT user_profile_to_profile_image_ref
+       FOREIGN KEY (owner_id)
+           REFERENCES USER_PROFILES(id)
+);

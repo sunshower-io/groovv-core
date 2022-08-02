@@ -24,6 +24,7 @@ pluginManagement {
 include (
         'groovv',
         'groovv-sdk',
+        'groovv-dto',
         'groovv-model',
         'groovv-persist',
         'groovv-service'

@@ -18,4 +18,21 @@ dependencies {
     testFixturesApi testFixtures(project(':groovv-model'))
     testImplementation testFixtures(project(':groovv-model'))
 
+    [
+            'core-api',
+            'core-impl',
+            'entity-view-api',
+            'entity-view-impl',
+            'integration-entity-view-spring',
+//            'integration-entity-view-spring-data-2.4',
+            'integration-hibernate-5.6',
+            'integration-jaxrs'
+
+    ].each {
+        implementation "com.blazebit:blaze-persistence-$it"
+    }
+
+    implementation 'com.blazebit:blaze-persistence-integration-spring-data-2.4'
+
+    api project(':groovv-dto')
 }

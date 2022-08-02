@@ -1,4 +1,4 @@
-package io.groovv.model.api.core;
+package io.groovv.model.api.converters;
 
 import io.sunshower.arcus.condensation.Converter;
 import io.sunshower.lang.common.encodings.Encoding;

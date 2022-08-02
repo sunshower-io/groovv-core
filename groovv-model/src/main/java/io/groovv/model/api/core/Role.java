@@ -17,7 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name = "ROLES")
-public class Role extends AbstractEntity<Identifier> implements GrantedAuthority {
+public class Role extends AbstractSerializableEntity<Identifier> implements GrantedAuthority {
 
   static final Sequence<Identifier> SEQUENCE;
 
