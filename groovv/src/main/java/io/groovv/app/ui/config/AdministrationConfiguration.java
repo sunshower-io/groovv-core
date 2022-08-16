@@ -1,6 +1,5 @@
 package io.groovv.app.ui.config;
 
-import com.aire.ux.AsynchronousSessionQueue;
 import com.aire.ux.ComponentInclusionManager;
 import com.aire.ux.DefaultUserInterface;
 import com.aire.ux.Extensions;
@@ -10,6 +9,7 @@ import com.aire.ux.UserInterface;
 import com.aire.ux.actions.ActionManager;
 import com.aire.ux.actions.DefaultActionManager;
 import com.aire.ux.concurrency.AccessQueue;
+import com.aire.ux.concurrency.AsynchronousSessionQueue;
 import com.aire.ux.ext.ExtensionRegistry;
 import com.aire.ux.ext.spring.SpringComponentInclusionManager;
 import com.aire.ux.ext.spring.SpringExtensionRegistry;
